@@ -1,0 +1,260 @@
+{
+  "_version": "1.89.0",
+  "sap.app": {
+    "id": "vendormodulee",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.33.0",
+      "toolsId": "c57e8463-ae3e-4377-a707-9708ac6efab6"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/vendor-risk/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "VendorManagement-display": {
+          "semanticObject": "VendorManagement",
+          "action": "display",
+          "title": "{{VendorManagement-display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.153.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "vendormodulee.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "updateGroupId": "vendorBatch"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        },
+        {
+          "uri": "css/vendorView.css"
+        },
+        {
+          "uri": "css/vendorObjectPage.css"
+        },
+        {
+          "uri": "css/purchaseOrderObjectPage.css"
+        },
+        {
+          "uri": "css/vendorHome.css"
+        },
+        {
+          "uri": "css/vendorRisk.css"
+        },
+        {
+          "uri": "css/invoices.css"
+        },
+        {
+          "uri": "css/invoiceCreate.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "vendormodulee.view",
+        "async": true,
+        "viewPath": "vendormodulee.view"
+      },
+      "routes": [
+        {
+          "name": "RouteVendorHome",
+          "pattern": ":?query:",
+          "target": [
+            "TargetVendorHome"
+          ]
+        },
+        {
+          "name": "RoutePurchaseOrders",
+          "pattern": "purchase-orders:?query:",
+          "target": [
+            "TargetPurchaseOrders"
+          ]
+        },
+        {
+          "name": "RoutePurchaseOrderObjectPage",
+          "pattern": "purchase-order/{purchaseOrderId}",
+          "target": [
+            "TargetPurchaseOrderObjectPage"
+          ]
+        },
+        {
+          "name": "Routevendorview",
+          "pattern": "vendors",
+          "target": [
+            "Targetvendorview"
+          ]
+        },
+        {
+          "name": "RouteVendorObjectPage",
+          "pattern": "vendor/{vendorId}",
+          "target": [
+            "TargetVendorObjectPage"
+          ]
+        },
+        {
+          "name": "RouteVendorRisk",
+          "pattern": "risk",
+          "target": [
+            "TargetVendorRisk"
+          ]
+        },
+        {
+          "name": "RouteInvoices",
+          "pattern": "invoices",
+          "target": [
+            "TargetInvoices"
+          ]
+        },
+        {
+          "name": "RouteInvoiceCreate",
+          "pattern": "invoice-create",
+          "target": [
+            "TargetInvoiceCreate"
+          ]
+        },
+        {
+          "name": "RouteInvoiceCreateForPO",
+          "pattern": "invoice-create/{purchaseOrderId}",
+          "target": [
+            "TargetInvoiceCreate"
+          ]
+        },
+        {
+          "name": "RouteInvoiceEdit",
+          "pattern": "invoice-edit/{invoiceId}",
+          "target": [
+            "TargetInvoiceCreate"
+          ]
+        },
+        {
+          "name": "RouteInvoiceObjectPage",
+          "pattern": "invoice/{invoiceId}",
+          "target": [
+            "TargetInvoiceObjectPage"
+          ]
+        }
+      ],
+      "targets": {
+        "Targetvendorview": {
+          "id": "vendorview",
+          "name": "vendorview"
+        },
+        "TargetVendorObjectPage": {
+          "id": "vendorObjectPage",
+          "name": "VendorObjectPage"
+        },
+        "TargetPurchaseOrderObjectPage": {
+          "id": "purchaseOrderObjectPage",
+          "name": "PurchaseOrderObjectPage"
+        },
+        "TargetPurchaseOrders": {
+          "id": "purchaseOrders",
+          "name": "PurchaseOrders"
+        },
+        "TargetVendorHome": {
+          "id": "vendorHome",
+          "name": "VendorHome"
+        },
+        "TargetVendorRisk": {
+          "id": "vendorRisk",
+          "name": "VendorRisk"
+        },
+        "TargetInvoices": {
+          "id": "invoices",
+          "name": "Invoices"
+        },
+        "TargetInvoiceCreate": {
+          "id": "invoiceCreate",
+          "name": "InvoiceCreate"
+        },
+        "TargetInvoiceObjectPage": {
+          "id": "invoiceObjectPage",
+          "name": "InvoiceObjectPage"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "vendormodulee.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "vendormodulee"
+  }
+}

@@ -1,0 +1,153 @@
+<mvc:View controllerName="vrfrontend.controller.home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+     xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    displayBlock="true">
+
+    <Page id="page" title="{i18n>title}">
+    <content>
+      <VBox class="sapUiMediumMargin">
+
+                <Panel
+                    backgroundDesign="Solid"
+                    class="sapUiMediumMarginBottom">
+
+                    <content>
+                        <HBox
+                            alignItems="Center"
+                            wrap="Wrap"
+                            class="sapUiMediumMargin">
+
+                            <core:Icon
+                                src="sap-icon://shield"
+                                size="3rem"
+                                color="#0A6ED1"
+                                class="sapUiMediumMarginEnd"/>
+
+                            <VBox>
+                                <Title
+                                    text="VENDOR RISK MANAGEMENT CONTROL TOWER"
+                                    level="H1"
+                                    wrapping="true"/>
+
+                                <Text
+                                    text="Procurement visibility · Vendor intelligence · Risk monitoring"
+                                    wrapping="true"/>
+                            </VBox>
+                        </HBox>
+                    </content>
+                </Panel>
+
+                <Title
+                    text="Home"
+                    level="H2"
+                    class="sapUiSmallMarginBottom"/>
+
+                <Text
+                    text="Select a module to get started."
+                    class="sapUiSmallMarginBottom"/>
+
+                
+<layout:Grid
+    defaultSpan="XL4 L4 M6 S12"
+    hSpacing="1"
+    vSpacing="1">
+
+    <layout:content>
+
+        <!-- Vendors Tile -->
+        <GenericTile
+            header="Vendor Management"
+            subheader="Vendor master information"
+            frameType="TwoByOne"
+            press=".onOpenVendors"
+            class="sapUiSmallMargin">
+            <!-- state="{= ${user>/designation} === 'Vendor'?'Loaded':'Disabled'}" -->
+
+            
+
+            <TileContent footer="Manage vendor records">
+                <ImageContent src="sap-icon://building"/>
+            </TileContent>
+
+        </GenericTile>
+
+        <GenericTile
+            header="Procurement Manager"
+            subheader="Purchase order processing"
+            frameType="TwoByOne"
+            press=".onOpenPurchaseOrders"
+            class="sapUiSmallMargin">
+            <!-- state="{= ${user>/designation} === 'Procurement_Manager'?'Loaded':'Disabled'}" -->
+
+            <TileContent footer="Manage purchase orders">
+                <ImageContent src="sap-icon://sales-order"/>
+            </TileContent>
+
+        </GenericTile>
+
+        
+
+        <!-- Vendor Risk Dashboard Tile -->
+        <GenericTile
+            header="Vendor Risk Dashboard"
+            subheader="Risk monitoring and assessment"
+            frameType="TwoByOne"
+            press=".onOpenRiskDashboard"
+            class="sapUiSmallMargin">
+
+            <TileContent footer="Monitor vendor risk">
+                <ImageContent src="sap-icon://bar-chart"/>
+            </TileContent>
+
+        </GenericTile>
+        
+        <!-- Procurement Tile -->
+         <GenericTile
+            header="Procurement Team"
+            subheader="Purchase order processing"
+            frameType="TwoByOne"
+            press=".onOpenPurchaseOrdersTeam"
+            class="sapUiSmallMargin">
+
+            <TileContent footer="Create purchase orders">
+                <ImageContent src="sap-icon://sales-order"/>
+            </TileContent>
+
+        </GenericTile>
+
+     <GenericTile
+            header="Quality Control"
+            subheader="Quality complaints and inspections"
+            frameType="TwoByOne"
+            press=".onOpenQualityControl"
+            class="sapUiSmallMargin">
+
+            <TileContent footer="Manage quality complaints">
+                <ImageContent src="sap-icon://quality-issue"/>
+            </TileContent>
+
+        </GenericTile>
+        <GenericTile
+            header="Delivery Team"
+            subheader="Delovery time and delay "
+            frameType="TwoByOne"
+            press=".onOpenDeliveryTeam"
+            class="sapUiSmallMargin"
+           >
+            <!-- state="{= ${user>/designation} === 'Delivery'?'Loaded':'Disabled'}" -->
+
+            <TileContent footer="Manage Delivery complaints">
+                <ImageContent src="sap-icon://shipping-status"/>
+            </TileContent>
+
+        </GenericTile>
+    </layout:content>
+</layout:Grid>
+
+
+            </VBox>
+    </content>
+    </Page>
+</mvc:View>

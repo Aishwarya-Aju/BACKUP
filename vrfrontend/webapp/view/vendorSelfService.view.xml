@@ -1,0 +1,20 @@
+<mvc:View
+    controllerName="vrfrontend.controller.VendorDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+ <Page
+        title="Vendor Management"
+        showNavButton="true"
+        navButtonPress=".onNavBack">
+
+        <content>
+            <core:HTML
+                content="&lt;iframe src='https://65850598trial.launchpad.cfapps.us10.hana.ondemand.com/c2f19d74-1e62-4abc-981a-e982c7e24575.vendormodulee.vendormodulee-0.0.1/index.html' style='width:100%;height:100%;min-height:80vh;border:none;'&gt;&lt;/iframe&gt;"
+                preferDOM="true"
+                sanitizeContent="false"
+                />
+        </content>
+
+    </Page>
+</mvc:View>

@@ -1,0 +1,6 @@
+code,description,isActive
+ENGINE,Engine and engine components,true
+TRANSMISSION,Transmission and clutch system,true
+ELECTRICAL,Electrical and charging system,true
+BRAKES,Brake system,true
+COOLING,Engine cooling system,true

@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="VendorRiskService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotation Term="Core.Links">
+                <Collection>
+                    <Record>
+                        <PropertyValue Property="rel" String="author"/>
+                        <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+                    </Record>
+                </Collection>
+            </Annotation>
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Vendors" EntityType="VendorRiskService.Vendors">
+                    <NavigationPropertyBinding Path="purchaseOrders" Target="PurchaseOrders"/>
+                    <NavigationPropertyBinding Path="deliveries" Target="Deliveries"/>
+                    <NavigationPropertyBinding Path="invoices" Target="Invoices"/>
+                    <NavigationPropertyBinding Path="qualityComplaints" Target="QualityComplaints"/>
+                    <NavigationPropertyBinding Path="complianceCertificates" Target="ComplianceCertificates"/>
+                    <NavigationPropertyBinding Path="riskAssessments" Target="RiskAssessments"/>
+                    <NavigationPropertyBinding Path="riskAlerts" Target="RiskAlerts"/>
+                </EntitySet>
+                <EntitySet Name="PurchaseOrders" EntityType="VendorRiskService.PurchaseOrders">
+                    <NavigationPropertyBinding Path="vendor" Target="Vendors"/>
+                    <NavigationPropertyBinding Path="buyer" Target="Employee"/>
+                    <NavigationPropertyBinding Path="items" Target="PurchaseOrderItems"/>
+                </EntitySet>
+                <EntitySet Name="PurchaseOrderItems" EntityType="VendorRiskService.PurchaseOrderItems">
+                    <NavigationPropertyBinding Path="purchaseOrder" Target="PurchaseOrders"/>
+                    <NavigationPropertyBinding Path="material" Target="Materials"/>
+                </EntitySet>
+                <EntitySet Name="Materials" EntityType="VendorRiskService.Materials"/>
+                <EntitySet Name="Deliveries" EntityType="VendorRiskService.Deliveries">
+                    <NavigationPropertyBinding Path="vendor" Target="Vendors"/>
+                    <NavigationPropertyBinding Path="purchaseOrder" Target="PurchaseOrders"/>
+                </EntitySet>
+                <EntitySet Name="Invoices" EntityType="VendorRiskService.Invoices">
+                    <NavigationPropertyBinding Path="vendor" Target="Vendors"/>
+                    <NavigationPropertyBinding Path="purchaseOrder" Target="PurchaseOrders"/>
+                </EntitySet>
+                <EntitySet Name="QualityComplaints" EntityType="VendorRiskService.QualityComplaints">
+                    <NavigationPropertyBinding Path="vendor" Target="Vendors"/>
+                    <NavigationPropertyBinding Path="purchaseOrder" Target="PurchaseOrders"/>
+                </EntitySet>
+                <EntitySet Name="ComplianceCertificates" EntityType="VendorRiskService.ComplianceCertificates">
+                    <NavigationPropertyBinding Path="vendor" Target="Vendors"/>
+                </EntitySet>
+                <EntitySet Name="RiskAssessments" EntityType="VendorRiskService.RiskAssessments">
+                    <NavigationPropertyBinding Path="vendor" Target="Vendors"/>
+                </EntitySet>
+                <EntitySet Name="RiskAlerts" EntityType="VendorRiskService.RiskAlerts">
+                    <NavigationPropertyBinding Path="vendor" Target="Vendors"/>
+                    <NavigationPropertyBinding Path="riskAssessment" Target="RiskAssessments"/>
+                </EntitySet>
+                <EntitySet Name="RiskRules" EntityType="VendorRiskService.RiskRules"/>
+                <EntitySet Name="Employee" EntityType="VendorRiskService.Employee"/>
+                <FunctionImport Name="totalVendor" Function="VendorRiskService.totalVendor"/>
+                <FunctionImport Name="totalPO" Function="VendorRiskService.totalPO"/>
+                <FunctionImport Name="totalInvoice" Function="VendorRiskService.totalInvoice"/>
+                <FunctionImport Name="getPOStatusCounts" Function="VendorRiskService.getPOStatusCounts"/>
+                <ActionImport Name="calculateDeliveryRisk" Action="VendorRiskService.calculateDeliveryRisk"/>
+                <ActionImport Name="calculateQualityRisk" Action="VendorRiskService.calculateQualityRisk"/>
+                <ActionImport Name="calculatePriceDeviationRisk" Action="VendorRiskService.calculatePriceDeviationRisk"/>
+                <ActionImport Name="calculateOverallVendorRisk" Action="VendorRiskService.calculateOverallVendorRisk"/>
+                <ActionImport Name="checkDatabase" Action="VendorRiskService.checkDatabase"/>
+            </EntityContainer>
+            <EntityType Name="Vendors">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="vendorCode" Type="Edm.String" MaxLength="20"/>
+                <Property Name="vendorName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="country" Type="Edm.String" MaxLength="50"/>
+                <Property Name="region" Type="Edm.String" MaxLength="50"/>
+                <Property Name="vendorCategory" Type="Edm.String" MaxLength="50"/>
+                <Property Name="materialCategory" Type="Edm.String" MaxLength="100"/>
+                <Property Name="contactPerson" Type="Edm.String" MaxLength="100"/>
+                <Property Name="email" Type="Edm.String" MaxLength="100"/>
+                <Property Name="phone" Type="Edm.String" MaxLength="30"/>
+                <Property Name="criticalVendor" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="vendorStatus" Type="Edm.String" DefaultValue="ACTIVE"/>
+                <Property Name="currentRiskScore" Type="Edm.Decimal" Precision="5" Scale="2" DefaultValue="0"/>
+                <Property Name="riskLevel" Type="Edm.String" MaxLength="20"/>
+                <Property Name="lastRiskCalculation" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="purchaseOrders" Type="Collection(VendorRiskService.PurchaseOrders)" Partner="vendor"/>
+                <NavigationProperty Name="deliveries" Type="Collection(VendorRiskService.Deliveries)" Partner="vendor"/>
+                <NavigationProperty Name="invoices" Type="Collection(VendorRiskService.Invoices)" Partner="vendor"/>
+                <NavigationProperty Name="qualityComplaints" Type="Collection(VendorRiskService.QualityComplaints)" Partner="vendor"/>
+                <NavigationProperty Name="complianceCertificates" Type="Collection(VendorRiskService.ComplianceCertificates)" Partner="vendor"/>
+                <NavigationProperty Name="riskAssessments" Type="Collection(VendorRiskService.RiskAssessments)" Partner="vendor"/>
+                <NavigationProperty Name="riskAlerts" Type="Collection(VendorRiskService.RiskAlerts)" Partner="vendor"/>
+            </EntityType>
+            <EntityType Name="PurchaseOrders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="poNumber" Type="Edm.String" MaxLength="30"/>
+                <NavigationProperty Name="vendor" Type="VendorRiskService.Vendors" Partner="purchaseOrders">
+                    <ReferentialConstraint Property="vendor_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="vendor_ID" Type="Edm.Guid"/>
+                <Property Name="poDate" Type="Edm.Date"/>
+                <Property Name="expectedDeliveryDate" Type="Edm.Date"/>
+                <Property Name="rejectionReason" Type="Edm.String" MaxLength="500"/>
+                <Property Name="poStatus" Type="Edm.String" DefaultValue="DRAFT"/>
+                <Property Name="totalAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="currency" Type="Edm.String" MaxLength="5"/>
+                <Property Name="paymentTerms" Type="Edm.String" DefaultValue="NET30"/>
+                <Property Name="contractReference" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="buyer" Type="VendorRiskService.Employee">
+                    <ReferentialConstraint Property="buyer_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="buyer_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="items" Type="Collection(VendorRiskService.PurchaseOrderItems)" Partner="purchaseOrder">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PurchaseOrderItems">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="purchaseOrder" Type="VendorRiskService.PurchaseOrders" Partner="items">
+                    <ReferentialConstraint Property="purchaseOrder_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="purchaseOrder_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="material" Type="VendorRiskService.Materials">
+                    <ReferentialConstraint Property="material_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="material_ID" Type="Edm.Guid"/>
+                <Property Name="materialCode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="materialDescription" Type="Edm.String" MaxLength="200"/>
+                <Property Name="materialGroup" Type="Edm.String" MaxLength="50"/>
+                <Property Name="orderedQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="unit" Type="Edm.String"/>
+                <Property Name="oldUnitPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="newUnitPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="priceDifference" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="priceDeviationPercent" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="contractPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="currency" Type="Edm.String"/>
+                <Property Name="itemStatus" Type="Edm.String" DefaultValue="OPEN"/>
+                <Property Name="requestedDeliveryDate" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="Materials">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="materialCode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="materialDescription" Type="Edm.String" MaxLength="200"/>
+                <Property Name="materialGroup" Type="Edm.String" MaxLength="50"/>
+                <Property Name="baseUnit" Type="Edm.String"/>
+                <Property Name="currentUnitPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="currency" Type="Edm.String"/>
+                <Property Name="contractPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="supplierMaterialCode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="status" Type="Edm.String" DefaultValue="ACTIVE"/>
+            </EntityType>
+            <EntityType Name="Deliveries">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="vendor" Type="VendorRiskService.Vendors" Partner="deliveries">
+                    <ReferentialConstraint Property="vendor_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="vendor_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="purchaseOrder" Type="VendorRiskService.PurchaseOrders">
+                    <ReferentialConstraint Property="purchaseOrder_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="purchaseOrder_ID" Type="Edm.Guid"/>
+                <Property Name="poItemNumber" Type="Edm.Int32"/>
+                <Property Name="materialCode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="expectedDeliveryDate" Type="Edm.Date"/>
+                <Property Name="actualDeliveryDate" Type="Edm.Date"/>
+                <Property Name="orderedQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="deliveredQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="deliveryStatus" Type="Edm.String" MaxLength="20"/>
+                <Property Name="delayDays" Type="Edm.Int32"/>
+                <Property Name="partialDelivery" Type="Edm.Boolean"/>
+                <Property Name="shipmentStatus" Type="Edm.String" MaxLength="30"/>
+                <Property Name="deliveryPercentage" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="remarks" Type="Edm.String" MaxLength="500"/>
+                <Property Name="deliveryRiskScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="deliveryRiskLevel" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="Invoices">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="invoiceNumber" Type="Edm.String" MaxLength="40"/>
+                <NavigationProperty Name="vendor" Type="VendorRiskService.Vendors" Partner="invoices">
+                    <ReferentialConstraint Property="vendor_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="vendor_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="purchaseOrder" Type="VendorRiskService.PurchaseOrders">
+                    <ReferentialConstraint Property="purchaseOrder_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="purchaseOrder_ID" Type="Edm.Guid"/>
+                <Property Name="invoiceDate" Type="Edm.Date"/>
+                <Property Name="materialCode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="quantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="oldPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="currentPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="priceDifference" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="priceDeviationPercent" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="invoiceAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="currency" Type="Edm.String" MaxLength="5"/>
+                <Property Name="invoiceStatus" Type="Edm.String" MaxLength="20"/>
+                <Property Name="blocked" Type="Edm.Boolean"/>
+                <Property Name="mismatch" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="QualityComplaints">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="complaintNumber" Type="Edm.String" MaxLength="40"/>
+                <NavigationProperty Name="vendor" Type="VendorRiskService.Vendors" Partner="qualityComplaints">
+                    <ReferentialConstraint Property="vendor_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="vendor_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="purchaseOrder" Type="VendorRiskService.PurchaseOrders">
+                    <ReferentialConstraint Property="purchaseOrder_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="purchaseOrder_ID" Type="Edm.Guid"/>
+                <Property Name="materialCode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="complaintDate" Type="Edm.Date"/>
+                <Property Name="defectType" Type="Edm.String" MaxLength="100"/>
+                <Property Name="severity" Type="Edm.String" MaxLength="20"/>
+                <Property Name="rejectedQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="inspectedQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="defectPercentage" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="complaintStatus" Type="Edm.String" MaxLength="20"/>
+                <Property Name="qualityScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="rootCause" Type="Edm.String" MaxLength="500"/>
+                <Property Name="correctiveAction" Type="Edm.String" MaxLength="500"/>
+                <Property Name="resolvedDate" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="ComplianceCertificates">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="vendor" Type="VendorRiskService.Vendors" Partner="complianceCertificates">
+                    <ReferentialConstraint Property="vendor_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="vendor_ID" Type="Edm.Guid"/>
+                <Property Name="materialCode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="certificateNumber" Type="Edm.String" MaxLength="50"/>
+                <Property Name="certificateType" Type="Edm.String" MaxLength="100"/>
+                <Property Name="issuingAuthority" Type="Edm.String" MaxLength="150"/>
+                <Property Name="issueDate" Type="Edm.Date"/>
+                <Property Name="expiryDate" Type="Edm.Date"/>
+                <Property Name="mandatory" Type="Edm.Boolean"/>
+                <Property Name="status" Type="Edm.String" MaxLength="20"/>
+                <Property Name="country" Type="Edm.String" MaxLength="50"/>
+                <Property Name="documentURL" Type="Edm.String" MaxLength="500"/>
+                <Property Name="daysToExpiry" Type="Edm.Int32"/>
+                <Property Name="verificationStatus" Type="Edm.String" MaxLength="20"/>
+                <Property Name="remarks" Type="Edm.String" MaxLength="500"/>
+            </EntityType>
+            <EntityType Name="RiskAssessments">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="vendor" Type="VendorRiskService.Vendors" Partner="riskAssessments">
+                    <ReferentialConstraint Property="vendor_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="vendor_ID" Type="Edm.Guid"/>
+                <Property Name="assessmentDate" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="deliveryRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="priceRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="qualityRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="complianceRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="financialRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="totalRiskScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="riskLevel" Type="Edm.String" MaxLength="20"/>
+                <Property Name="calculationStatus" Type="Edm.String" MaxLength="20"/>
+                <Property Name="calculatedBy" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="RiskAlerts">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="alertNumber" Type="Edm.String" MaxLength="40"/>
+                <NavigationProperty Name="vendor" Type="VendorRiskService.Vendors" Partner="riskAlerts">
+                    <ReferentialConstraint Property="vendor_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="vendor_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="riskAssessment" Type="VendorRiskService.RiskAssessments">
+                    <ReferentialConstraint Property="riskAssessment_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="riskAssessment_ID" Type="Edm.Guid"/>
+                <Property Name="alertType" Type="Edm.String" MaxLength="50"/>
+                <Property Name="severity" Type="Edm.String" MaxLength="20"/>
+                <Property Name="riskScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="threshold" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="message" Type="Edm.String" MaxLength="500"/>
+                <Property Name="recipientVendor" Type="Edm.String" MaxLength="100"/>
+                <Property Name="recipientManager" Type="Edm.String" MaxLength="100"/>
+                <Property Name="status" Type="Edm.String" MaxLength="20"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="sentAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="acknowledgedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="resolutionRemarks" Type="Edm.String" MaxLength="500"/>
+            </EntityType>
+            <EntityType Name="RiskRules">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="riskType" Type="Edm.String" MaxLength="30"/>
+                <Property Name="condition" Type="Edm.String" MaxLength="200"/>
+                <Property Name="minValue" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="maxValue" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="score" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="weight" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="active" Type="Edm.Boolean"/>
+                <Property Name="effectiveFrom" Type="Edm.Date"/>
+                <Property Name="effectiveTo" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="Employee">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="empId" Type="Edm.String"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="designation" Type="Edm.String"/>
+            </EntityType>
+            <ComplexType Name="DeliveryRiskResult">
+                <Property Name="vendorID" Type="Edm.Guid"/>
+                <Property Name="totalDeliveries" Type="Edm.Int32"/>
+                <Property Name="delayedDeliveries" Type="Edm.Int32"/>
+                <Property Name="partialDeliveries" Type="Edm.Int32"/>
+                <Property Name="averageDelayDays" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="delayedPercentage" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="partialPercentage" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="averageDeliveryPercentage" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="delayScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="delayedDeliveryScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="partialDeliveryScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="completionScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="deliveryRiskScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="riskLevel" Type="Edm.String" MaxLength="20"/>
+            </ComplexType>
+            <ComplexType Name="OverallRiskResult">
+                <Property Name="vendorID" Type="Edm.Guid"/>
+                <Property Name="deliveryRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="qualityRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="priceRisk" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="overallRiskScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="riskLevel" Type="Edm.String" MaxLength="20"/>
+                <Property Name="calculationStatus" Type="Edm.String" MaxLength="30"/>
+            </ComplexType>
+            <ComplexType Name="QualityRiskResult">
+                <Property Name="vendorID" Type="Edm.Guid"/>
+                <Property Name="totalComplaints" Type="Edm.Int32"/>
+                <Property Name="totalInspectedQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="totalRejectedQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="averageDefectPercentage" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="defectScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="severityScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="qualityRiskScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="riskLevel" Type="Edm.String" MaxLength="20"/>
+            </ComplexType>
+            <ComplexType Name="PriceRiskResult">
+                <Property Name="vendorID" Type="Edm.Guid"/>
+                <Property Name="totalInvoices" Type="Edm.Int32"/>
+                <Property Name="totalPriceIncrease" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="averagePriceDeviationPercent" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="priceDeviationScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="priceRiskScore" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="riskLevel" Type="Edm.String" MaxLength="20"/>
+            </ComplexType>
+            <ComplexType Name="return_VendorRiskService_getPOStatusCounts">
+                <Property Name="status" Type="Edm.String"/>
+                <Property Name="count" Type="Edm.Int32"/>
+            </ComplexType>
+            <ComplexType Name="return_VendorRiskService_checkDatabase">
+                <Property Name="database" Type="Edm.String"/>
+                <Property Name="primaryDatabaseConnected" Type="Edm.Boolean"/>
+            </ComplexType>
+            <Action Name="poAccept" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="VendorRiskService.PurchaseOrders"/>
+                <ReturnType Type="VendorRiskService.PurchaseOrders"/>
+            </Action>
+            <Action Name="poReject" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="VendorRiskService.PurchaseOrders"/>
+                <ReturnType Type="VendorRiskService.PurchaseOrders"/>
+            </Action>
+            <Action Name="vendorAccept" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="VendorRiskService.PurchaseOrders"/>
+                <Parameter Name="expectedDeliveryDate" Type="Edm.Date"/>
+                <ReturnType Type="VendorRiskService.PurchaseOrders"/>
+            </Action>
+            <Action Name="vendorReject" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="VendorRiskService.PurchaseOrders"/>
+                <Parameter Name="reason" Type="Edm.String" MaxLength="500"/>
+                <ReturnType Type="VendorRiskService.PurchaseOrders"/>
+            </Action>
+            <Function Name="totalVendor" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.Int32"/>
+            </Function>
+            <Function Name="totalPO" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.Int32"/>
+            </Function>
+            <Function Name="totalInvoice" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.Int32"/>
+            </Function>
+            <Function Name="getPOStatusCounts" IsBound="false" IsComposable="false">
+                <ReturnType Type="Collection(VendorRiskService.return_VendorRiskService_getPOStatusCounts)" Nullable="true"/>
+            </Function>
+            <Action Name="calculateDeliveryRisk" IsBound="false">
+                <Parameter Name="vendorID" Type="Edm.Guid"/>
+                <ReturnType Type="VendorRiskService.DeliveryRiskResult"/>
+            </Action>
+            <Action Name="calculateQualityRisk" IsBound="false">
+                <Parameter Name="vendorID" Type="Edm.Guid"/>
+                <ReturnType Type="VendorRiskService.QualityRiskResult"/>
+            </Action>
+            <Action Name="calculatePriceDeviationRisk" IsBound="false">
+                <Parameter Name="vendorID" Type="Edm.Guid"/>
+                <ReturnType Type="VendorRiskService.PriceRiskResult"/>
+            </Action>
+            <Action Name="calculateOverallVendorRisk" IsBound="false">
+                <Parameter Name="vendorID" Type="Edm.Guid"/>
+                <ReturnType Type="VendorRiskService.OverallRiskResult"/>
+            </Action>
+            <Action Name="checkDatabase" IsBound="false">
+                <ReturnType Type="VendorRiskService.return_VendorRiskService_checkDatabase"/>
+            </Action>
+            <Annotations Target="VendorRiskService.Vendors/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Vendors/vendorStatus">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="ACTIVE"/>
+                            <PropertyValue Property="Value" String="ACTIVE"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="INACTIVE"/>
+                            <PropertyValue Property="Value" String="INACTIVE"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="BLOCKED"/>
+                            <PropertyValue Property="Value" String="BLOCKED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="SUSPENDED"/>
+                            <PropertyValue Property="Value" String="SUSPENDED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="BLACKLISTED"/>
+                            <PropertyValue Property="Value" String="BLACKLISTED"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.PurchaseOrders/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.PurchaseOrders/poStatus">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="DRAFT"/>
+                            <PropertyValue Property="Value" String="DRAFT"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="PENDING_APPROVAL"/>
+                            <PropertyValue Property="Value" String="PENDING_APPROVAL"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="APPROVED"/>
+                            <PropertyValue Property="Value" String="APPROVED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="REJECTED"/>
+                            <PropertyValue Property="Value" String="REJECTED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="SENT_TO_VENDOR"/>
+                            <PropertyValue Property="Value" String="SENT_TO_VENDOR"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="ACCEPTED"/>
+                            <PropertyValue Property="Value" String="ACCEPTED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="PARTIALLY_DELIVERED"/>
+                            <PropertyValue Property="Value" String="PARTIALLY_DELIVERED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="FULLY_DELIVERED"/>
+                            <PropertyValue Property="Value" String="FULLY_DELIVERED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CANCELLED"/>
+                            <PropertyValue Property="Value" String="CANCELLED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CLOSED"/>
+                            <PropertyValue Property="Value" String="CLOSED"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.PurchaseOrders/paymentTerms">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="IMMEDIATE"/>
+                            <PropertyValue Property="Value" String="IMMEDIATE"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NET15"/>
+                            <PropertyValue Property="Value" String="NET15"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NET30"/>
+                            <PropertyValue Property="Value" String="NET30"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NET45"/>
+                            <PropertyValue Property="Value" String="NET45"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NET60"/>
+                            <PropertyValue Property="Value" String="NET60"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NET90"/>
+                            <PropertyValue Property="Value" String="NET90"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.PurchaseOrderItems/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.PurchaseOrderItems/unit">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="EA"/>
+                            <PropertyValue Property="Value" String="EA"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="KG"/>
+                            <PropertyValue Property="Value" String="KG"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="G"/>
+                            <PropertyValue Property="Value" String="G"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="L"/>
+                            <PropertyValue Property="Value" String="L"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="M"/>
+                            <PropertyValue Property="Value" String="M"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CM"/>
+                            <PropertyValue Property="Value" String="CM"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="BOX"/>
+                            <PropertyValue Property="Value" String="BOX"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="BAG"/>
+                            <PropertyValue Property="Value" String="BAG"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="SET"/>
+                            <PropertyValue Property="Value" String="SET"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="PACK"/>
+                            <PropertyValue Property="Value" String="PACK"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.PurchaseOrderItems/currency">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="INR"/>
+                            <PropertyValue Property="Value" String="INR"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="USD"/>
+                            <PropertyValue Property="Value" String="USD"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="EUR"/>
+                            <PropertyValue Property="Value" String="EUR"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="GBP"/>
+                            <PropertyValue Property="Value" String="GBP"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="JPY"/>
+                            <PropertyValue Property="Value" String="JPY"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="AUD"/>
+                            <PropertyValue Property="Value" String="AUD"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CAD"/>
+                            <PropertyValue Property="Value" String="CAD"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="SGD"/>
+                            <PropertyValue Property="Value" String="SGD"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.PurchaseOrderItems/itemStatus">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="OPEN"/>
+                            <PropertyValue Property="Value" String="OPEN"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CONFIRMED"/>
+                            <PropertyValue Property="Value" String="CONFIRMED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="PARTIALLY_DELIVERED"/>
+                            <PropertyValue Property="Value" String="PARTIALLY_DELIVERED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="FULLY_DELIVERED"/>
+                            <PropertyValue Property="Value" String="FULLY_DELIVERED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CANCELLED"/>
+                            <PropertyValue Property="Value" String="CANCELLED"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CLOSED"/>
+                            <PropertyValue Property="Value" String="CLOSED"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Materials/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Materials/baseUnit">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="EA"/>
+                            <PropertyValue Property="Value" String="EA"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="KG"/>
+                            <PropertyValue Property="Value" String="KG"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="G"/>
+                            <PropertyValue Property="Value" String="G"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="L"/>
+                            <PropertyValue Property="Value" String="L"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="M"/>
+                            <PropertyValue Property="Value" String="M"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CM"/>
+                            <PropertyValue Property="Value" String="CM"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="BOX"/>
+                            <PropertyValue Property="Value" String="BOX"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="BAG"/>
+                            <PropertyValue Property="Value" String="BAG"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="SET"/>
+                            <PropertyValue Property="Value" String="SET"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="PACK"/>
+                            <PropertyValue Property="Value" String="PACK"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Materials/currency">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="INR"/>
+                            <PropertyValue Property="Value" String="INR"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="USD"/>
+                            <PropertyValue Property="Value" String="USD"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="EUR"/>
+                            <PropertyValue Property="Value" String="EUR"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="GBP"/>
+                            <PropertyValue Property="Value" String="GBP"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="JPY"/>
+                            <PropertyValue Property="Value" String="JPY"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="AUD"/>
+                            <PropertyValue Property="Value" String="AUD"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="CAD"/>
+                            <PropertyValue Property="Value" String="CAD"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="SGD"/>
+                            <PropertyValue Property="Value" String="SGD"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Materials/status">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="ACTIVE"/>
+                            <PropertyValue Property="Value" String="ACTIVE"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="INACTIVE"/>
+                            <PropertyValue Property="Value" String="INACTIVE"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Deliveries/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Invoices/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.QualityComplaints/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.ComplianceCertificates/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.RiskAssessments/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.RiskAlerts/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.RiskRules/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Employee/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="VendorRiskService.Employee/designation">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Manager"/>
+                            <PropertyValue Property="Value" String="Manager"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="QualityCheck"/>
+                            <PropertyValue Property="Value" String="QualityCheck"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Executive"/>
+                            <PropertyValue Property="Value" String="Executive"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="ProcurementTeam"/>
+                            <PropertyValue Property="Value" String="ProcurementTeam"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

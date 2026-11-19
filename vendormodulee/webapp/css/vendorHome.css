@@ -1,0 +1,357 @@
+/* =========================================================
+   Vendor Self-Service Portal
+   Shared by the Home dashboard and My Purchase Orders
+   ========================================================= */
+
+/* Page background */
+.portalPage .sapMPageBgStandard,
+.portalPage .sapMPageEnableScrolling {
+    background: #f4f7fb;
+}
+
+/* ---------------------------------------------------------
+   Header and navigation
+   --------------------------------------------------------- */
+.portalHeaderBar {
+    background: #ffffff;
+    border-bottom: 1px solid #dce5ed;
+    box-shadow: 0 1px 4px rgba(31, 58, 82, 0.08);
+}
+
+.portalHeaderBar .portalLogo {
+    color: #176b87;
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+}
+
+.portalHeaderBar .sapMTitle {
+    color: #123b66;
+    font-weight: 700;
+}
+
+.portalHeaderBar .sapMBtnInner {
+    border-radius: 7px;
+}
+
+/* ---------------------------------------------------------
+   Page container
+   --------------------------------------------------------- */
+.dashboardContainer {
+    box-sizing: border-box;
+    padding: 1.5rem 2rem 2rem;
+    background: #f4f7fb;
+    min-height: 100%;
+}
+
+.portalMessageStrip {
+    margin-bottom: 1rem;
+}
+
+/* ---------------------------------------------------------
+   Welcome banner
+   --------------------------------------------------------- */
+.dashboardHeader {
+    box-sizing: border-box;
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.8rem;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #123b66 0%, #176b87 100%);
+    box-shadow: 0 6px 18px rgba(20, 54, 84, 0.16);
+}
+
+.dashboardHeader .sapMTitle {
+    color: #ffffff !important;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.dashboardHeader .sapMText {
+    color: #e4f2fb !important;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.dashboardQuickActions {
+    margin-top: 1.5rem;
+    gap: 0.75rem;
+}
+
+.dashboardQuickActions .sapMBtn {
+    margin: 0.15rem 0;
+}
+
+.dashboardQuickActions .sapMBtnInner {
+    border-radius: 8px;
+    font-weight: 600;
+    min-height: 2.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* ---------------------------------------------------------
+   Section titles
+   --------------------------------------------------------- */
+.dashboardSectionTitle {
+    color: #183b5b;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0.5rem 0 1rem;
+}
+
+/* ---------------------------------------------------------
+   KPI cards
+   --------------------------------------------------------- */
+.dashboardTiles {
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.dashboardTile {
+    flex: 1 1 13rem;
+    min-width: 12rem;
+    max-width: 22rem;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(31, 58, 82, 0.09);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboardTile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(31, 58, 82, 0.15);
+}
+
+.dashboardTile .sapMGTHdrTxt {
+    color: #183b5b;
+    font-weight: 700;
+}
+
+.dashboardTile .sapMGTSubHdrTxt {
+    color: #63788c;
+}
+
+.dashboardTile .sapMNCValue {
+    font-weight: 700;
+}
+
+/* The top edge carries the status colour of the card */
+.dashboardTile.kpiTotal {
+    border-top: 4px solid #5b738b;
+}
+
+.dashboardTile.kpiPending {
+    border-top: 4px solid #e9730c;
+}
+
+.dashboardTile.kpiAccepted {
+    border-top: 4px solid #107e3e;
+}
+
+.dashboardTile.kpiRejected {
+    border-top: 4px solid #bb0000;
+}
+
+/* ---------------------------------------------------------
+   Content cards (recent orders, deliveries, order list)
+   --------------------------------------------------------- */
+.portalCard {
+    box-sizing: border-box;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #e5ebf2;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(31, 58, 82, 0.06);
+}
+
+/* Two columns on wide screens, stacked on narrow ones */
+.portalColumns {
+    gap: 1.25rem;
+}
+
+.portalColumns .portalMain {
+    flex: 2 1 34rem;
+    min-width: 0;
+}
+
+.portalColumns .portalSide {
+    flex: 1 1 20rem;
+    min-width: 0;
+}
+
+.dashboardSectionHeader {
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.dashboardSectionHeader .sapMTitle {
+    color: #183b5b;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.dashboardSectionHeader .sapMText {
+    color: #687b8e;
+    font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   Filter bar (My Purchase Orders)
+   --------------------------------------------------------- */
+.portalFilterBar {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.portalFilterBar .portalSearch {
+    max-width: 100%;
+}
+
+.portalFilterBar .sapMSF {
+    border-radius: 8px;
+}
+
+.portalFilterBar .portalStatusFilter {
+    min-width: 12rem;
+}
+
+/* ---------------------------------------------------------
+   Tables and lists
+   --------------------------------------------------------- */
+.dashboardPOTable {
+    border: 1px solid #e8edf3;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.dashboardPOTable .sapMListTblHeaderCell {
+    background: #edf3f8;
+    border-bottom: 1px solid #dce5ed;
+}
+
+.dashboardPOTable .sapMListTblHeaderCell .sapMText {
+    color: #294b68;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.dashboardPOTable .sapMListTblCell {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+    vertical-align: middle;
+}
+
+.dashboardPOTable .sapMLIB:hover {
+    background: #f3f8fc;
+}
+
+.dashboardPOTable .sapMObjectIdentifierTitle {
+    color: #155a85;
+    font-weight: 700;
+}
+
+.dashboardPOTable .sapMObjStatus {
+    font-weight: 600;
+}
+
+.portalDeliveryList {
+    border: 1px solid #e8edf3;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.portalDeliveryList .sapMLIB:hover {
+    background: #f3f8fc;
+}
+
+/* ---------------------------------------------------------
+   Empty states
+   --------------------------------------------------------- */
+.portalEmptyState {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+}
+
+.portalEmptyState .sapUiIcon {
+    color: #8aa0b5;
+    margin-bottom: 0.75rem;
+}
+
+.portalEmptyState .sapMTitle {
+    color: #183b5b;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.portalEmptyState .sapMText {
+    color: #687b8e;
+    max-width: 24rem;
+}
+
+/* ---------------------------------------------------------
+   Tablet
+   --------------------------------------------------------- */
+@media (max-width: 900px) {
+    .dashboardContainer {
+        padding: 1rem;
+    }
+
+    .dashboardHeader {
+        padding: 1.5rem;
+    }
+
+    .dashboardTile {
+        min-width: 10rem;
+    }
+
+    .portalCard {
+        padding: 1rem;
+    }
+}
+
+/* ---------------------------------------------------------
+   Phone
+   --------------------------------------------------------- */
+@media (max-width: 600px) {
+    .dashboardContainer {
+        padding: 0.65rem;
+    }
+
+    .dashboardHeader {
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .dashboardHeader .sapMTitle {
+        font-size: 1.4rem;
+    }
+
+    .dashboardQuickActions {
+        gap: 0.4rem;
+    }
+
+    .dashboardTile {
+        flex: 1 1 100%;
+        max-width: none;
+    }
+
+    .portalCard {
+        padding: 0.7rem;
+        border-radius: 12px;
+    }
+
+    .dashboardSectionHeader .sapMTitle {
+        font-size: 1.1rem;
+    }
+
+    /* Keep the navigation buttons on screen: icon first, title hidden */
+    .portalHeaderBar .sapMTitle {
+        display: none;
+    }
+
+    .portalFilterBar .portalStatusFilter {
+        width: 100%;
+    }
+}

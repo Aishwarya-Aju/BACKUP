@@ -1,0 +1,508 @@
+
+<mvc:View
+    controllerName="score.dashboard.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <App id="vendorRiskApp">
+        <Page title="Vendor Risk Management" class="dashboardBackground">
+            <content>
+
+                <VBox class="sapUiSmallMargin">
+
+                    <!-- COLORFUL DASHBOARD BANNER -->
+                    <VBox class="dashboardBanner sapUiMediumMarginBottom">
+                        <HBox
+                            justifyContent="SpaceBetween"
+                            alignItems="Center"
+                            wrap="Wrap">
+
+                            <HBox alignItems="Center">
+                                <core:Icon
+                                    src="sap-icon://shield"
+                                    size="3rem"
+                                    color="#FFFFFF"
+                                    class="sapUiMediumMarginEnd"/>
+
+                                <VBox>
+                                    <Title
+                                        text="Vendor Risk Management"
+                                        level="H1"
+                                        class="bannerTitle"/>
+
+                                    <Text
+                                        text="Vendor Risk Control Tower"
+                                        class="bannerSubtitle"/>
+                                </VBox>
+                            </HBox>
+
+                            <core:Icon
+                                src="sap-icon://bar-chart"
+                                size="4rem"
+                                color="#FFFFFF"
+                                class="bannerChartIcon"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- VENDOR SUMMARY CARDS -->
+                    <HBox
+                        width="100%"
+                        wrap="Wrap"
+                        class="sapUiSmallMarginBottom">
+
+                        <Panel
+                            headerText="Total Vendors"
+                            class="summaryCard totalVendorsCard sapUiTinyMarginEnd sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="10rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    class="sapUiSmallMargin"
+                                    alignItems="Center">
+
+                                    <core:Icon
+                                        src="sap-icon://group"
+                                        size="2rem"
+                                        color="#0A6ED1"/>
+
+                                    <ObjectNumber
+                                        id="totalVendorsCount"
+                                        number="0"
+                                        emphasized="true"/>
+
+                                    <Text text="Active vendors in the system"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <Panel
+                            headerText="High Risk Vendors"
+                            class="summaryCard highRiskVendorsCard sapUiTinyMarginEnd sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="10rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    class="sapUiSmallMargin"
+                                    alignItems="Center">
+
+                                    <core:Icon
+                                        src="sap-icon://message-warning"
+                                        size="2rem"
+                                        color="#BB0000"/>
+
+                                    <ObjectNumber
+                                        id="highRiskVendorsCount"
+                                        number="0"
+                                        state="Error"
+                                        emphasized="true"/>
+
+                                    <Text text="High or critical risk vendors"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <Panel
+                            headerText="Medium Risk Vendors"
+                            class="summaryCard MediumRiskVendorsCard sapUiTinyMarginEnd sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="10rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    class="sapUiSmallMargin"
+                                    alignItems="Center">
+
+                                    <core:Icon
+                                        src="sap-icon://business-objects-experience"
+                                        size="2rem"
+                                        color="#E5A000"/>
+
+                                    <ObjectNumber
+                                        id="MediumRiskVendorsCount"
+                                        number="0"
+                                        state="Warning"
+                                        emphasized="true"/>
+
+                                    <Text text="Vendors with Medium risk"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <Panel
+                            headerText="Low Risk Vendors"
+                            class="summaryCard lowRiskVendorsCard sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="10rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    class="sapUiSmallMargin"
+                                    alignItems="Center">
+
+                                    <core:Icon
+                                        src="sap-icon://accept"
+                                        size="2rem"
+                                        color="#188918"/>
+
+                                    <ObjectNumber
+                                        id="lowRiskVendorsCount"
+                                        number="0"
+                                        state="Success"
+                                        emphasized="true"/>
+
+                                    <Text text="Vendors with low risk"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                    </HBox>
+
+                    <!-- VENDOR SELECTOR -->
+                    <HBox
+                        alignItems="Center"
+                        wrap="Wrap"
+                        class="sapUiSmallMarginBottom">
+
+                        <Label
+                            text="Select Vendor"
+                            labelFor="vendorSelect"
+                            class="sapUiSmallMarginEnd"/>
+
+                        <Select
+                            id="vendorSelect"
+                            width="22rem"
+                            change=".onVendorChange"
+                            items="{vendors>/list}">
+
+                            <core:Item
+                                key="{vendors>ID}"
+                                text="{vendors>label}"/>
+
+                        </Select>
+                    </HBox>
+
+                    <!-- RISK CALCULATION BUTTONS -->
+                    <HBox
+                        wrap="Wrap"
+                        alignItems="Center"
+                        class="sapUiSmallMarginBottom">
+
+                        <Button
+                            text="Calculate Delivery Risk"
+                            icon="sap-icon://shipping-status"
+                            type="Emphasized"
+                            press=".onCalculateDeliveryRisk"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"/>
+
+                        <Button
+                            text="Calculate Quality Risk"
+                            icon="sap-icon://quality-issue"
+                            press=".onCalculateQualityRisk"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"/>
+
+                        <Button
+                            text="Calculate Price Risk"
+                            icon="sap-icon://money-bills"
+                            press=".onCalculatePriceRisk"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"/>
+
+                        <Button
+                            text="Calculate Overall Risk"
+                            icon="sap-icon://alert"
+                            type="Accept"
+                            press=".onCalculateOverallRisk"
+                            class="sapUiTinyMarginBottom"/>
+
+                    </HBox>
+
+                    <!-- SELECTED VENDOR INFORMATION -->
+                    <Panel class="riskCard sapUiSmallMarginBottom">
+                        <content>
+                            <HBox
+                                justifyContent="SpaceBetween"
+                                alignItems="Center"
+                                wrap="Wrap"
+                                class="sapUiSmallMargin">
+
+                                <HBox
+                                    alignItems="Center"
+                                    wrap="Wrap">
+
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Vendor Code"/>
+                                        <Text id="vendorCode" text="-"/>
+                                    </VBox>
+
+                                    <VBox>
+                                        <Label text="Vendor Name"/>
+                                        <Title
+                                            id="vendorName"
+                                            text="-"
+                                            level="H3"/>
+                                    </VBox>
+                                </HBox>
+
+                                <VBox alignItems="End">
+                                    <Label text="Assessment Status"/>
+                                    <ObjectStatus
+                                        text="Completed"
+                                        state="Success"/>
+                                </VBox>
+
+                                <Button
+                                    text="Vendor Details"
+                                    icon="sap-icon://navigation-right-arrow"
+                                    press=".onVendorDetails"
+                                    class="sapUiTinyMarginBottom"/>
+
+                            </HBox>
+                        </content>
+                    </Panel>
+
+                    <!-- VENDOR DELIVERY HISTORY -->
+                    <Panel
+                        headerText="Vendor Delivery History"
+                        class="sapUiSmallMarginBottom">
+
+                        <content>
+                            <Table
+                                id="deliveriesTable"
+                                items="{deliveries>/list}"
+                                growing="true"
+                                growingThreshold="2"
+                                noDataText="No deliveries found for this vendor">
+
+                                <columns>
+                                    <Column>
+                                        <Text text="PO Number"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="PO Item"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Material Code"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Expected Date"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Actual Date"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Ordered Qty"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Delivered Qty"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Shipment Status"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Remarks"/>
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{deliveries>poNumber}"/>
+                                            <Text text="{deliveries>poItemNumber}"/>
+                                            <Text text="{deliveries>materialCode}"/>
+                                            <Text text="{deliveries>expectedDeliveryDate}"/>
+                                            <Text text="{deliveries>actualDeliveryDate}"/>
+                                            <ObjectNumber number="{deliveries>orderedQuantity}"/>
+                                            <ObjectNumber number="{deliveries>deliveredQuantity}"/>
+                                            <ObjectStatus
+                                                text="{deliveries>shipmentStatus}"
+                                                state="Information"/>
+                                            <Text text="{deliveries>remarks}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+
+                            </Table>
+                        </content>
+                    </Panel>
+
+                    <!-- RISK SCORE CARDS -->
+                    <HBox
+                        width="100%"
+                        wrap="Wrap"
+                        class="sapUiSmallMarginBottom">
+
+                        <!-- OVERALL RISK -->
+                        <Panel
+                            headerText="Overall Risk"
+                            class="riskCard overallRiskCard sapUiTinyMarginEnd sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="12rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    alignItems="Center"
+                                    justifyContent="Center"
+                                    class="sapUiSmallMargin">
+
+                                    <ObjectNumber
+                                        id="overallRisk"
+                                        number="0"
+                                        unit="/ 100"
+                                        emphasized="true"/>
+
+                                    <ObjectStatus
+                                        id="overallLevel"
+                                        text="Loading..."
+                                        state="Warning"/>
+
+                                    <Text
+                                        text="Combined risk"
+                                        class="sapUiTinyMarginTop"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <!-- DELIVERY RISK -->
+                        <Panel
+                            headerText="Delivery Risk"
+                            class="riskCard sapUiTinyMarginEnd sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="12rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    alignItems="Center"
+                                    justifyContent="Center"
+                                    class="sapUiSmallMargin">
+
+                                    <ObjectNumber
+                                        id="deliveryRisk"
+                                        number="0"
+                                        unit="/ 100"
+                                        emphasized="true"/>
+
+                                    <ObjectStatus
+                                        id="deliveryStatus"
+                                        text="Loading..."
+                                        state="Warning"/>
+
+                                    <Text
+                                        text="Delivery Performance"
+                                        class="sapUiTinyMarginTop"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <!-- QUALITY RISK -->
+                        <Panel
+                            headerText="Quality Risk"
+                            class="riskCard sapUiTinyMarginEnd sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="12rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    alignItems="Center"
+                                    justifyContent="Center"
+                                    class="sapUiSmallMargin">
+
+                                    <ObjectNumber
+                                        id="qualityRisk"
+                                        number="0"
+                                        unit="/ 100"
+                                        emphasized="true"/>
+
+                                    <ObjectStatus
+                                        id="qualityStatus"
+                                        text="Loading..."
+                                        state="Warning"/>
+
+                                    <Text
+                                        text="Quality Performance"
+                                        class="sapUiTinyMarginTop"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <!-- PRICE RISK -->
+                        <Panel
+                            headerText="Price Risk"
+                            class="riskCard sapUiTinyMarginBottom">
+
+                            <layoutData>
+                                <FlexItemData
+                                    growFactor="1"
+                                    baseSize="0%"
+                                    minWidth="12rem"/>
+                            </layoutData>
+
+                            <content>
+                                <VBox
+                                    alignItems="Center"
+                                    justifyContent="Center"
+                                    class="sapUiSmallMargin">
+
+                                    <ObjectNumber
+                                        id="priceRisk"
+                                        number="0"
+                                        unit="/ 100"
+                                        emphasized="true"/>
+
+                                    <ObjectStatus
+                                        id="priceStatus"
+                                        text="Loading..."
+                                        state="Warning"/>
+
+                                    <Text
+                                        text="Price Deviation"
+                                        class="sapUiTinyMarginTop"/>
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                    </HBox>
+
+                </VBox>
+
+            </content>
+        </Page>
+    </App>
+
+</mvc:View>

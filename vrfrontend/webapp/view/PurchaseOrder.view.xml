@@ -1,0 +1,287 @@
+<mvc:View
+    controllerName="vrfrontend.controller.PurchaseOrder"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:cards="sap.f.cards"
+>
+    <f:DynamicPage
+        id="poDynamicPage"
+        fitContent="true"
+        headerExpanded="true"
+        class="sapUiResponsiveContentPadding"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Purchase Order Details" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+                    <f:content>
+                    <fb:FilterBar
+                        id="poFilterBar"
+                        showFilterConfiguration="false"
+                        useToolbar="false"
+                        showGoOnFB="false"
+                    >
+                        <fb:filterGroupItems>
+
+                            <!-- PO Number -->
+                            <fb:FilterGroupItem
+                                label="PO Number"
+                                name="poNumber"
+                                groupName="poNumberGroup"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="poFilter"
+                                        width="220px"
+                                        selectionChange=".onpoFilterChange"
+                                        items="{poFilter>/numbers}"
+                                    >
+                                        <core:Item key="{poFilter>value}" text="{poFilter>value}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- PO Date -->
+                            <fb:FilterGroupItem
+                                label="PO Date"
+                                name="poDate"
+                                groupName="poDateGroup"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="poDateFilter"
+                                        width="220px"
+                                        selectionChange=".onpoDateFilterChange"
+                                        items="{poFilter>/dates}"
+                                    >
+                                        <core:Item key="{poFilter>value}" text="{poFilter>value}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- Expected Delivery Date -->
+                            <fb:FilterGroupItem
+                                label="Expected Delivery Date"
+                                name="expectedDeliveryDate"
+                                groupName="poExDateGroup"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="poExDateFilter"
+                                        width="220px"
+                                        selectionChange=".onpoExDateFilterChange"
+                                        items="{poFilter>/deliveryDates}"
+                                    >
+                                        <core:Item key="{poFilter>value}" text="{poFilter>value}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- PO Status -->
+                            <fb:FilterGroupItem
+                                label="PO Status"
+                                name="poStatus"
+                                groupName="poStatusGroup"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="poStatusFilter"
+                                        width="220px"
+                                        selectionChange=".onpoStatusFilterChange"
+                                        items="{poFilter>/statuses}"
+                                    >
+                                        <core:Item key="{poFilter>value}" text="{poFilter>value}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <VBox
+                width="100%"
+                class="sapUiMediumMarginTop"
+            >
+            <Toolbar>
+            <Title text="Purchase Orders"/>
+            <ToolbarSpacer />
+             <Button
+                                id="poSortButton"
+                                icon="sap-icon://sort-ascending"
+                                text="PO Number"
+                                tooltip="PO Number: ascending (click for descending)"
+                                type="Transparent"
+                                press=".onToggleSort"
+                            />
+             <Button
+                                icon="sap-icon://add"
+                                tooltip="Add PO"
+                                type="Transparent"
+                                press=".addPO"
+                            />
+                            <!-- <Button
+                                icon="sap-icon://edit"
+                                tooltip="Edit PO"
+                                type="Transparent"
+                                press=".onEditPO"
+                            /> -->
+
+                            <Button
+                                icon="sap-icon://delete"
+                                tooltip="Delete PO"
+                                type="Transparent"
+                                press=".onDeletePO"
+                            />
+
+            </Toolbar>
+                <IconTabBar
+                    id="poTabBar"
+                    class="vrxPoTabs"
+                    selectedKey="all"
+                    expandable="false"
+                    applyContentPadding="false"
+                    select=".onTabSelect"
+                >
+                    <items>
+                        <IconTabFilter
+                            key="recent"
+                            text="Recent"
+                            icon="sap-icon://date-time"
+                            iconColor="Default"
+                        />
+                        <IconTabFilter
+                            key="all"
+                            text="All Orders"
+                            icon="sap-icon://list"
+                            iconColor="Neutral"
+                        />
+                        <IconTabFilter
+                            key="pending"
+                            text="Pending"
+                            icon="sap-icon://pending"
+                            iconColor="Critical"
+                        />
+                        <IconTabFilter
+                            key="accepted"
+                            text="Accepted"
+                            icon="sap-icon://accept"
+                            iconColor="Positive"
+                        />
+                        <IconTabFilter
+                            key="sent"
+                            text="Sent to Vendor"
+                            icon="sap-icon://shipping-status"
+                            iconColor="Default"
+                        />
+                        <IconTabFilter
+                            key="rejected"
+                            text="Rejected"
+                            icon="sap-icon://decline"
+                            iconColor="Negative"
+                        />
+                    </items>
+                </IconTabBar>
+                <Table
+                    id="poTable"
+                    width="100%"
+                    growing="true"
+                    growingScrollToLoad="true"
+                    growingThreshold="10"
+                    mode="MultiSelect"
+                    items="{
+                        path: '/PurchaseOrders',
+                        sorter: [
+                            { path: 'poSeq' },
+                            { path: 'poNumber' }
+                        ]
+                    }"
+                >
+
+                    <columns>
+                        <Column width="10rem">
+                            <Text text="PO Number" />
+                        </Column>
+
+                        <Column width="15rem">
+                            <Text text="PO Date" />
+                        </Column>
+
+                        <Column width="12rem">
+                            <Text text="Expected Delivery Date" />
+                        </Column>
+                        <Column width="10rem">
+                            <Text text="PO Status" />
+                        </Column>
+                        <Column>
+                            <Text text="Total Amount" />
+                        </Column>
+                        <Column>
+                            <Text text="Payment Terms" />
+                        </Column>
+                    </columns>
+                    <items>
+                       
+<ColumnListItem
+    type="Navigation"
+    press=".onPOPress"
+    highlight="{
+        parts: [
+            { path: 'createdAt', targetType: 'any' },
+            { path: 'clock>/now', targetType: 'any' }
+        ],
+        formatter: '.formatter.newRowHighlight'
+    }"
+>
+
+                            <cells>
+                                <HBox alignItems="Center">
+                                    <Text text="{poNumber}" class="sapUiTinyMarginEnd" />
+                                    <ObjectStatus
+                                        text="NE"
+                                        state="Information"
+                                        inverted="true"
+                                      visible="{
+    parts: [
+        { path: 'createdAt', targetType: 'any' },
+        { path: 'clock>/now', targetType: 'any' }
+    ],
+    formatter: '.formatter.isNew'
+}"
+                                    />
+                                </HBox>
+                                <Text text="{poDate}" />
+                                <Text text="{expectedDeliveryDate}" />
+                               <ObjectStatus
+    text="{poStatus}"
+    state="{
+        path: 'poStatus',
+        formatter: '.formatter.poStatusState'
+    }"
+/>
+                                <Text text="{totalAmount}" />
+                                <Text text="{paymentTerms}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

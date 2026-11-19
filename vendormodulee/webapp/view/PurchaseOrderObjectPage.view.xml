@@ -1,0 +1,319 @@
+<mvc:View
+    controllerName="vendormodulee.controller.PurchaseOrderObjectPage"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    core:require="{ formatter: 'vendormodulee/model/formatter' }">
+
+    <Page
+        id="purchaseOrderObjectPage"
+        title="Purchase Order Details"
+        class="purchaseOrderObjectPage"
+        showNavButton="true"
+        navButtonPress=".onNavBack">
+
+        <content>
+            <VBox class="sapUiMediumMargin">
+
+                <Title
+                    text="Purchase Order Information"
+                    level="H2"
+                    class="sapUiMediumMarginBottom" />
+
+                <MessageStrip
+                    text="This order is waiting for your response. Accept it to confirm, or reject it and give a reason."
+                    type="Warning"
+                    showIcon="true"
+                    visible="{= ${path: 'poStatus', targetType: 'any'} === 'SENT_TO_VENDOR' }"
+                    class="sapUiSmallMarginBottom" />
+
+                <ObjectHeader
+                    title="{poNumber}"
+                    number="{path: 'totalAmount', formatter: 'formatter.amount'}"
+                    numberUnit="{currency}">
+
+                    <attributes>
+                        <ObjectAttribute
+                            title="PO Date"
+                            text="{path: 'poDate', formatter: 'formatter.date'}" />
+
+                        <ObjectAttribute
+                            title="Payment Terms"
+                            text="{paymentTerms}" />
+
+                        <ObjectAttribute
+                            title="Contract Reference"
+                            text="{contractReference}" />
+
+                        <ObjectAttribute
+                            title="Expected Delivery"
+                            text="{path: 'expectedDeliveryDate', formatter: 'formatter.deliveryDate'}"
+                            visible="{= ${path: 'poStatus', targetType: 'any'} === 'ACCEPTED' || ((${path: 'poStatus', targetType: 'any'} === 'PARTIALLY_DELIVERED' || ${path: 'poStatus', targetType: 'any'} === 'FULLY_DELIVERED' || ${path: 'poStatus', targetType: 'any'} === 'CLOSED') &amp;&amp; !!${path: 'expectedDeliveryDate', targetType: 'any'}) }" />
+
+                        <ObjectAttribute
+                            title="Rejection Reason"
+                            text="{rejectionReason}"
+                            visible="{= ${path: 'poStatus', targetType: 'any'} === 'REJECTED' }" />
+                    </attributes>
+
+                    <statuses>
+                        <ObjectStatus
+                            title="Status"
+                            text="{path: 'poStatus', formatter: 'formatter.statusText'}"
+                            state="{path: 'poStatus', formatter: 'formatter.statusState'}" />
+                    </statuses>
+
+                </ObjectHeader>
+
+                <!-- Accept and Reject: only for orders awaiting vendor response -->
+                <HBox
+                    id="poActionButtons"
+                    class="sapUiMediumMarginTop"
+                    justifyContent="End"
+                    visible="{= ${path: 'poStatus', targetType: 'any'} === 'SENT_TO_VENDOR' }">
+
+                    <Button
+                        id="acceptPOButton"
+                        text="Accept"
+                        icon="sap-icon://accept"
+                        type="Emphasized"
+                        press=".onAcceptPO"
+                        class="sapUiSmallMarginEnd" />
+
+                    <Button
+                        id="rejectPOButton"
+                        text="Reject"
+                        icon="sap-icon://decline"
+                        type="Reject"
+                        press=".onRejectPO" />
+
+                </HBox>
+
+                <!-- Update delivery date: only for accepted orders -->
+             
+<HBox
+    id="deliveryDateAction"
+    class="sapUiMediumMarginTop"
+    justifyContent="End"
+    visible="{= ${path: 'poStatus', targetType: 'any'} === 'ACCEPTED'
+        &amp;&amp; ${path: 'poView>/invoiceStatus', targetType: 'any'} !== 'SUBMITTED' }">
+
+    <Button
+        id="updateDeliveryDateButton"
+        text="Update Expected Delivery Date"
+        icon="sap-icon://calendar"
+        type="Emphasized"
+        press=".onUpdateExpectedDeliveryDate" />
+
+</HBox>
+
+
+                <!-- Invoice of this order. The backend creates exactly one draft
+                     invoice when the order is accepted, so there is no
+                     "Create Invoice" action here: the vendor opens it. -->
+                <Panel
+                    id="poInvoicePanel"
+                    headerText="Invoice"
+                    class="sapUiMediumMarginTop poInvoicePanel"
+                    visible="{= ${poView>/invoiceState} !== 'NONE' }">
+
+                    <VBox class="sapUiMediumMargin">
+
+                        <BusyIndicator
+                            id="poInvoiceBusy"
+                            text="Loading invoice..."
+                            visible="{= ${poView>/invoiceState} === 'LOADING' }" />
+
+                        <MessageStrip
+                            id="poInvoiceErrorStrip"
+                            text="{poView>/errorText}"
+                            type="Error"
+                            showIcon="true"
+                            visible="{= ${poView>/invoiceState} === 'ERROR' }" />
+
+                        <Button
+                            id="poInvoiceRetryButton"
+                            text="Retry"
+                            icon="sap-icon://refresh"
+                            class="sapUiSmallMarginTop"
+                            visible="{= ${poView>/invoiceState} === 'ERROR' }"
+                            press=".onRetryInvoiceLoad" />
+
+                        <VBox
+                            id="poInvoiceDetails"
+                            visible="{= ${poView>/invoiceState} === 'FOUND' }">
+
+                            <MessageStrip
+                                id="poInvoiceDraftStrip"
+                                text="A draft invoice was created when this purchase order was accepted. Open it to enter the invoice number, dates and item quantities."
+                                type="Information"
+                                showIcon="true"
+                                class="sapUiSmallMarginBottom"
+                                visible="{= ${poView>/invoiceStatus} === 'DRAFT' }" />
+
+                            <ObjectIdentifier
+                                title="{path: 'poView>/invoiceNumber', formatter: 'formatter.invoiceNumber'}"
+                                text="Invoice" />
+
+                            <HBox
+                                class="sapUiSmallMarginTop poInvoiceFacts"
+                                wrap="Wrap">
+
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <Label text="Status" />
+                                    <ObjectStatus
+                                        id="poInvoiceStatus"
+                                        text="{path: 'poView>/invoiceStatus', formatter: 'formatter.invoiceStatusText'}"
+                                        state="{path: 'poView>/invoiceStatus', formatter: 'formatter.invoiceStatusState'}"
+                                        inverted="true" />
+                                </VBox>
+
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <Label text="Invoice Date" />
+                                    <Text text="{path: 'poView>/invoiceDate', formatter: 'formatter.date'}" />
+                                </VBox>
+
+                                <VBox>
+                                    <Label text="Invoice Amount" />
+                                    <ObjectNumber
+                                        number="{path: 'poView>/invoiceAmount', formatter: 'formatter.amount'}"
+                                        unit="{poView>/currency}" />
+                                </VBox>
+
+                            </HBox>
+
+                            <HBox
+                                class="sapUiSmallMarginTop"
+                                justifyContent="End"
+                                wrap="Wrap">
+
+                                <Button
+                                    id="poOpenInvoiceButton"
+                                    text="View Invoice"
+                                    icon="sap-icon://sales-document"
+                                    press=".onOpenInvoice"
+                                    class="sapUiSmallMarginEnd" />
+
+                                <Button
+                                    id="poCompleteInvoiceButton"
+                                    text="Complete Draft Invoice"
+                                    icon="sap-icon://edit"
+                                    type="Emphasized"
+                                    visible="{= ${poView>/invoiceStatus} === 'DRAFT' }"
+                                    press=".onCompleteInvoice" />
+
+                            </HBox>
+
+                        </VBox>
+
+                    </VBox>
+                </Panel>
+
+                <!-- Vendor information -->
+                <Panel
+                    headerText="Vendor"
+                    class="sapUiMediumMarginTop">
+
+                    <VBox class="sapUiMediumMargin">
+
+                        <ObjectIdentifier
+                            title="{vendor/vendorName}"
+                            text="{vendor/vendorCode}" />
+
+                        <HBox class="sapUiSmallMarginTop">
+
+                            <VBox class="sapUiSmallMarginEnd">
+                                <Label text="Email" />
+                                <Text text="{vendor/email}" />
+                            </VBox>
+
+                            <VBox class="sapUiSmallMarginEnd">
+                                <Label text="Phone" />
+                                <Text text="{vendor/phone}" />
+                            </VBox>
+
+                            <VBox>
+                                <Label text="Country" />
+                                <Text text="{vendor/country}" />
+                            </VBox>
+
+                        </HBox>
+
+                    </VBox>
+                </Panel>
+
+                <!-- Purchase order items -->
+                <Panel
+                    headerText="Purchase Order Items"
+                    class="sapUiMediumMarginTop">
+
+                    <Table
+                        id="purchaseOrderItemsTable"
+                        items="{path: 'items'}"
+                        growing="true"
+                        growingThreshold="10"
+                        noDataText="No purchase order items found">
+
+                        <columns>
+                            <Column>
+                                <Text text="Material Code" />
+                            </Column>
+
+                            <Column>
+                                <Text text="Description" />
+                            </Column>
+
+                            <Column hAlign="End">
+                                <Text text="Quantity" />
+                            </Column>
+
+                            <Column>
+                                <Text text="Unit" />
+                            </Column>
+
+                            <Column hAlign="End">
+                                <Text text="Unit Price" />
+                            </Column>
+
+                            <Column>
+                                <Text text="Currency" />
+                            </Column>
+
+                            <Column>
+                                <Text text="Status" />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{materialCode}" />
+
+                                    <Text text="{materialDescription}" />
+
+                                    <Text text="{orderedQuantity}" />
+
+                                    <Text text="{unit}" />
+
+                                    <ObjectNumber
+                                        number="{path: 'newUnitPrice', formatter: 'formatter.amount'}"
+                                        unit="{currency}" />
+
+                                    <Text text="{currency}" />
+
+                                    <ObjectStatus
+                                        text="{path: 'itemStatus', formatter: 'formatter.itemStatusText'}"
+                                        state="{path: 'itemStatus', formatter: 'formatter.itemStatusState'}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+
+                    </Table>
+                </Panel>
+
+            </VBox>
+        </content>
+
+    </Page>
+
+</mvc:View>

@@ -1,0 +1,11 @@
+ID,claimVersion,decisionStage,decision,comments,decidedBy,decidedAt,approvedAmount,reviewTask_ID,claim_ID
+bf2d78d2-1fb4-44e5-9a43-da0ffe4577fc,1,WarrantyReview,Accepted,WarrantyReview review completed.,analyst@example.com,2026-10-26T12:00:00Z,,03ac513b-e76f-4afd-913b-afc19f449934,ba452f77-cc71-4403-89f2-ba6393c69854
+ebd48967-1d82-44de-bf1f-ed186bc91554,1,WarrantyReview,Accepted,WarrantyReview review completed.,analyst@example.com,2026-10-26T12:00:00Z,,217ecd7b-a043-4dd3-b031-05b170439e63,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+43dc5fa6-6ee5-4e5a-9a20-7d7a91ddb9ff,1,TechnicalReview,Approved,TechnicalReview review completed.,technical@example.com,2026-10-26T12:00:00Z,22000.00,8b483e9d-442c-4771-b685-b232a1d4362e,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+3ac99803-381e-4795-b052-7de5e9c59a4f,1,FinanceReview,Approved,FinanceReview review completed.,finance@example.com,2026-10-26T12:00:00Z,21000.00,13110eaf-5982-4ccd-ab2e-12d4456c06b5,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+5c1c31a9-eebf-48d5-91bb-5990052a17f4,1,WarrantyReview,Accepted,WarrantyReview review completed.,analyst@example.com,2026-10-26T12:00:00Z,,668c40d7-9749-4506-806a-3a94c4f08f29,eebde852-02e2-4819-8daf-06af91f17b16
+d9f5426b-5a62-440f-bd0f-c68b71184b1b,1,TechnicalReview,Approved,TechnicalReview review completed.,technical@example.com,2026-10-26T12:00:00Z,,1d32fc7c-d926-4f8e-a0eb-d8a1382cd77f,eebde852-02e2-4819-8daf-06af91f17b16
+70973f71-bf5b-453e-a29a-c1dd69956d14,1,FinanceReview,Approved,FinanceReview review completed.,finance@example.com,2026-10-26T12:00:00Z,8150.00,4861709c-494f-4152-a3a1-27c23974ae81,eebde852-02e2-4819-8daf-06af91f17b16
+2e8fc9da-129f-4f07-9b6b-78332c49e429,1,WarrantyReview,Accepted,WarrantyReview review completed.,analyst@example.com,2026-10-26T12:00:00Z,,c61ff66e-87ae-45ef-be33-90a0f18777e3,9990c89d-03d5-4196-b9f9-071958e85c12
+1a92ede9-339e-4ffb-96fc-3a0cd36f1160,1,TechnicalReview,Approved,TechnicalReview review completed.,technical@example.com,2026-10-26T12:00:00Z,,28470b28-2316-43d2-a4d6-72377c74a8fa,9990c89d-03d5-4196-b9f9-071958e85c12
+33349505-2748-4680-97ac-15eabbe11021,1,FinanceReview,Approved,FinanceReview review completed.,finance@example.com,2026-10-26T12:00:00Z,18400.00,ebda6437-029b-4569-82bb-db56ddea23f8,9990c89d-03d5-4196-b9f9-071958e85c12

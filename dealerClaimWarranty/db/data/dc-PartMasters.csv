@@ -1,0 +1,11 @@
+ID,partNumber,partDescription,category_code,standardUnitPrice,currency,validFrom,validTo,isActive
+2ca75f60-b323-4347-939c-4a3f5b458363,PT-ENG-001,Oil pump assembly,ENGINE,8500.00,INR,2024-01-01,2028-12-31,true
+3fd74df8-0ca8-441d-9985-920bc8e8d0e1,PT-ENG-002,Cylinder head gasket,ENGINE,1200.00,INR,2024-01-01,2028-12-31,true
+efe6c465-71cc-44f1-a10c-d6d8da9544c8,PT-TRN-001,Clutch kit,TRANSMISSION,18500.00,INR,2024-01-01,2028-12-31,true
+4af2bd51-78ee-4b35-b95e-942b9d8ab036,PT-TRN-002,Gearbox speed sensor,TRANSMISSION,4500.00,INR,2024-01-01,2028-12-31,true
+bdc9ad0d-b492-45f0-a4fc-930c1d34e92b,PT-ELC-001,Alternator assembly,ELECTRICAL,12500.00,INR,2024-01-01,2028-12-31,true
+a6b5a3e1-8a63-4dfa-ba9f-0c0a8e351f6c,PT-ELC-002,Main wiring harness,ELECTRICAL,9800.00,INR,2024-01-01,2028-12-31,true
+f07d6410-ac6d-4a8b-824d-c6c2af263a71,PT-BRK-001,Front brake pad set,BRAKES,6500.00,INR,2024-01-01,2028-12-31,true
+bd22eaa4-4808-498c-bcdb-adef7d8d1bd1,PT-BRK-002,Brake master cylinder,BRAKES,7800.00,INR,2024-01-01,2028-12-31,true
+9c95ca22-fb12-49d7-a21d-657eea59354e,PT-COOL-001,Radiator assembly,COOLING,14500.00,INR,2024-01-01,2028-12-31,true
+f9a71a7a-3cf7-4b6d-9a72-656702887add,PT-COOL-002,Water pump assembly,COOLING,9200.00,INR,2024-01-01,2028-12-31,true

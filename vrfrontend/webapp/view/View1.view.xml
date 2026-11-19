@@ -1,0 +1,721 @@
+<mvc:View
+    controllerName="vrfrontend.controller.View1"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data"
+    displayBlock="true"
+    height="100%"
+>
+    <Page
+        id="mainPage"
+        showHeader="false"
+        class="vrxPage"
+    >
+        <content>
+            <VBox class="vrxDashboardBody">
+                <HBox
+                    width="100%"
+                    alignItems="Center"
+                    class="vrxPageHeader sapUiSmallMarginBottom"
+                >
+                    <Button
+                        icon="sap-icon://nav-back"
+                        type="Transparent"
+                        tooltip="{i18n>dashBack}"
+                        press=".onNav"
+                        class="vrxBackButton sapUiSmallMarginEnd"
+                    />
+
+                    <VBox class="vrxHeaderText">
+                        <Title
+                            text="{i18n>dashTitle}"
+                            level="H1"
+                            wrapping="true"
+                            class="vrxPageHeaderTitle"
+                        />
+
+                        <Text
+                            text="{i18n>dashSubtitle}"
+                            wrapping="true"
+                            class="vrxPageHeaderSubtitle"
+                        />
+                    </VBox>
+                </HBox>
+
+                <MessageStrip
+                    text="{i18n>dashLoadError}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{kpi>/error}"
+                    class="sapUiSmallMarginBottom"
+                />
+
+                <!-- PROCUREMENT TEAM PAGES -->
+                <!-- <Title
+                    text="Procurement Team Pages"
+                    level="H2"
+                    class="vrxSectionTitle sapUiSmallMarginTop sapUiSmallMarginBottom"
+                /> -->
+
+                <layout:Grid
+                    width="100%"
+                    defaultSpan="XL4 L4 M4 S12"
+                    hSpacing="1"
+                    vSpacing="1"
+                    class="vrxKpiGrid"
+                >
+                    <layout:content>
+                        <GenericTile
+                            header="{i18n>kpiVendorsTotal}"
+                            subheader="Overall vendor count"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentTeal"
+                            press=".onVendorPress"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/vendorsTotal}"
+                                    icon="sap-icon://supplier"
+                                    valueColor="Neutral"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+
+                        <GenericTile
+                            header="{i18n>kpiPOTotal}"
+                            subheader="All purchase orders"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentPurple"
+                            press=".onPurchaseOrderPress"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/poTotal}"
+                                    icon="sap-icon://sales-order"
+                                    valueColor="Neutral"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+
+                        <GenericTile
+                            header="{i18n>kpiInvoiceTotal}"
+                            subheader="All invoices"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentTeal"
+                            press=".onInvoicePress"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/invoiceTotal}"
+                                    icon="sap-icon://receipt"
+                                    valueColor="Neutral"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+                    </layout:content>
+                </layout:Grid>
+
+                <!-- ROW 2 AND 3: STATUS DETAILS -->
+                <!-- <Title
+                    text="Status Details"
+                    level="H2"
+                    class="vrxSectionTitle sapUiSmallMarginTop sapUiSmallMarginBottom"
+                />
+
+                <layout:Grid
+                    width="100%"
+                    defaultSpan="XL4 L4 M6 S12"
+                    hSpacing="1"
+                    vSpacing="1"
+                    class="vrxKpiGrid"
+                >
+                    <layout:content>
+                        <GenericTile
+                            header="{i18n>kpiVendorsActive}"
+                            subheader="Currently active"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentGreen"
+                            press=".onVendorPress"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/vendorsActive}"
+                                    icon="sap-icon://accept"
+                                    valueColor="Good"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+
+                        <GenericTile
+                            header="{i18n>kpiVendorsHighRisk}"
+                            subheader="Require attention"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentRed"
+                            press=".onVendorRisk"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/vendorsHighRisk}"
+                                    icon="sap-icon://alert"
+                                    valueColor="Error"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+
+                        <GenericTile
+                            header="{i18n>kpiVendorsBlocked}"
+                            subheader="Blocked vendors"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentNavy"
+                            press=".onVendorPress"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/vendorsBlocked}"
+                                    icon="sap-icon://locked"
+                                    valueColor="Error"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+
+                        <GenericTile
+                            header="{i18n>kpiPOPending}"
+                            subheader="Awaiting approval"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentAmber"
+                            press=".onPurchaseOrderPress"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/poPending}"
+                                    icon="sap-icon://pending"
+                                    valueColor="Critical"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+
+                        <GenericTile
+                            header="{i18n>kpiPOApproved}"
+                            subheader="Approved orders"
+                            frameType="OneByOne"
+                            class="vrxKpiTile vrxAccentGreen"
+                            press=".onPurchaseOrderPress"
+                        >
+                            <TileContent>
+                                <NumericContent
+                                    value="{kpi>/poApproved}"
+                                    icon="sap-icon://approvals"
+                                    valueColor="Good"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+                    </layout:content>
+                </layout:Grid> -->
+
+                <!-- ANALYTICS -->
+                <Title
+                    text="{i18n>dashAnalytics}"
+                    level="H2"
+                    class="vrxSectionTitle sapUiMediumMarginTop"
+                />
+
+                <layout:Grid
+                    defaultSpan="XL6 L6 M12 S12"
+                    hSpacing="1"
+                    vSpacing="1"
+                >
+                    <layout:content>
+                        <!-- Vendor status -->
+                        <!-- <VBox class="vrxCard">
+                            <Title
+                                text="{i18n>chartVendorStatus}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+                            <Text
+                                text="{i18n>chartNoData}"
+                                class="vrxMutedText"
+                                visible="{= ${vendorChart>/VendorStatus}.length === 0 }"
+                            />
+                            <viz:VizFrame
+                                id="idVizFrame"
+                                uiConfig="{applicationSet:'fiori'}"
+                                height="320px"
+                                width="100%"
+                                vizType="donut"
+                            >
+                                <viz:dataset>
+                                    <viz.data:FlattenedDataset
+                                        data="{vendorChart>/VendorStatus}"
+                                    >
+                                        <viz.data:dimensions>
+                                            <viz.data:DimensionDefinition
+                                                name="Vendor Status"
+                                                value="{vendorChart>status}"
+                                            />
+                                        </viz.data:dimensions>
+                                        <viz.data:measures>
+                                            <viz.data:MeasureDefinition
+                                                name="Vendor Count"
+                                                value="{vendorChart>count}"
+                                            />
+                                        </viz.data:measures>
+                                    </viz.data:FlattenedDataset>
+                                </viz:dataset>
+                                <viz:feeds>
+                                    <viz.feeds:FeedItem
+                                        uid="size"
+                                        type="Measure"
+                                        values="Vendor Count"
+                                    />
+                                    <viz.feeds:FeedItem
+                                        uid="color"
+                                        type="Dimension"
+                                        values="Vendor Status"
+                                    />
+                                </viz:feeds>
+                            </viz:VizFrame>
+                        </VBox> -->
+
+                        <!-- Vendor risk -->
+
+                        <VBox class="vrxCard">
+                            <Title
+                                text="{i18n>chartVendorRisk}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+
+                            <Text
+                                text="{i18n>chartNoData}"
+                                class="vrxMutedText"
+                                visible="{= ${riskChart>/levels}.length === 0 }"
+                            />
+
+                            <viz:VizFrame
+                                id="riskViz"
+                                uiConfig="{applicationSet:'fiori'}"
+                                height="320px"
+                                width="100%"
+                                vizType="donut"
+                            >
+                                <viz:dataset>
+                                    <viz.data:FlattenedDataset
+                                        data="{riskChart>/levels}"
+                                    >
+                                        <viz.data:dimensions>
+                                            <viz.data:DimensionDefinition
+                                                name="Risk Level"
+                                                value="{riskChart>status}"
+                                            />
+                                        </viz.data:dimensions>
+
+                                        <viz.data:measures>
+                                            <viz.data:MeasureDefinition
+                                                name="Vendor Count"
+                                                value="{riskChart>count}"
+                                            />
+                                        </viz.data:measures>
+                                    </viz.data:FlattenedDataset>
+                                </viz:dataset>
+
+                                <viz:feeds>
+                                    <viz.feeds:FeedItem
+                                        uid="size"
+                                        type="Measure"
+                                        values="Vendor Count"
+                                    />
+
+                                    <viz.feeds:FeedItem
+                                        uid="color"
+                                        type="Dimension"
+                                        values="Risk Level"
+                                    />
+                                </viz:feeds>
+                            </viz:VizFrame>
+                        </VBox>
+
+                        <!-- PO status -->
+                        <VBox class="vrxCard">
+                            <Title
+                                text="{i18n>chartPOStatus}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+                            <Text
+                                text="{i18n>chartNoData}"
+                                class="vrxMutedText"
+                                visible="{= ${poChart>/poStatus}.length === 0 }"
+                            />
+                            <viz:VizFrame
+                                id="idVizFrames"
+                                uiConfig="{applicationSet:'fiori'}"
+                                height="320px"
+                                width="100%"
+                                vizType="bar"
+                            >
+                                <viz:dataset>
+                                    <viz.data:FlattenedDataset
+                                        data="{poChart>/poStatus}"
+                                    >
+                                        <viz.data:dimensions>
+                                            <viz.data:DimensionDefinition
+                                                name="Purchase Order Status"
+                                                value="{poChart>status}"
+                                            />
+                                        </viz.data:dimensions>
+                                        <viz.data:measures>
+                                            <viz.data:MeasureDefinition
+                                                name="PO Count"
+                                                value="{poChart>count}"
+                                            />
+                                        </viz.data:measures>
+                                    </viz.data:FlattenedDataset>
+                                </viz:dataset>
+                                <viz:feeds>
+                                    <viz.feeds:FeedItem
+                                        uid="valueAxis"
+                                        type="Measure"
+                                        values="PO Count"
+                                    />
+                                    <viz.feeds:FeedItem
+                                        uid="categoryAxis"
+                                        type="Dimension"
+                                        values="Purchase Order Status"
+                                    />
+                                </viz:feeds>
+                            </viz:VizFrame>
+                        </VBox>
+
+                        <!-- Invoice status -->
+                        <!-- <VBox class="vrxCard">
+                            <Title
+                                text="{i18n>chartInvoiceStatus}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+                            <Text
+                                text="{i18n>chartNoData}"
+                                class="vrxMutedText"
+                                visible="{= ${invoiceChart>/statuses}.length === 0 }"
+                            />
+                            <viz:VizFrame
+                                id="invoiceViz"
+                                uiConfig="{applicationSet:'fiori'}"
+                                height="320px"
+                                width="100%"
+                                vizType="bar"
+                            >
+                                <viz:dataset>
+                                    <viz.data:FlattenedDataset
+                                        data="{invoiceChart>/statuses}"
+                                    >
+                                        <viz.data:dimensions>
+                                            <viz.data:DimensionDefinition
+                                                name="Invoice Status"
+                                                value="{invoiceChart>status}"
+                                            />
+                                        </viz.data:dimensions>
+                                        <viz.data:measures>
+                                            <viz.data:MeasureDefinition
+                                                name="Invoice Count"
+                                                value="{invoiceChart>count}"
+                                            />
+                                        </viz.data:measures>
+                                    </viz.data:FlattenedDataset>
+                                </viz:dataset>
+                                <viz:feeds>
+                                    <viz.feeds:FeedItem
+                                        uid="valueAxis"
+                                        type="Measure"
+                                        values="Invoice Count"
+                                    />
+                                    <viz.feeds:FeedItem
+                                        uid="categoryAxis"
+                                        type="Dimension"
+                                        values="Invoice Status"
+                                    />
+                                </viz:feeds>
+                            </viz:VizFrame>
+                        </VBox> -->
+                    </layout:content>
+                </layout:Grid>
+
+                <!-- ACTIVITY -->
+                <!-- <Title
+                    text="{i18n>dashActivity}"
+                    level="H2"
+                    class="vrxSectionTitle sapUiMediumMarginTop"
+                /> -->
+
+                <layout:Grid
+                    defaultSpan="XL6 L6 M12 S12"
+                    hSpacing="1"
+                    vSpacing="1"
+                >
+                    <layout:content>
+                        <!-- Recent purchase orders -->
+                        <VBox class="vrxCard">
+                            <Title
+                                text="{i18n>chartInvoiceStatus}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+                            <Text
+                                text="{i18n>chartNoData}"
+                                class="vrxMutedText"
+                                visible="{= ${invoiceChart>/statuses}.length === 0 }"
+                            />
+                            <viz:VizFrame
+                                id="invoiceViz"
+                                uiConfig="{applicationSet:'fiori'}"
+                                height="320px"
+                                width="100%"
+                                vizType="bar"
+                            >
+                                <viz:dataset>
+                                    <viz.data:FlattenedDataset
+                                        data="{invoiceChart>/statuses}"
+                                    >
+                                        <viz.data:dimensions>
+                                            <viz.data:DimensionDefinition
+                                                name="Invoice Status"
+                                                value="{invoiceChart>status}"
+                                            />
+                                        </viz.data:dimensions>
+                                        <viz.data:measures>
+                                            <viz.data:MeasureDefinition
+                                                name="Invoice Count"
+                                                value="{invoiceChart>count}"
+                                            />
+                                        </viz.data:measures>
+                                    </viz.data:FlattenedDataset>
+                                </viz:dataset>
+                                <viz:feeds>
+                                    <viz.feeds:FeedItem
+                                        uid="valueAxis"
+                                        type="Measure"
+                                        values="Invoice Count"
+                                    />
+                                    <viz.feeds:FeedItem
+                                        uid="categoryAxis"
+                                        type="Dimension"
+                                        values="Invoice Status"
+                                    />
+                                </viz:feeds>
+                            </viz:VizFrame>
+                        </VBox>
+
+                        <VBox class="vrxCard">
+                            <Title
+                                text="{i18n>listRecentPO}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+                            <Table
+                                id="recentPOTable"
+                                items="{recent>/purchaseOrders}"
+                                noDataText="{i18n>listNoData}"
+                                class="vrxDashTable"
+                            >
+                                <columns>
+                                    <Column>
+                                        <Text text="{i18n>colPO}" />
+                                    </Column>
+                                    <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                    >
+                                        <Text text="{i18n>colDate}" />
+                                    </Column>
+                                    <Column
+                                        hAlign="End"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                    >
+                                        <Text text="{i18n>colAmount}" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>colStatus}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem
+                                        type="Navigation"
+                                        press=".onRecentPOPress"
+                                    >
+                                        <cells>
+                                            <ObjectIdentifier
+                                                title="{recent>poNumber}"
+                                            />
+                                            <Text text="{recent>poDateText}" />
+                                            <ObjectNumber
+                                                number="{path: 'recent>totalAmount', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2, maxFractionDigits: 2}}"
+                                                unit="{recent>currency}"
+                                            />
+                                            <ObjectStatus
+                                                text="{recent>statusText}"
+                                                state="{path: 'recent>poStatus', formatter: '.formatter.poStatusState'}"
+                                            />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                        <!-- <VBox class="vrxCard">
+                            <Title
+                                text="{i18n>listRecentPO}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+                            <Table
+                                id="recentPOTable"
+                                items="{recent>/purchaseOrders}"
+                                noDataText="{i18n>listNoData}"
+                                class="vrxDashTable"
+                            >
+                                <columns>
+                                    <Column>
+                                        <Text text="{i18n>colPO}" />
+                                    </Column>
+                                    <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                    >
+                                        <Text text="{i18n>colDate}" />
+                                    </Column>
+                                    <Column
+                                        hAlign="End"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                    >
+                                        <Text text="{i18n>colAmount}" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>colStatus}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem
+                                        type="Navigation"
+                                        press=".onRecentPOPress"
+                                    >
+                                        <cells>
+                                            <ObjectIdentifier
+                                                title="{recent>poNumber}"
+                                            />
+                                            <Text text="{recent>poDateText}" />
+                                            <ObjectNumber
+                                                number="{path: 'recent>totalAmount', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2, maxFractionDigits: 2}}"
+                                                unit="{recent>currency}"
+                                            />
+                                            <ObjectStatus
+                                                text="{recent>statusText}"
+                                                state="{path: 'recent>poStatus', formatter: '.formatter.poStatusState'}"
+                                            />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox> -->
+
+                        <!-- High-risk vendors -->
+                        <VBox class="vrxCard vrxAccentRed">
+                            <Title
+                                text="{i18n>listHighRisk}"
+                                level="H3"
+                                class="vrxSectionTitle"
+                            />
+                            <Table
+                                id="highRiskTable"
+                                items="{recent>/highRiskVendors}"
+                                noDataText="{i18n>listNoData}"
+                                class="vrxDashTable"
+                            >
+                                <columns>
+                                    <Column>
+                                        <Text text="{i18n>colVendor}" />
+                                    </Column>
+                                    <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                    >
+                                        <Text text="{i18n>colStatus}" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>colRisk}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem
+                                        type="Navigation"
+                                        press=".onHighRiskVendorPress"
+                                    >
+                                        <cells>
+                                            <ObjectIdentifier
+                                                title="{recent>vendorName}"
+                                                text="{recent>vendorCode}"
+                                            />
+                                            <Text text="{recent>statusText}" />
+                                            <ObjectStatus
+                                                text="{recent>riskText}"
+                                                state="{recent>riskState}"
+                                            />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </layout:content>
+                </layout:Grid>
+
+                <!-- QUICK ACCESS -->
+                <!-- <VBox class="vrxCard sapUiMediumMarginTop">
+                    <Title
+                        text="{i18n>quickAccess}"
+                        level="H3"
+                        class="vrxSectionTitle"
+                    />
+                    <HBox wrap="Wrap">
+                        <Button
+                            text="{i18n>navVendors}"
+                            icon="sap-icon://supplier"
+                            press=".onVendorPress"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                        />
+                        <Button
+                            text="{i18n>navPurchaseOrders}"
+                            icon="sap-icon://sales-order"
+                            press=".onPurchaseOrderPress"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                        />
+                        <Button
+                            text="{i18n>navInvoices}"
+                            icon="sap-icon://receipt"
+                            press=".onInvoicePress"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                        />
+                        <Button
+                            text="{i18n>navRisk}"
+                            icon="sap-icon://alert"
+                            press=".onVendorRisk"
+                            class="sapUiTinyMarginBottom"
+                        />
+                    </HBox>
+                </VBox> -->
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

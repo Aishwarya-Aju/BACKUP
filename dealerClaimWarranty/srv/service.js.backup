@@ -1,0 +1,394 @@
+const cds = require('@sap/cds');
+const { SELECT, INSERT, UPDATE } = cds.ql;
+
+function toDate(value) {
+    if (!value) return null;
+
+    const dateString = String(value).substring(0, 10);
+    const [year, month, day] = dateString.split('-').map(Number);
+
+    if (!year || !month || !day) return null;
+
+    return new Date(Date.UTC(year, month - 1, day));
+}
+
+function addMonths(date, months) {
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + months;
+    const day = date.getUTCDate();
+
+    const lastDay = new Date(
+        Date.UTC(year, month + 1, 0)
+    ).getUTCDate();
+
+    return new Date(
+        Date.UTC(year, month, Math.min(day, lastDay))
+    );
+}
+
+function hasPartCoverage(coverages, part) {
+    const exactCoverage = coverages.filter(c =>
+        c.coverageType === 'Part' &&
+        c.partMaster_ID === part.ID
+    );
+
+    const categoryCoverage = coverages.filter(c =>
+        c.coverageType === 'Category' &&
+        c.category_code === part.category_code
+    );
+
+    const matching = exactCoverage.length
+        ? exactCoverage
+        : categoryCoverage;
+
+    return matching.some(c => c.isCovered !== false);
+}
+
+function hasLabourCoverage(coverages, labour) {
+    const exactCoverage = coverages.filter(c =>
+        c.coverageType === 'Labour' &&
+        c.labourOperation_ID === labour.ID
+    );
+
+    const categoryCoverage = coverages.filter(c =>
+        c.coverageType === 'Category' &&
+        c.category_code === labour.category_code
+    );
+
+    const matching = exactCoverage.length
+        ? exactCoverage
+        : categoryCoverage;
+
+    return matching.some(c => c.isCovered !== false);
+}
+
+module.exports = cds.service.impl(async function () {
+
+    const {
+        Dealers,
+        Vehicles,
+        WarrantyPolicies,
+        WarrantyPolicyCoverages,
+        PartMasters,
+        LabourOperationMasters,
+        WarrantyClaims,
+        ClaimParts,
+        ClaimLabour,
+        EligibilityChecks,
+        ClaimReviewTasks,
+        ClaimStatusHistory
+    } = this.entities;
+
+    this.on('checkEligibility', async (req) => {
+
+        // 1. Get claim ID
+        const claimID = req.params[0]?.ID;
+
+        if (!claimID) {
+            return req.reject(400, 'Claim ID is missing');
+        }
+
+        // 2. Fetch claim
+        const claim = await SELECT.one
+            .from(WarrantyClaims)
+            .where({ ID: claimID });
+
+        if (!claim) {
+            return req.reject(404, 'Warranty claim not found');
+        }
+
+        if (claim.status !== 'Submitted') {
+            return req.reject(
+                400,
+                'Only submitted claims can undergo eligibility checking'
+            );
+        }
+
+        // 3. Fetch dealer and vehicle
+        const dealer = await SELECT.one
+            .from(Dealers)
+            .where({ ID: claim.dealer_ID });
+
+        const vehicle = await SELECT.one
+            .from(Vehicles)
+            .where({ ID: claim.vehicle_ID });
+
+        if (!dealer || !vehicle) {
+            return req.reject(
+                400,
+                'Dealer or vehicle information is missing'
+            );
+        }
+
+        // 4. Fetch warranty policy
+        const policyID =
+            claim.warrantyPolicy_ID || vehicle.warrantyPolicy_ID;
+
+        const policy = policyID
+            ? await SELECT.one.from(WarrantyPolicies)
+                .where({ ID: policyID })
+            : null;
+
+        const dealerValid = dealer.isActive === true;
+
+        const vehicleValid =
+            vehicle.isActive === true &&
+            vehicle.dealer_ID === claim.dealer_ID;
+
+        const policyValid =
+            !!policy &&
+            policy.isActive === true &&
+            (!vehicle.warrantyPolicy_ID ||
+                vehicle.warrantyPolicy_ID === policy.ID);
+
+        // 5. Validate dates
+        const failureDate = toDate(claim.failureDate);
+        const saleDate = toDate(vehicle.saleDate);
+
+        const submissionDate = toDate(
+            claim.claimDate || claim.submittedAt || new Date()
+        );
+
+        if (!failureDate || !saleDate || !submissionDate) {
+            return req.reject(
+                400,
+                'Failure date, sale date or submission date is invalid'
+            );
+        }
+
+        // 6. Warranty period validation
+        const warrantyEndDate = policy
+            ? addMonths(saleDate, policy.coverageMonths)
+            : null;
+
+        const warrantyValid =
+            policyValid &&
+            failureDate >= saleDate &&
+            failureDate <= warrantyEndDate;
+
+        // 7. Mileage validation
+        const mileageValid =
+            policyValid &&
+            claim.mileageAtFailure >= 0 &&
+            claim.mileageAtFailure <= policy.maxKilometers &&
+            (
+                vehicle.currentOdometer == null ||
+                claim.mileageAtFailure <= vehicle.currentOdometer
+            );
+
+        // 8. Claim submission period validation
+        const daysDifference = Math.round(
+            (submissionDate.getTime() - failureDate.getTime()) /
+            (1000 * 60 * 60 * 24)
+        );
+
+        const submissionValid =
+            policyValid &&
+            daysDifference >= 0 &&
+            daysDifference <= policy.claimSubmissionDays;
+
+        // 9. Duplicate repair reference validation
+        const existingClaims = await SELECT.from(WarrantyClaims)
+            .where({
+                repairReference: claim.repairReference
+            });
+
+        const isDuplicate = existingClaims.some(
+            existing => existing.ID !== claimID
+        );
+
+        // 10. Fetch policy coverages
+        const coverages = policy
+            ? await SELECT.from(WarrantyPolicyCoverages)
+                .where({ policy_ID: policy.ID })
+            : [];
+
+        // 11. Validate parts
+        const parts = await SELECT.from(ClaimParts)
+            .where({ claim_ID: claimID });
+
+        let partsEligible = true;
+
+        for (const line of parts) {
+
+            const part = line.partMaster_ID
+                ? await SELECT.one.from(PartMasters)
+                    .where({ ID: line.partMaster_ID })
+                : null;
+
+            if (!part || !part.isActive) {
+                partsEligible = false;
+                break;
+            }
+
+            const validFrom = toDate(part.validFrom);
+            const validTo = toDate(part.validTo);
+
+            if (
+                (validFrom && failureDate < validFrom) ||
+                (validTo && failureDate > validTo) ||
+                !hasPartCoverage(coverages, part)
+            ) {
+                partsEligible = false;
+                break;
+            }
+        }
+
+        // 12. Validate labour operations
+        const labours = await SELECT.from(ClaimLabour)
+            .where({ claim_ID: claimID });
+
+        let labourEligible = true;
+
+        for (const line of labours) {
+
+            const operation = line.labourOperation_ID
+                ? await SELECT.one.from(LabourOperationMasters)
+                    .where({ ID: line.labourOperation_ID })
+                : null;
+
+            if (
+                !operation ||
+                !operation.isActive ||
+                !hasLabourCoverage(coverages, operation)
+            ) {
+                labourEligible = false;
+                break;
+            }
+        }
+
+        // 13. Check claim amount against policy limit
+        const requestedAmount = Number(claim.requestedAmount);
+
+        const withinClaimLimit =
+            policyValid &&
+            claim.requestedAmount != null &&
+            requestedAmount >= 0 &&
+            (
+                policy.maxClaimAmount == null ||
+                requestedAmount <= Number(policy.maxClaimAmount)
+            );
+
+        // 14. Calculate overall eligibility
+        const hasClaimLines = parts.length + labours.length > 0;
+
+        const isEligible =
+            dealerValid &&
+            vehicleValid &&
+            policyValid &&
+            warrantyValid &&
+            mileageValid &&
+            submissionValid &&
+            !isDuplicate &&
+            partsEligible &&
+            labourEligible &&
+            withinClaimLimit &&
+            hasClaimLines;
+
+        // 15. Prepare failure reasons
+        const reasons = [];
+
+        if (!dealerValid)
+            reasons.push('Dealer is inactive');
+
+        if (!vehicleValid)
+            reasons.push('Vehicle is inactive or does not belong to this dealer');
+
+        if (!policyValid)
+            reasons.push('Warranty policy is missing, inactive or invalid');
+
+        if (!warrantyValid)
+            reasons.push('Warranty period is invalid or expired');
+
+        if (!mileageValid)
+            reasons.push('Vehicle mileage exceeds policy limit or is invalid');
+
+        if (!submissionValid)
+            reasons.push('Claim submitted outside permitted period');
+
+        if (isDuplicate)
+            reasons.push('Duplicate repair reference');
+
+        if (!partsEligible)
+            reasons.push('One or more parts are inactive or not covered');
+
+        if (!labourEligible)
+            reasons.push('One or more labour operations are inactive or not covered');
+
+        if (!withinClaimLimit)
+            reasons.push('Claim amount exceeds policy limit or is missing');
+
+        if (!hasClaimLines)
+            reasons.push('Claim must contain at least one part or labour item');
+
+        // 16. Save eligibility history
+        await INSERT.into(EligibilityChecks).entries({
+            claimVersion: claim.claimVersion,
+            checkDate: new Date(),
+
+            isEligible,
+            dealerValid,
+            vehicleValid,
+            policyValid,
+            warrantyValid,
+            mileageValid,
+            submissionValid,
+            isDuplicate,
+            partsEligible,
+            labourEligible,
+            withinClaimLimit,
+
+            failureReason: reasons.join('; '),
+
+            claim_ID: claimID
+        });
+
+        // 17. Update claim status
+        const newStatus = isEligible
+            ? 'UnderWarrantyReview'
+            : 'Rejected';
+
+        await UPDATE(WarrantyClaims)
+            .set({
+                status: newStatus,
+                rejectionReason: isEligible
+                    ? null
+                    : reasons.join('; '),
+                closedAt: isEligible
+                    ? null
+                    : new Date()
+            })
+            .where({ ID: claimID });
+
+        // 18. Record status history
+        await INSERT.into(ClaimStatusHistory).entries({
+            claimVersion: claim.claimVersion,
+            previousStatus: claim.status,
+            newStatus,
+            changeReason: isEligible
+                ? 'Eligibility checks passed'
+                : reasons.join('; '),
+            changedBy: req.user?.id || 'SYSTEM',
+            changedAt: new Date(),
+            claim_ID: claimID
+        });
+
+        // 19. Create Warranty Analyst task if eligible
+        if (isEligible) {
+
+            await INSERT.into(ClaimReviewTasks).entries({
+                claimVersion: claim.claimVersion,
+                reviewStage: 'WarrantyReview',
+                assignedRole: 'Warranty Analyst',
+                taskStatus: 'Open',
+                assignedAt: new Date(),
+                claim_ID: claimID
+            });
+        }
+
+        // 20. Return result
+        return isEligible;
+
+    });
+
+});

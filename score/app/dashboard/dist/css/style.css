@@ -1,0 +1,72 @@
+.riskCard {
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+/* Common summary card styling */
+.summaryCard {
+    border-radius: 10px;
+    border: 1px solid #d9e2ec;
+    min-height: 9rem;
+}
+
+/* Blue - Total Vendors */
+.totalVendorsCard {
+    background-color: #eaf3fc;
+    border-top: 4px solid #0a6ed1;
+}
+
+/* Red - High Risk Vendors */
+.highRiskVendorsCard {
+    background-color: #fff0f0;
+    border-top: 4px solid #bb0000;
+}
+
+/* Green - Low Risk Vendors */
+.lowRiskVendorsCard {
+    background-color: #eaf7ed;
+    border-top: 4px solid #188918;
+}
+
+.MediumRiskVendorsCard {
+    background-color: #eaf7ed;
+    border-top: 4px solid #f0e00b;
+}
+
+.dashboardBanner {
+    background: linear-gradient(120deg, #063B78, #087FC4, #36B4E8);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 60, 120, 0.18);
+}
+
+.bannerTitle {
+    color: #FFFFFF !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+}
+
+.bannerSubtitle {
+    color: #E0F2FE !important;
+    font-size: 1rem;
+    margin-top: 0.35rem;
+}
+
+.bannerTitleGroup {
+    padding: 0.5rem 0;
+}
+
+.bannerChartIcon {
+    opacity: 0.9;
+    margin: 0.5rem;
+}
+.dashboardBackground,
+.dashboardBackground .sapMPageBgStandard,
+.dashboardBackground .sapMPageEnableScrolling {
+    background: #F3F0FF!important;
+}
+
+.dashboardBackground .sapMPageScroll {
+    background: #F3F0FF !important;
+}

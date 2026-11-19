@@ -1,0 +1,380 @@
+<mvc:View
+    controllerName="vrfrontend.controller.POItem"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+    xmlns:form="sap.ui.layout.form"
+    height="100%"
+>
+    <Page
+        showHeader="false"
+        busy="{ui>/busy}"
+        busyIndicatorDelay="0"
+    >
+        <uxap:ObjectPageLayout
+            id="poObjectPage"
+            upperCaseAnchorBar="false"
+            showAnchorBar="false"
+            enableLazyLoading="false"
+            useIconTabBar="false"
+        >
+
+            <!-- ================= HEADER ================= -->
+            <uxap:headerTitle>
+                <uxap:ObjectPageDynamicHeaderTitle>
+
+                    <uxap:expandedHeading>
+                        <VBox>
+                            <Title text="Purchase Order" level="H1" />
+                            <Text
+                                text="Purchase order details and order items"
+                                class="sapUiTinyMarginTop"
+                            />
+                        </VBox>
+                    </uxap:expandedHeading>
+
+                    <uxap:snappedHeading>
+                        <Title text="Purchase Order" />
+                    </uxap:snappedHeading>
+
+                    <uxap:actions>
+                        <Button
+                            id="editButton"
+                            text="Edit"
+                            icon="sap-icon://edit"
+                            type="Emphasized"
+                            visible="{= !${ui>/editMode} &amp;&amp; !${ui>/isNew} }"
+                            enabled="{=${po>/poStatus}==='DRAFT' || ${po>/poStatus}==='PENDING_APPROVAL' || ${po>/poStatus}==='APPROVAL' }"
+                            press=".onEdit"
+                        />
+                        <Button
+                            id="saveButton"
+                            text="Save"
+                            icon="sap-icon://save"
+                            type="Emphasized"
+                            visible="{ui>/editMode}"
+                            press=".onSave"
+                        />
+                        <Button
+                            id="cancelEditButton"
+                            text="Cancel"
+                            icon="sap-icon://decline"
+                            visible="{ui>/editMode}"
+                            press=".onCancelEdit"
+                        />
+                    </uxap:actions>
+
+                </uxap:ObjectPageDynamicHeaderTitle>
+            </uxap:headerTitle>
+
+            <uxap:sections>
+
+                
+                <uxap:ObjectPageSection title="Purchase Order Details" titleUppercase="false">
+                    <uxap:subSections>
+                        <uxap:ObjectPageSubSection showTitle="false">
+                            <uxap:blocks>
+
+                                <form:SimpleForm
+                                    editable="{ui>/editMode}"
+                                    layout="ColumnLayout"
+                                    columnsM="2"
+                                    columnsL="2"
+                                    columnsXL="2"
+                                >
+                                    <Label text="PO Number" required="true" />
+                                    <Input
+                                        value="{po>/poNumber}"
+                                        editable="false"
+                                    />
+
+                                    <Label text="Currency" required="true" />
+                                    <ComboBox
+                                        selectedKey="{po>/currency}"
+                                        editable="{ui>/editMode}"
+                                        items="{lookups>/currencies}"
+                                    >
+                                        <core:Item key="{lookups>key}" text="{lookups>text}" />
+                                    </ComboBox>
+
+                                    <Label text="Contract Reference" required="true" />
+                                    <Input
+                                        value="{po>/contractReference}"
+                                        editable="{ui>/editMode}"
+                                        placeholder="Enter contract reference"
+                                    />
+
+                                    <Label text="Expected Delivery Date" required="true" />
+                                    <DatePicker
+                                        value="{po>/expectedDeliveryDate}"
+                                        editable="{ui>/editMode}"
+                                        valueFormat="yyyy-MM-dd"
+                                        displayFormat="yyyy-MM-dd"
+                                    />
+
+                                    <Label text="Payment Terms" required="true" />
+                                    <ComboBox
+                                        selectedKey="{po>/paymentTerms}"
+                                        editable="{ui>/editMode}"
+                                        items="{lookups>/paymentTerms}"
+                                    >
+                                        <core:Item key="{lookups>key}" text="{lookups>text}" />
+                                    </ComboBox>
+
+                                    <Label text="Total Amount" />
+                                    <Input
+                                        value="{
+                                            path: 'po>/totalAmount',
+                                            type: 'sap.ui.model.type.Float',
+                                            formatOptions: { minFractionDigits: 2, maxFractionDigits: 2 }
+                                        }"
+                                        editable="false"
+                                    />
+
+                                    <Label text="Status" />
+                                    <ObjectStatus
+                                        text="{po>/poStatus}"
+                                        state="{path: 'po>/poStatus', formatter: '.formatStatusState'}"
+                                        inverted="true"
+                                    />
+                                </form:SimpleForm>
+
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+
+                
+                <uxap:ObjectPageSection title="Order Items" titleUppercase="false">
+                    <uxap:subSections>
+                        <uxap:ObjectPageSubSection showTitle="false">
+                            <uxap:blocks>
+
+                                <VBox width="100%">
+
+                                    <OverflowToolbar>
+                                        <ToolbarSpacer />
+                                        <Button
+                                            text="Add Item"
+                                            icon="sap-icon://add"
+                                            type="Emphasized"
+                                            enabled="{ui>/editMode}"
+                                            press=".onAddItem"
+                                        />
+                                    </OverflowToolbar>
+
+                                    <Table
+                                        id="orderItemsTable"
+                                        width="100%"
+                                        growing="true"
+                                        growingThreshold="10"
+                                        growingScrollToLoad="true"
+                                        inset="false"
+                                        noDataText="No Purchase Order Items Found"
+                                        items="{po>/items}"
+                                    >
+                                        <columns>
+                                            <Column width="16rem">
+                                                <Text text="Material" />
+                                            </Column>
+                                            <Column width="9rem" minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Material Group" />
+                                            </Column>
+                                            <Column width="8rem">
+                                                <Text text="Quantity" />
+                                            </Column>
+                                            <Column width="7rem" minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Unit" />
+                                            </Column>
+                                            <Column width="10rem" hAlign="End">
+                                                <Text text="Old Unit Price" />
+                                            </Column>
+                                            <Column width="10rem" hAlign="End" minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Contract Price" />
+                                            </Column>
+                                            <Column width="10rem" hAlign="End">
+                                                <Text text="Total Amount" />
+                                            </Column>
+                                            <Column width="13rem" minScreenWidth="Desktop" demandPopin="true">
+                                                <Text text="Requested Delivery Date" />
+                                            </Column>
+                                        </columns>
+
+                                        <items>
+                                            <ColumnListItem>
+
+                                                <!-- Material (list comes from the "materials" JSON model) -->
+                                                <ComboBox
+                                                    selectedKey="{po>materialCode}"
+                                                    editable="{ui>/editMode}"
+                                                    width="100%"
+                                                    showSecondaryValues="true"
+                                                    filterSecondaryValues="true"
+                                                    selectionChange=".onMaterialChange"
+                                                    items="{
+                                                        path: 'materials>/items',
+                                                        templateShareable: false
+                                                    }"
+                                                >
+                                                    <core:ListItem
+                                                        key="{materials>materialCode}"
+                                                        text="{materials>materialCode}"
+                                                        additionalText="{materials>materialDescription}"
+                                                    />
+                                                </ComboBox>
+
+                                                <Text text="{po>materialGroup}" />
+
+                                                <Input
+                                                    value="{po>quantity}"
+                                                    editable="{ui>/editMode}"
+                                                    type="Number"
+                                                    liveChange=".onQuantityChange"
+                                                />
+
+                                                <ComboBox
+                                                    selectedKey="{po>unit}"
+                                                    editable="{ui>/editMode}"
+                                                    width="100%"
+                                                    items="{lookups>/units}"
+                                                >
+                                                    <core:Item key="{lookups>key}" text="{lookups>text}" />
+                                                </ComboBox>
+
+                                                <Input
+                                                    value="{po>oldUnitPrice}"
+                                                    editable="{ui>/editMode}"
+                                                    type="Number"
+                                                    textAlign="End"
+                                                    liveChange=".onPriceChange"
+                                                />
+
+                                                <Text
+                                                    textAlign="End"
+                                                    text="{
+                                                        path: 'po>contractPrice',
+                                                        type: 'sap.ui.model.type.Float',
+                                                        formatOptions: { minFractionDigits: 2, maxFractionDigits: 2 }
+                                                    }"
+                                                />
+
+                                                <Text
+                                                    textAlign="End"
+                                                    text="{
+                                                        path: 'po>totalAmount',
+                                                        type: 'sap.ui.model.type.Float',
+                                                        formatOptions: { minFractionDigits: 2, maxFractionDigits: 2 }
+                                                    }"
+                                                />
+
+                                                <DatePicker
+                                                    value="{po>requestedDeliveryDate}"
+                                                    editable="{ui>/editMode}"
+                                                    valueFormat="yyyy-MM-dd"
+                                                    displayFormat="yyyy-MM-dd"
+                                                />
+
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+
+                                </VBox>
+
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+
+                <uxap:ObjectPageSection title="Additional Information" titleUppercase="false">
+                    <uxap:subSections>
+                        <uxap:ObjectPageSubSection showTitle="false">
+                            <uxap:blocks>
+
+                                <form:SimpleForm
+                                    editable="{ui>/editMode}"
+                                    layout="ColumnLayout"
+                                    columnsM="2"
+                                    columnsL="2"
+                                    columnsXL="2"
+                                >
+                                    <Label text="Buyer" />
+                                    <ComboBox
+                                        selectedKey="{po>/buyer_ID}"
+                                        editable="{ui>/editMode}"
+                                        items="{
+                                            path: '/Employee',
+                                            sorter: { path: 'name' },
+                                            templateShareable: false
+                                        }"
+                                    >
+                                        <core:Item key="{ID}" text="{name}" />
+                                    </ComboBox>
+
+                                    <Label text="Vendor" />
+                                    <ComboBox
+                                        selectedKey="{po>/vendor_ID}"
+                                        editable="{ui>/editMode}"
+                                        items="{
+                                            path: '/Vendors',
+                                            filters:[
+                                            {
+                                             path: 'vendorStatus',
+                                             operator: 'EQ',
+                                             value1: 'ACTIVE' 
+                                            }
+                                            ],
+                                            sorter: { path: 'vendorName' },
+                                            templateShareable: false
+                                        }"
+                                    >
+                                        <core:Item key="{ID}" text="{vendorName}" />
+                                    </ComboBox>
+                                </form:SimpleForm>
+
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+
+            </uxap:sections>
+        </uxap:ObjectPageLayout>
+
+        <!-- ================= FOOTER ================= -->
+        <footer>
+            <OverflowToolbar id="otbFooter">
+                <ToolbarSpacer />
+                <Button
+                    type="Accept"
+                    text="Approve"
+                    press=".onAcceptPO"
+                    enabled="{= ${po>/poStatus} === 'PENDING_APPROVAL' &amp;&amp; !${ui>/editMode} }"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <Button
+                    type="Reject"
+                    text="Cancel"
+                    press=".onRejectPO"
+                    enabled="{= ${po>/poStatus} === 'PENDING_APPROVAL' &amp;&amp; !${ui>/editMode} }"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <Button
+                    type="Accept"
+                    text="Sent to Vendor"
+                    press=".onSentPO"
+                    enabled="{= ${po>/poStatus} === 'APPROVED' &amp;&amp; !${ui>/editMode} }"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

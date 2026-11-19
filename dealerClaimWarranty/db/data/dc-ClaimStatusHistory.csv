@@ -1,0 +1,15 @@
+ID,claimVersion,previousStatus,newStatus,changeReason,changedBy,changedAt,claim_ID
+d04a1516-67f4-490c-819d-e9d28585cbdc,1,Submitted,UnderWarrantyReview,Eligibility passed.,SYSTEM,2026-10-25T11:00:00Z,ba452f77-cc71-4403-89f2-ba6393c69854
+7d6dc75e-2d02-408a-b58e-73405d6c1691,1,UnderWarrantyReview,UnderTechnicalReview,Warranty Analyst accepted claim.,analyst@example.com,2026-10-26T12:00:00Z,ba452f77-cc71-4403-89f2-ba6393c69854
+f1bfa9be-b272-469c-a1ad-7c2cbf02aca6,1,Submitted,UnderWarrantyReview,Eligibility passed.,SYSTEM,2026-10-05T11:00:00Z,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+6bbb7681-f48b-4fba-ad27-75fc1233df41,1,UnderWarrantyReview,UnderTechnicalReview,Warranty review accepted.,analyst@example.com,2026-10-06T09:00:00Z,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+00506b9e-e2b5-43d9-98e3-247c41ea47a9,1,UnderTechnicalReview,UnderFinanceReview,Technical review completed.,technical@example.com,2026-10-06T11:00:00Z,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+317e9cf9-1970-4fec-9923-fbf125c16f77,1,UnderFinanceReview,Approved,Finance approved claim.,finance@example.com,2026-10-08T12:00:00Z,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+db0d9b7e-3954-4c8d-97b7-ad5f783224ea,1,Submitted,UnderWarrantyReview,Eligibility passed.,SYSTEM,2026-10-05T11:00:00Z,eebde852-02e2-4819-8daf-06af91f17b16
+3def8a21-7b7b-4655-9209-2d16843e6354,1,UnderWarrantyReview,UnderTechnicalReview,Warranty review accepted.,analyst@example.com,2026-10-06T09:00:00Z,eebde852-02e2-4819-8daf-06af91f17b16
+050be061-a1a5-4c14-b43c-51f6718bd976,1,UnderTechnicalReview,UnderFinanceReview,Technical review completed.,technical@example.com,2026-10-06T11:00:00Z,eebde852-02e2-4819-8daf-06af91f17b16
+e3dae705-34ae-406c-b362-030b6a41b1da,1,UnderFinanceReview,Settled,Finance approved claim.,finance@example.com,2026-10-08T12:00:00Z,eebde852-02e2-4819-8daf-06af91f17b16
+4696ce97-d5aa-4f3f-a71f-277821c4f08f,1,Submitted,UnderWarrantyReview,Eligibility passed.,SYSTEM,2026-10-05T11:00:00Z,9990c89d-03d5-4196-b9f9-071958e85c12
+d5ab7f3b-6614-4563-9cda-89f943c61c96,1,UnderWarrantyReview,UnderTechnicalReview,Warranty review accepted.,analyst@example.com,2026-10-06T09:00:00Z,9990c89d-03d5-4196-b9f9-071958e85c12
+3462740f-c077-48ac-a904-dad3dce8a8b3,1,UnderTechnicalReview,UnderFinanceReview,Technical review completed.,technical@example.com,2026-10-06T11:00:00Z,9990c89d-03d5-4196-b9f9-071958e85c12
+87adfa51-d490-42a1-a7e4-8f735a4a4f85,1,UnderFinanceReview,Approved,Finance approved claim.,finance@example.com,2026-10-08T12:00:00Z,9990c89d-03d5-4196-b9f9-071958e85c12

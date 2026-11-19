@@ -1,0 +1,227 @@
+<mvc:View
+    controllerName="vendormodulee.controller.InvoiceObjectPage"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    core:require="{ formatter: 'vendormodulee/model/formatter' }">
+
+    <Page
+        id="invoiceObjectPage"
+        title="Invoice Details"
+        class="portalPage invoiceObjectPage"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        enableScrolling="true"
+        busy="{invoiceView>/busy}"
+        busyIndicatorDelay="0">
+
+        <content>
+            <VBox
+                class="dashboardContainer"
+                width="100%"
+                renderType="Bare">
+
+                <MessageStrip
+                    id="invoiceDetailErrorStrip"
+                    class="portalMessageStrip"
+                    text="{invoiceView>/errorText}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${invoiceView>/errorText} }" />
+
+                <MessageStrip
+                    id="invoiceDraftStrip"
+                    text="This is a draft invoice. It was created automatically when the purchase order was accepted. Complete it by entering the invoice number, dates and item quantities."
+                    type="Information"
+                    showIcon="true"
+                    visible="{= ${path: 'invoiceStatus', targetType: 'any'} === 'DRAFT' }"
+                    class="portalMessageStrip" />
+
+                <MessageStrip
+                    text="This invoice is blocked. It cannot be processed until the block is released."
+                    type="Error"
+                    showIcon="true"
+                    visible="{= ${path: 'blocked', targetType: 'any'} === true }"
+                    class="portalMessageStrip" />
+
+                <VBox
+                    class="portalCard"
+                    width="100%"
+                    renderType="Bare">
+
+                    <ObjectHeader
+                        id="invoiceHeader"
+                        title="{path: 'invoiceNumber', formatter: 'formatter.invoiceNumber'}"
+                        number="{path: 'invoiceAmount', formatter: 'formatter.amount'}"
+                        numberUnit="{currency}">
+
+                        <attributes>
+                            <ObjectAttribute
+                                title="Invoice Date"
+                                text="{path: 'invoiceDate', formatter: 'formatter.date'}" />
+
+                            <ObjectAttribute
+                                title="Delivery Date"
+                                text="{path: 'deliveryDate', formatter: 'formatter.date'}"
+                                visible="{= !!${path: 'deliveryDate', targetType: 'any'} }" />
+
+                            <ObjectAttribute
+                                title="Expected Delivery"
+                                text="{path: 'expectedDeliveryDate', formatter: 'formatter.date'}"
+                                visible="{= !!${path: 'expectedDeliveryDate', targetType: 'any'} }" />
+
+                            <ObjectAttribute
+                                title="Currency"
+                                text="{currency}" />
+
+                            <ObjectAttribute
+                                id="invoicePoAttribute"
+                                title="Purchase Order"
+                                text="{purchaseOrder/poNumber}"
+                                active="true"
+                                press=".onPurchaseOrderPress" />
+
+                            <ObjectAttribute
+                                title="Vendor"
+                                text="{vendor/vendorName} ({vendor/vendorCode})" />
+                        </attributes>
+
+                        <statuses>
+                            <ObjectStatus
+                                title="Status"
+                                text="{path: 'invoiceStatus', formatter: 'formatter.invoiceStatusText'}"
+                                state="{path: 'invoiceStatus', formatter: 'formatter.invoiceStatusState'}" />
+
+                            <ObjectStatus
+                                title="Blocked"
+                                text="{path: 'blocked', formatter: 'formatter.blockedText'}"
+                                state="{path: 'blocked', formatter: 'formatter.blockedState'}" />
+
+                            <ObjectStatus
+                                title="Mismatch"
+                                text="{path: 'mismatch', formatter: 'formatter.mismatchText'}"
+                                state="{path: 'mismatch', formatter: 'formatter.mismatchState'}" />
+                        </statuses>
+                    </ObjectHeader>
+                </VBox>
+
+                <VBox
+                    class="portalCard invoiceDetailCard"
+                    width="100%"
+                    renderType="Bare">
+
+                    <Title
+                        id="invoiceItemsTitle"
+                        text="Invoice Items"
+                        level="H3"
+                        class="sapUiSmallMarginBottom" />
+
+                    <Table
+                        id="invoiceItemsTable"
+                        width="100%"
+                        items="{path: 'items'}"
+                        growing="true"
+                        growingThreshold="20"
+                        updateFinished=".onItemsUpdateFinished">
+
+                        <noData>
+                            <VBox
+                                class="portalEmptyState"
+                                alignItems="Center"
+                                renderType="Bare">
+                                <core:Icon
+                                    src="sap-icon://product"
+                                    size="2.5rem" />
+                                <Title
+                                    text="No invoice items found"
+                                    level="H4" />
+                                <Text
+                                    text="{= ${path: 'invoiceStatus', targetType: 'any'} === 'DRAFT' ? 'This draft has no item lines yet. Complete the draft to add them.' : 'This invoice has no item lines.' }"
+                                    textAlign="Center" />
+                            </VBox>
+                        </noData>
+
+                        <columns>
+                            <Column>
+                                <Text text="Material Code" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Description" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Quantity" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Unit" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Unit Price" />
+                            </Column>
+
+                            <Column hAlign="End">
+                                <Text text="Line Amount" />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <ObjectIdentifier title="{materialCode}" />
+
+                                    <Text text="{materialDescription}" />
+
+                                    <Text text="{path: 'quantity', formatter: 'formatter.quantity'}" />
+
+                                    <Text text="{unit}" />
+
+                                    <ObjectNumber
+                                        number="{path: 'unitPrice', formatter: 'formatter.amount'}"
+                                        unit="{currency}" />
+
+                                    <ObjectNumber
+                                        number="{path: 'lineAmount', formatter: 'formatter.amount'}"
+                                        unit="{currency}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+            </VBox>
+        </content>
+
+        <footer>
+            <OverflowToolbar id="invoiceDetailFooter">
+                <ToolbarSpacer />
+
+                <!-- DRAFT: complete the existing draft (never creates a new invoice) -->
+                <Button
+                    id="completeDraftButton"
+                    text="Complete Draft Invoice"
+                    icon="sap-icon://edit"
+                    type="Emphasized"
+                    visible="{= ${path: 'invoiceStatus', targetType: 'any'} === 'DRAFT' }"
+                    press=".onEditInvoice" />
+
+                <!-- SUBMITTED: the backend action updateInvoice supports editing -->
+             
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+
+</mvc:View>

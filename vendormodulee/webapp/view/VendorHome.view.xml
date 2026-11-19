@@ -1,0 +1,378 @@
+<mvc:View
+    controllerName="vendormodulee.controller.VendorHome"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    core:require="{ formatter: 'vendormodulee/model/formatter' }">
+
+    <Page
+        id="vendorHomePage"
+        class="portalPage"
+        enableScrolling="true">
+
+        <customHeader>
+            <Bar class="portalHeaderBar">
+                <contentLeft>
+                    <core:Icon
+                        src="sap-icon://supplier"
+                        class="portalLogo" />
+                    <Title
+                        text="Vendor Self-Service Portal"
+                        level="H1" />
+                </contentLeft>
+
+                <contentRight>
+                    <Button
+                        text="Home"
+                        icon="sap-icon://home"
+                        type="Emphasized"
+                        press=".onNavHome" />
+
+                    <Button
+                        text="My Purchase Orders"
+                        icon="sap-icon://sales-order"
+                        type="Transparent"
+                        press=".onOpenPurchaseOrders" />
+
+                         <Button
+                        text="My Risk"
+                        icon="sap-icon://alert"
+                        type="Transparent"
+                        press=".onOpenRisk" />
+
+
+                                            <Button
+                        text="Invoices"
+                        icon="sap-icon://sales-document"
+                        type="Transparent"
+                        press=".onOpenInvoices" />  
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <VBox
+                class="dashboardContainer"
+                width="100%"
+                renderType="Bare">
+
+                <!-- Load / configuration errors -->
+                <MessageStrip
+                    class="portalMessageStrip"
+                    text="{dashboard>/errorText}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${dashboard>/errorText} }" />
+
+                <!-- Welcome banner -->
+                <VBox
+                    class="dashboardHeader"
+                    width="100%"
+                    renderType="Bare">
+
+                    <Title
+                        text="{dashboard>/welcomeTitle}"
+                        level="H2" />
+
+                    <Text
+                        text="{dashboard>/welcomeText}"
+                        wrapping="true" />
+
+                    <HBox
+                        class="dashboardQuickActions"
+                        wrap="Wrap"
+                        alignItems="Center">
+
+                        <Button
+                            text="My Purchase Orders"
+                            icon="sap-icon://sales-order"
+                            type="Emphasized"
+                            press=".onOpenPurchaseOrders" />
+
+                        <Button
+                            text="{= 'Review ' + ${dashboard>/pending} + ' pending ' + (${dashboard>/pending} === 1 ? 'order' : 'orders') }"
+                            icon="sap-icon://pending"
+                            visible="{= ${dashboard>/pending} > 0 }"
+                            press=".onKpiPress">
+                            <customData>
+                                <core:CustomData key="status" value="SENT_TO_VENDOR" />
+                            </customData>
+                        </Button>
+
+                                                <Button
+                            text="My Risk Profile"
+                            icon="sap-icon://alert"
+                            press=".onOpenRisk" />
+
+                        <Button
+                            text="Refresh"
+                            icon="sap-icon://refresh"
+                            press=".onRefreshDashboard" />
+                    </HBox>
+                </VBox>
+
+                <!-- KPI cards -->
+                <Title
+                    text="Order Overview"
+                    level="H3"
+                    class="dashboardSectionTitle" />
+
+                <HBox
+                    class="dashboardTiles"
+                    width="100%"
+                    wrap="Wrap"
+                    alignItems="Stretch"
+                    renderType="Bare">
+
+                    <GenericTile
+                        class="dashboardTile kpiTotal"
+                        header="Total Purchase Orders"
+                        subheader="Sent to your company"
+                        frameType="OneByOne"
+                        state="{= ${dashboard>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="status" value="ALL" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{dashboard>/total}"
+                                icon="sap-icon://sales-order"
+                                valueColor="Neutral"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        class="dashboardTile kpiPending"
+                        header="Pending Acceptance"
+                        subheader="Waiting for your response"
+                        frameType="OneByOne"
+                        state="{= ${dashboard>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="status" value="SENT_TO_VENDOR" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{dashboard>/pending}"
+                                icon="sap-icon://pending"
+                                valueColor="Critical"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        class="dashboardTile kpiAccepted"
+                        header="Accepted Orders"
+                        subheader="Confirmed by you"
+                        frameType="OneByOne"
+                        state="{= ${dashboard>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="status" value="ACCEPTED" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{dashboard>/accepted}"
+                                icon="sap-icon://accept"
+                                valueColor="Good"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        class="dashboardTile kpiRejected"
+                        header="Rejected Orders"
+                        subheader="Declined by you"
+                        frameType="OneByOne"
+                        state="{= ${dashboard>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="status" value="REJECTED" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{dashboard>/rejected}"
+                                icon="sap-icon://decline"
+                                valueColor="Error"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
+
+                <!-- Recent orders and upcoming deliveries -->
+                <HBox
+                    class="portalColumns"
+                    width="100%"
+                    wrap="Wrap"
+                    alignItems="Start"
+                    renderType="Bare">
+
+                    <!-- Recent purchase orders -->
+                    <VBox
+                        class="portalCard portalMain"
+                        renderType="Bare">
+
+                        <HBox
+                            alignItems="Center"
+                            justifyContent="SpaceBetween"
+                            wrap="Wrap"
+                            class="dashboardSectionHeader">
+
+                            <VBox renderType="Bare">
+                                <Title
+                                    text="Recent Purchase Orders"
+                                    level="H3" />
+
+                                <Text
+                                    text="Your latest orders, newest first."
+                                    wrapping="true" />
+                            </VBox>
+
+                            <Button
+                                text="View all"
+                                type="Transparent"
+                                press=".onOpenPurchaseOrders" />
+                        </HBox>
+
+                        <Table
+                            id="recentOrdersTable"
+                            class="dashboardPOTable"
+                            width="100%"
+                            items="{dashboard>/recentOrders}">
+
+                            <noData>
+                                <VBox
+                                    class="portalEmptyState"
+                                    alignItems="Center"
+                                    renderType="Bare">
+                                    <core:Icon
+                                        src="sap-icon://sales-order"
+                                        size="2.5rem" />
+                                    <Title
+                                        text="No purchase orders yet"
+                                        level="H4" />
+                                    <Text
+                                        text="Orders sent to your company will appear here."
+                                        textAlign="Center" />
+                                </VBox>
+                            </noData>
+
+                            <columns>
+                                <Column>
+                                    <Text text="PO Number" />
+                                </Column>
+
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="Status" />
+                                </Column>
+
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    hAlign="End">
+                                    <Text text="Amount" />
+                                </Column>
+
+                                <Column
+                                    minScreenWidth="Desktop"
+                                    demandPopin="true">
+                                    <Text text="Expected Delivery" />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    type="Navigation"
+                                    press=".onPurchaseOrderPress">
+                                    <cells>
+                                        <ObjectIdentifier
+                                            title="{dashboard>poNumber}"
+                                            text="{path: 'dashboard>poDate', formatter: 'formatter.date'}" />
+
+                                        <ObjectStatus
+                                            text="{path: 'dashboard>poStatus', formatter: 'formatter.statusText'}"
+                                            state="{path: 'dashboard>poStatus', formatter: 'formatter.statusState'}"
+                                            inverted="true" />
+
+                                        <ObjectNumber
+                                            number="{path: 'dashboard>totalAmount', formatter: 'formatter.amount'}"
+                                            unit="{dashboard>currency}" />
+
+                                        <Text
+                                            text="{path: 'dashboard>expectedDeliveryDate', formatter: 'formatter.deliveryDate'}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>
+
+                    <!-- Upcoming deliveries -->
+                    <VBox
+                        class="portalCard portalSide"
+                        renderType="Bare">
+
+                        <VBox
+                            class="dashboardSectionHeader"
+                            renderType="Bare">
+                            <Title
+                                text="Upcoming Deliveries"
+                                level="H3" />
+
+                            <Text
+                                text="Accepted orders with an expected delivery date."
+                                wrapping="true" />
+                        </VBox>
+
+                        <List
+                            id="upcomingDeliveriesList"
+                            class="portalDeliveryList"
+                            items="{dashboard>/upcomingDeliveries}"
+                            showSeparators="Inner">
+
+                            <noData>
+                                <VBox
+                                    class="portalEmptyState"
+                                    alignItems="Center"
+                                    renderType="Bare">
+                                    <core:Icon
+                                        src="sap-icon://shipping-status"
+                                        size="2.5rem" />
+                                    <Title
+                                        text="No upcoming deliveries"
+                                        level="H4" />
+                                    <Text
+                                        text="Accept an order and set its expected delivery date to see it here."
+                                        textAlign="Center" />
+                                </VBox>
+                            </noData>
+
+                            <ObjectListItem
+                                title="{dashboard>poNumber}"
+                                number="{path: 'dashboard>totalAmount', formatter: 'formatter.amount'}"
+                                numberUnit="{dashboard>currency}"
+                                type="Navigation"
+                                press=".onPurchaseOrderPress">
+                                <attributes>
+                                    <ObjectAttribute
+                                        title="Expected"
+                                        text="{path: 'dashboard>expectedDeliveryDate', formatter: 'formatter.date'}" />
+                                </attributes>
+                                <firstStatus>
+                                    <ObjectStatus
+                                        text="{dashboard>daysText}"
+                                        state="{dashboard>daysState}" />
+                                </firstStatus>
+                            </ObjectListItem>
+                        </List>
+                    </VBox>
+                </HBox>
+
+            </VBox>
+        </content>
+
+    </Page>
+</mvc:View>

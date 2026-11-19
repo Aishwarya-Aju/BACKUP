@@ -1,0 +1,4 @@
+ID,settlementNumber,approvedAmount,paidAmount,currency,paymentReference,exportReference,paymentDate,paymentStatus,remarks,claim_ID
+7e5dfb48-63d8-4b5b-b970-e07a0e81a312,SET-2026-0006,21000.00,,INR,,ERP-EXP-0006,,Pending,Awaiting payment processing.,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+903a3a04-3cc2-40d6-a0a7-73ab6ff60196,SET-2026-0007,8150.00,8150.00,INR,UTR-20260512-0007,ERP-EXP-0007,2026-05-12,Paid,Payment credited successfully.,eebde852-02e2-4819-8daf-06af91f17b16
+916ae864-9dbe-4e6a-9a71-4b747d56b4f2,SET-2026-0008,18400.00,0.00,INR,UTR-FAIL-0008,ERP-EXP-0008,2026-09-08,Failed,Bank rejected payment; retry required.,9990c89d-03d5-4196-b9f9-071958e85c12

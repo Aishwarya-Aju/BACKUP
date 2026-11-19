@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("score.dashboard.controller.VendorDetails",{onBack:function(){const e=this.getView().getParent();if(e){e.back()}}})});
+//# sourceMappingURL=VendorDetails.controller.js.map

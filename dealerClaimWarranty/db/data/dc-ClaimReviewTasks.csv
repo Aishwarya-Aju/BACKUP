@@ -1,0 +1,12 @@
+ID,claimVersion,reviewStage,assignedTo,assignedRole,taskStatus,assignedAt,completedAt,dueAt,claim_ID
+03ac513b-e76f-4afd-913b-afc19f449934,1,WarrantyReview,analyst@example.com,Warranty Analyst,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,ba452f77-cc71-4403-89f2-ba6393c69854
+89dbbdaa-6187-44db-9318-4c35879cab35,1,TechnicalReview,technical@example.com,Technical Approver,Open,2026-10-25T12:00:00Z,,2026-10-30T12:00:00Z,ba452f77-cc71-4403-89f2-ba6393c69854
+217ecd7b-a043-4dd3-b031-05b170439e63,1,WarrantyReview,analyst@example.com,Warranty Analyst,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+8b483e9d-442c-4771-b685-b232a1d4362e,1,TechnicalReview,technical@example.com,Technical Approver,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+13110eaf-5982-4ccd-ab2e-12d4456c06b5,1,FinanceReview,finance@example.com,Finance User,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,2ed8eca6-feb5-42bc-b2da-891d43dbffe5
+668c40d7-9749-4506-806a-3a94c4f08f29,1,WarrantyReview,analyst@example.com,Warranty Analyst,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,eebde852-02e2-4819-8daf-06af91f17b16
+1d32fc7c-d926-4f8e-a0eb-d8a1382cd77f,1,TechnicalReview,technical@example.com,Technical Approver,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,eebde852-02e2-4819-8daf-06af91f17b16
+4861709c-494f-4152-a3a1-27c23974ae81,1,FinanceReview,finance@example.com,Finance User,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,eebde852-02e2-4819-8daf-06af91f17b16
+c61ff66e-87ae-45ef-be33-90a0f18777e3,1,WarrantyReview,analyst@example.com,Warranty Analyst,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,9990c89d-03d5-4196-b9f9-071958e85c12
+28470b28-2316-43d2-a4d6-72377c74a8fa,1,TechnicalReview,technical@example.com,Technical Approver,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,9990c89d-03d5-4196-b9f9-071958e85c12
+ebda6437-029b-4569-82bb-db56ddea23f8,1,FinanceReview,finance@example.com,Finance User,Completed,2026-10-25T12:00:00Z,2026-10-26T12:00:00Z,2026-10-30T12:00:00Z,9990c89d-03d5-4196-b9f9-071958e85c12

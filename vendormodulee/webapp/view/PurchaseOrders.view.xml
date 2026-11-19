@@ -1,0 +1,207 @@
+<mvc:View
+    controllerName="vendormodulee.controller.PurchaseOrders"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    core:require="{ formatter: 'vendormodulee/model/formatter' }">
+
+    <Page
+        id="purchaseOrdersPage"
+        class="portalPage"
+        enableScrolling="true">
+
+        <customHeader>
+            <Bar class="portalHeaderBar">
+                <contentLeft>
+                    <core:Icon
+                        src="sap-icon://supplier"
+                        class="portalLogo" />
+                    <Title
+                        text="Vendor Self-Service Portal"
+                        level="H1" />
+                </contentLeft>
+
+                <contentRight>
+                    <Button
+                        text="Home"
+                        icon="sap-icon://home"
+                        type="Transparent"
+                        press=".onNavHome" />
+
+                    <Button
+                        text="My Purchase Orders"
+                        icon="sap-icon://sales-order"
+                        type="Emphasized" />
+
+                                            <Button
+                        text="My Risk"
+                        icon="sap-icon://alert"
+                        type="Transparent"
+                        press=".onOpenRisk" />
+
+                                            <Button
+                        text="Invoices"
+                        icon="sap-icon://sales-document"
+                        type="Transparent"
+                        press=".onOpenInvoices" />
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <VBox
+                class="dashboardContainer"
+                width="100%"
+                renderType="Bare">
+
+                <VBox
+                    class="portalCard"
+                    width="100%"
+                    renderType="Bare">
+
+                    <HBox
+                        alignItems="Center"
+                        justifyContent="SpaceBetween"
+                        wrap="Wrap"
+                        class="dashboardSectionHeader">
+
+                        <VBox renderType="Bare">
+                            <Title
+                                id="purchaseOrdersTitle"
+                                text="My Purchase Orders"
+                                level="H2" />
+
+                            <Text
+                                text="Select an order to review it, accept or reject it, or update its delivery date."
+                                wrapping="true" />
+                        </VBox>
+
+                        <Button
+                            text="Refresh"
+                            icon="sap-icon://refresh"
+                            press=".onRefresh" />
+                    </HBox>
+
+                    <HBox
+                        class="portalFilterBar"
+                        wrap="Wrap"
+                        alignItems="Center"
+                        renderType="Bare">
+
+                        <SearchField
+                            id="purchaseOrderSearch"
+                            class="portalSearch"
+                            width="22rem"
+                            placeholder="Search by PO number"
+                            search=".onSearch" />
+
+                        <Select
+                            id="statusFilter"
+                            class="portalStatusFilter"
+                            selectedKey="ALL"
+                            forceSelection="true"
+                            change=".onStatusFilterChange">
+                            <core:Item key="ALL" text="All statuses" />
+                            <core:Item key="SENT_TO_VENDOR" text="Pending Acceptance" />
+                            <core:Item key="ACCEPTED" text="Accepted" />
+                            <core:Item key="REJECTED" text="Rejected" />
+                            <core:Item key="PARTIALLY_DELIVERED" text="Partially Delivered" />
+                            <core:Item key="FULLY_DELIVERED" text="Fully Delivered" />
+                            <core:Item key="CLOSED" text="Closed" />
+                            <core:Item key="CANCELLED" text="Cancelled" />
+                        </Select>
+                    </HBox>
+
+                    <Table
+                        id="purchaseOrdersTable"
+                        class="dashboardPOTable"
+                        width="100%"
+                        growing="true"
+                        growingThreshold="20"
+                        updateFinished=".onUpdateFinished"
+                        items="{
+                            path: '/PurchaseOrders',
+                            parameters: {
+                                $orderby: 'poDate desc',
+                                $count: true
+                            },
+                            suspended: true
+                        }">
+
+                        <noData>
+                            <VBox
+                                class="portalEmptyState"
+                                alignItems="Center"
+                                renderType="Bare">
+                                <core:Icon
+                                    src="sap-icon://document-text"
+                                    size="2.5rem" />
+                                <Title
+                                    text="No purchase orders found"
+                                    level="H4" />
+                                <Text
+                                    text="Change the search or status filter, or select Refresh to check for new orders."
+                                    textAlign="Center" />
+                            </VBox>
+                        </noData>
+
+                        <columns>
+                            <Column>
+                                <Text text="PO Number" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="PO Date" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="End">
+                                <Text text="Amount" />
+                            </Column>
+
+                            <Column>
+                                <Text text="Status" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Expected Delivery" />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem
+                                type="Navigation"
+                                press=".onPurchaseOrderPress">
+                                <cells>
+                                    <ObjectIdentifier title="{poNumber}" />
+
+                                    <Text text="{path: 'poDate', formatter: 'formatter.date'}" />
+
+                                    <ObjectNumber
+                                        number="{path: 'totalAmount', formatter: 'formatter.amount'}"
+                                        unit="{currency}" />
+
+                                    <ObjectStatus
+                                        text="{path: 'poStatus', formatter: 'formatter.statusText'}"
+                                        state="{path: 'poStatus', formatter: 'formatter.statusState'}"
+                                        inverted="true" />
+
+                                    <Text text="{path: 'expectedDeliveryDate', formatter: 'formatter.deliveryDate'}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+            </VBox>
+        </content>
+
+    </Page>
+
+</mvc:View>

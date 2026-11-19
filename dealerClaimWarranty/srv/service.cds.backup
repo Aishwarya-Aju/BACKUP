@@ -1,0 +1,39 @@
+
+using { dc } from '../db/schema';
+
+service WarrantyService {
+
+    entity Dealers as projection on dc.Dealers;
+
+    entity Vehicles as projection on dc.Vehicles;
+
+    entity WarrantyPolicies as projection on dc.WarrantyPolicies;
+
+    entity ClaimCategories as projection on dc.ClaimCategories;
+
+    entity PartMasters as projection on dc.PartMasters;
+
+    entity LabourOperationMasters as projection on dc.LabourOperationMasters;
+
+    entity WarrantyPolicyCoverages as projection on dc.WarrantyPolicyCoverages;
+
+    entity WarrantyClaims as projection on dc.WarrantyClaims actions {
+        action checkEligibility() returns Boolean;
+    };
+
+    entity ClaimLabour as projection on dc.ClaimLabour;
+
+    entity ClaimParts as projection on dc.ClaimParts;
+
+    entity ClaimDocuments as projection on dc.ClaimDocuments;
+
+    entity EligibilityChecks as projection on dc.EligibilityChecks;
+
+    entity ClaimReviewTasks as projection on dc.ClaimReviewTasks;
+
+    entity ClaimDecisions as projection on dc.ClaimDecisions;
+
+entity ClaimStatusHistory as projection on dc.ClaimStatusHistory;
+    entity SettlementRecords as projection on dc.SettlementRecords;
+
+}

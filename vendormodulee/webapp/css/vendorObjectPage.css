@@ -1,0 +1,339 @@
+/* =========================================================
+   VENDOR OBJECT PAGE
+   SAP UI5 Professional Styling
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE BACKGROUND
+   ========================================================= */
+
+.vendorObjectPage {
+    background: #f5f7f9;
+}
+
+.vendorObjectPage .sapMPageBgStandard {
+    background: #f5f7f9;
+}
+
+.vendorObjectPage .sapMPageEnableScrolling {
+    background: #f5f7f9;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.vendorObjectPage .sapUiMediumMargin {
+    max-width: 1500px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-bottom: 35px;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+   ========================================================= */
+
+.vendorObjectPage .sapUiMediumMargin > .sapMTitle {
+    color: #1d2d3e;
+
+    font-size: 1.5rem;
+
+    font-weight: 700;
+
+    margin-bottom: 16px;
+}
+
+
+/* =========================================================
+   VENDOR INFORMATION - OBJECT HEADER
+   ========================================================= */
+
+.vendorObjectPage .sapMOH {
+    background: #ffffff;
+
+    border: 1px solid #d9e2ec;
+
+    border-left: 4px solid #0a6ed1;
+
+    border-radius: 10px;
+
+    padding: 20px 24px;
+
+    margin-bottom: 22px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Vendor name */
+
+.vendorObjectPage .sapMOHTitle {
+    color: #1d2d3e;
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+}
+
+
+/* Vendor code */
+
+.vendorObjectPage .sapMObjectNumberText {
+    color: #0a6ed1;
+
+    font-weight: 700;
+}
+
+.vendorObjectPage .sapMObjectNumberUnit {
+    color: #607d94;
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   OBJECT HEADER ATTRIBUTES
+   ========================================================= */
+
+.vendorObjectPage .sapMObjectAttributeTitle {
+    color: #607d94;
+
+    font-weight: 600;
+}
+
+.vendorObjectPage .sapMObjectAttributeText {
+    color: #34495e;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.vendorObjectPage .sapMObjStatusSuccess {
+    color: #107e3e;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PURCHASE ORDER PANEL
+   ========================================================= */
+
+.vendorObjectPage .sapMPanel {
+    background: #ffffff;
+
+    border: 1px solid #d9e2ec;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Panel header */
+
+.vendorObjectPage .sapMPanelHdr {
+    background: #ffffff;
+
+    color: #1d2d3e;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    min-height: 52px;
+
+    line-height: 52px;
+
+    padding-left: 20px;
+
+    border-bottom: 1px solid #d9e2ec;
+}
+
+
+/* =========================================================
+   PURCHASE ORDER TABLE
+   ========================================================= */
+
+#vendorPurchaseOrderTable {
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+#vendorPurchaseOrderTable .sapMListTblHeaderCell {
+    background: #f1f5f8;
+
+    border-bottom: 1px solid #cbd7e2;
+
+    padding-top: 12px;
+
+    padding-bottom: 12px;
+}
+
+
+/* Header text */
+
+#vendorPurchaseOrderTable
+.sapMListTblHeaderCell
+.sapMText {
+    color: #334e68;
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TABLE ROWS
+   ========================================================= */
+
+#vendorPurchaseOrderTable .sapMListTblRow {
+    background: #ffffff;
+
+    transition: background-color 0.15s ease;
+}
+
+
+/* Hover */
+
+#vendorPurchaseOrderTable .sapMListTblRow:hover {
+    background: #f5faff;
+}
+
+
+/* Cells */
+
+#vendorPurchaseOrderTable .sapMListTblCell {
+    padding-top: 12px;
+
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #e6edf3;
+
+    vertical-align: middle;
+}
+
+
+/* Cell text */
+
+#vendorPurchaseOrderTable
+.sapMListTblCell
+.sapMText {
+    color: #34495e;
+
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   PO NUMBER
+   ========================================================= */
+
+#vendorPurchaseOrderTable
+.sapMListTblCell:first-child
+.sapMText {
+    color: #0a6ed1;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PO STATUS
+   ========================================================= */
+
+#vendorPurchaseOrderTable .sapMObjStatus {
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TOTAL AMOUNT
+   ========================================================= */
+
+#vendorPurchaseOrderTable .sapMObjectNumberText {
+    color: #1d2d3e;
+
+    font-weight: 700;
+}
+
+#vendorPurchaseOrderTable .sapMObjectNumberUnit {
+    color: #607d94;
+}
+
+
+/* =========================================================
+   EMPTY TABLE
+   ========================================================= */
+
+#vendorPurchaseOrderTable .sapMListNoData {
+    color: #607d94;
+
+    padding: 45px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   NAVIGATION ROW
+   ========================================================= */
+
+#vendorPurchaseOrderTable
+.sapMLIB.sapMLIBTypeNavigation {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .vendorObjectPage .sapUiMediumMargin {
+        margin-left: 16px;
+
+        margin-right: 16px;
+    }
+
+    .vendorObjectPage .sapMOH {
+        padding: 18px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .vendorObjectPage .sapUiMediumMargin {
+        margin-left: 10px;
+
+        margin-right: 10px;
+    }
+
+    .vendorObjectPage .sapMOHTitle {
+        font-size: 1.2rem;
+    }
+
+    #vendorPurchaseOrderTable
+    .sapMListTblCell {
+        padding-left: 7px;
+
+        padding-right: 7px;
+    }
+}

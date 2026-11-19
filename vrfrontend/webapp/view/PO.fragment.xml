@@ -1,0 +1,289 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="Dialog"
+        title="Purchase Order Details"
+    >
+        <content>
+            <f:SimpleForm
+                editable="true"
+                layout="ColumnLayout"
+                columnsL="2"
+            >
+                <f:content>
+                    <Title text="Purchase Order Creation"></Title>
+                    <Label
+                        text="PO Number"
+                        required="true"
+                    />
+                    <Input
+                        id="inputPONumber"
+                        type="Text"
+                    />
+
+                    <Label
+                        text="PO Date"
+                        required="true"
+                    />
+                    <Input
+                        id="inputPODate"
+                        type="Date"
+                    />
+
+                    <Label
+                        text="Expected Delivery Date"
+                        required="true"
+                    />
+                    <Input
+                        id="inputExpectedDate"
+                        type="Date"
+                    />
+
+                    <Label
+                        text="PO Status"
+                        required="true"
+                    />
+                    <Input value="DRAFT"
+                         editable="false"/>
+                    
+                    <!-- <Label
+                        text="Total Amount"
+                        required="true"
+                    />
+                    <Input
+                        id="inputAmount"
+                        type="Number"
+                    /> -->
+
+                    <Label
+                        text="Currency"
+                        required="true"
+                    />
+                    <Input
+                        id="inputCurrency"
+                        value="INR"
+                    />
+
+                    <Label
+                        text="Payment Terms"
+                        required="true"
+                    />
+                    <ComboBox
+                        id="inputPaymentTerms"
+                        selectedKey="NET30"
+                        editable="true"
+                    >
+                        <core:Item
+                            key="IMMEDIATE"
+                            text="IMMEDIATE"
+                        />
+                        <core:Item
+                            key="NET15"
+                            text="NET15"
+                        />
+                        <core:Item
+                            key="NET30"
+                            text="NET30"
+                        />
+                        <core:Item
+                            key="NET45"
+                            text="NET45"
+                        />
+                        <core:Item
+                            key="NET60"
+                            text="NET60"
+                        />
+                        <core:Item
+                            key="NET90"
+                            text="NET90"
+                        />
+                    </ComboBox>
+
+                    <Label
+                        text="Contact Reference"
+                        required="true"
+                    />
+                    <Input
+                        id="inputContactReference"
+                        type="Text"
+                    />
+                    <Label text="Vendor" required="true"/>
+                    <ComboBox 
+                    id="inputVendor"
+                    selectedKey="{po>/vendorID}"
+                    editable="{ui>/editMode}"
+                    width="100%"
+                    items ="{ path:'/Vendors',
+                    templateShareable:false
+                    }"
+                   
+                    >
+                    <core:Item key="{ID}" text="{vendorName}" />
+                    </ComboBox>
+                    <Label text="Buyer"
+                     required="true"/>
+                        <ComboBox
+                                    id="inputBuyer"
+                                    selectedKey="{po>/buyer_ID}"
+                                    editable="{ui>/editMode}"
+                                    width="100%"
+                                    items="{
+                                        path: '/Employee',
+                                        templateShareable: false
+                                    }"
+                                >
+                                    <core:Item key="{ID}" text="{name}" />
+                                </ComboBox>
+
+                </f:content>
+                 <f:content>
+                    <Title text="Purchase Order Items"></Title>
+                    <Label
+                        text="Material"
+                        required="true"
+                    />
+                    <core:ListItem
+                                                        key="{materials>materialCode}"
+                                                        text="{materials>materialCode}"
+                                                        additionalText="{materials>materialDescription}"
+                                                    />
+
+                    <Label
+                        text="PO Date"
+                        required="true"
+                    />
+                    <Input
+                        id="inputPODate"
+                        type="Date"
+                    />
+
+                    <Label
+                        text="Expected Delivery Date"
+                        required="true"
+                    />
+                    <Input
+                        id="inputExpectedDate"
+                        type="Date"
+                    />
+
+                    <Label
+                        text="PO Status"
+                        required="true"
+                    />
+                    <Input value="DRAFT"
+                         editable="false"/>
+                    
+                    <!-- <Label
+                        text="Total Amount"
+                        required="true"
+                    />
+                    <Input
+                        id="inputAmount"
+                        type="Number"
+                    /> -->
+
+                    <Label
+                        text="Currency"
+                        required="true"
+                    />
+                    <Input
+                        id="inputCurrency"
+                        value="INR"
+                    />
+
+                    <Label
+                        text="Payment Terms"
+                        required="true"
+                    />
+                    <ComboBox
+                        id="inputPaymentTerms"
+                        selectedKey="NET30"
+                        editable="true"
+                    >
+                        <core:Item
+                            key="IMMEDIATE"
+                            text="IMMEDIATE"
+                        />
+                        <core:Item
+                            key="NET15"
+                            text="NET15"
+                        />
+                        <core:Item
+                            key="NET30"
+                            text="NET30"
+                        />
+                        <core:Item
+                            key="NET45"
+                            text="NET45"
+                        />
+                        <core:Item
+                            key="NET60"
+                            text="NET60"
+                        />
+                        <core:Item
+                            key="NET90"
+                            text="NET90"
+                        />
+                    </ComboBox>
+
+                    <Label
+                        text="Contact Reference"
+                        required="true"
+                    />
+                    <Input
+                        id="inputContactReference"
+                        type="Text"
+                    />
+                    <Label text="Vendor" required="true"/>
+                    <ComboBox 
+                    id="inputVendor"
+                    selectedKey="{po>/vendorID}"
+                    editable="{ui>/editMode}"
+                    width="100%"
+                    items ="{ path:'/Vendors',
+                    templateShareable:false
+                    }"
+                   
+                    >
+                    <core:Item key="{ID}" text="{vendorName}" />
+                    </ComboBox>
+                    <Label text="Buyer"
+                     required="true"/>
+                        <ComboBox
+                                    id="inputBuyer"
+                                    selectedKey="{po>/buyer_ID}"
+                                    editable="{ui>/editMode}"
+                                    width="100%"
+                                    items="{
+                                        path: '/Employee',
+                                        templateShareable: false
+                                    }"
+                                >
+                                    <core:Item key="{ID}" text="{name}" />
+                                </ComboBox>
+
+                </f:content>
+            </f:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button
+                text="Create"
+                type="Emphasized"
+                press=".onCreate"
+            />
+        </beginButton>
+
+        <endButton>
+            <Button
+                text="Cancel"
+                press=".onCloseDialog"
+            />
+        </endButton>
+
+    </Dialog>
+</core:FragmentDefinition>

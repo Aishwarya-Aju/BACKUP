@@ -1,0 +1,7 @@
+ID,vendor_ID,materialCode,certificateNumber,certificateType,issuingAuthority,issueDate,expiryDate,mandatory,status,country,documentURL,daysToExpiry,verificationStatus,remarks
+a3000001-0000-4000-8000-000000000001,11111111-1111-4111-8111-111111111111,MAT1001,CERT-AL-001,ISO 9001,Bureau Veritas,2026-01-01,2027-12-31,true,VALID,India,https://example.com/cert/AL001,448,VERIFIED,Valid quality certification
+a3000002-0000-4000-8000-000000000002,22222222-2222-4222-8222-222222222222,MAT2001,CERT-BE-001,Electrical Safety,BIS,2025-11-01,2026-11-15,true,EXPIRING,India,https://example.com/cert/BE001,37,VERIFIED,Renewal required soon
+a3000003-0000-4000-8000-000000000003,33333333-3333-4333-8333-333333333333,MAT3001,CERT-GI-001,ISO 9001,Bureau Veritas,2024-01-01,2026-06-30,true,EXPIRED,India,https://example.com/cert/GI001,-101,PENDING,Expired certificate
+a3000004-0000-4000-8000-000000000004,44444444-4444-4444-8444-444444444444,MAT4001,CERT-DE-001,Equipment Safety,TUV,2024-01-01,2026-05-31,true,EXPIRED,India,https://example.com/cert/DE001,-131,FAILED,Mandatory certificate expired
+a3000005-0000-4000-8000-000000000005,55555555-5555-4555-8555-555555555555,MAT5001,CERT-EL-001,ISO 9001,Bureau Veritas,2026-01-01,2027-12-31,false,VALID,India,https://example.com/cert/EL001,448,VERIFIED,No compliance concerns
+a3000006-0000-4000-8000-000000000006,66666666-6666-4666-8666-666666666666,MAT6001,CERT-ZM-001,Manufacturing Quality,ISO,2025-01-01,2026-10-15,true,EXPIRING,India,https://example.com/cert/ZM001,6,PENDING,Urgent renewal and verification required

@@ -1,0 +1,85 @@
+
+<mvc:View
+    controllerName="score.dashboard.controller.VendorDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page
+        title="Vendor Details"
+        showNavButton="true"
+        navButtonPress=".onBack">
+
+        <content>
+            <VBox class="sapUiMediumMargin">
+
+                <ObjectHeader
+                    title="{selectedVendor>/vendorName}"
+                    intro="{selectedVendor>/vendorCode}"
+                    number="{selectedVendor>/currentRiskScore}"
+                    numberUnit="Risk Score"
+                    responsive="true">
+
+                    <attributes>
+                        <ObjectAttribute
+                            title="Country"
+                            text="{selectedVendor>/country}"/>
+
+                        <ObjectAttribute
+                            title="Region"
+                            text="{selectedVendor>/region}"/>
+
+                        <ObjectAttribute
+                            title="Vendor Category"
+                            text="{selectedVendor>/vendorCategory}"/>
+
+                        <ObjectAttribute
+                            title="Material Category"
+                            text="{selectedVendor>/materialCategory}"/>
+
+                        <ObjectAttribute
+                            title="Contact Person"
+                            text="{selectedVendor>/contactPerson}"/>
+
+                        <ObjectAttribute
+                            title="Email"
+                            text="{selectedVendor>/email}"/>
+
+                        <ObjectAttribute
+                            title="Phone"
+                            text="{selectedVendor>/phone}"/>
+                    </attributes>
+
+                    <statuses>
+                        <ObjectStatus
+                            title="Vendor Status"
+                            text="{selectedVendor>/vendorStatus}"/>
+
+                        <ObjectStatus
+                            title="Risk Level"
+                            text="{selectedVendor>/riskLevel}"
+                            state="{selectedVendor>/riskState}"/>
+                    </statuses>
+
+                </ObjectHeader>
+
+                <Panel
+                    headerText="Additional Information"
+                    class="sapUiSmallMarginTop">
+
+                    <content>
+                        <VBox class="sapUiSmallMargin">
+
+                                <ObjectAttribute
+                                title="Last Risk Calculation"
+                                text="{selectedVendor>/lastRiskCalculation}"/>
+
+                        </VBox>
+                    </content>
+
+                </Panel>
+
+            </VBox>
+        </content>
+
+    </Page>
+</mvc:View>

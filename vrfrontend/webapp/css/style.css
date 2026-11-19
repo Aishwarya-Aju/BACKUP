@@ -1,0 +1,459 @@
+.riskCard {
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+/* Common summary card styling */
+.summaryCard {
+    border-radius: 10px;
+    border: 1px solid #d9e2ec;
+    min-height: 9rem;
+}
+
+/* Blue - Total Vendors */
+.totalVendorsCard {
+    background-color: #eaf3fc;
+    border-top: 4px solid #0a6ed1;
+}
+
+/* Red - High Risk Vendors */
+.highRiskVendorsCard {
+    background-color: #fff0f0;
+    border-top: 4px solid #bb0000;
+}
+
+/* Green - Low Risk Vendors */
+.lowRiskVendorsCard {
+    background-color: #eaf7ed;
+    border-top: 4px solid #188918;
+}
+
+.MediumRiskVendorsCard {
+    background-color: #eaf7ed;
+    border-top: 4px solid #f0e00b;
+}
+
+.dashboardBanner {
+    background: linear-gradient(120deg, #063B78, #087FC4, #36B4E8);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 60, 120, 0.18);
+}
+
+.bannerTitle {
+    color: #FFFFFF !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+}
+
+.bannerSubtitle {
+    color: #E0F2FE !important;
+    font-size: 1rem;
+    margin-top: 0.35rem;
+}
+
+.bannerTitleGroup {
+    padding: 0.5rem 0;
+}
+
+.bannerChartIcon {
+    opacity: 0.9;
+    margin: 0.5rem;
+}
+.dashboardBackground,
+.dashboardBackground .sapMPageBgStandard,
+.dashboardBackground .sapMPageEnableScrolling {
+    background: #F3F0FF!important;
+}
+
+.dashboardBackground .sapMPageScroll {
+    background: #F3F0FF !important;
+}/* Enter your custom styles here */
+
+
+/* =====================================================
+   PROCUREMENT DASHBOARD - GLOBAL STYLES
+   ===================================================== */
+
+.procurementPage,
+.procurementDynamicPage {
+    background: #f4f7fb;
+}
+
+.procurementPage .sapMPageEnableScrolling {
+    background: #f4f7fb;
+}
+
+.procurementDynamicPage .sapFDynamicPageTitle {
+    background: #ffffff;
+    border-bottom: 1px solid #e6ebf2;
+    box-shadow: 0 2px 8px rgba(31, 52, 82, 0.04);
+}
+
+.procurementDynamicPage .sapFDynamicPageHeader {
+    background: linear-gradient(115deg, #eaf3ff 0%, #f2f7ff 55%, #e9fbf8 100%);
+    border-bottom: 1px solid #e1eaf4;
+    box-shadow: none;
+}
+
+.dashboardHeading {
+    padding: 4px 0;
+}
+
+.dashboardSubtitle {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-top: 3px;
+}
+
+.dashboardWelcome {
+    padding: 16px 10px 20px;
+}
+
+.dashboardWelcome .sapMTitle {
+    color: #12345a;
+    font-weight: 700;
+}
+
+.welcomeDescription,
+.sectionDescription {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-top: 6px;
+}
+
+/* =====================================================
+   CONTENT LAYOUT
+   ===================================================== */
+
+.dashboardContent {
+    box-sizing: border-box;
+    padding: 24px 28px 18px;
+}
+
+.sectionTitle {
+    color: #16365c;
+    font-weight: 700;
+    margin: 4px 0 16px;
+}
+
+.sectionHeading {
+    margin: 26px 0 16px;
+}
+
+.kpiContainer {
+    align-items: stretch;
+    gap: 18px;
+}
+
+.chartContainer {
+    align-items: stretch;
+    gap: 22px;
+}
+
+/* =====================================================
+   KPI TILES
+   ===================================================== */
+
+.kpiTile.sapMGT {
+    flex: 1 1 225px;
+    min-width: 215px;
+    max-width: 320px;
+    width: auto !important;
+    min-height: 155px;
+    border: 1px solid #e6ebf2;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(26, 54, 93, 0.06);
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.kpiTile.sapMGT:hover {
+    box-shadow: 0 9px 24px rgba(26, 54, 93, 0.13);
+    transform: translateY(-3px);
+}
+
+.kpiTile .sapMGTHdrContent {
+    padding: 16px 16px 0;
+}
+
+.kpiTile .sapMGTHdrTxt {
+    color: #193858;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.kpiTile .sapMGTSubHdrTxt {
+    color: #748399;
+    font-size: 0.8rem;
+}
+
+.kpiTile .sapMTileCnt {
+    padding: 6px 16px 12px;
+}
+
+.kpiTile .sapMNCValue {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.vendorKpi {
+    border-top: 4px solid #0a6ed1 !important;
+}
+
+.poKpi {
+    border-top: 4px solid #0f9d8a !important;
+}
+
+.invoiceKpi {
+    border-top: 4px solid #e99b25 !important;
+}
+
+.riskKpi {
+    border-top: 4px solid #8b5cf6 !important;
+}
+
+.riskTileContent {
+    padding-top: 8px;
+}
+
+.riskTileContent .sapMTitle {
+    color: #293d59;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.riskTileContent .sapMText {
+    color: #748399;
+    font-size: 0.75rem;
+}
+
+/* =====================================================
+   ANALYTICS PANELS
+   ===================================================== */
+
+.chartPanel.sapMPanel {
+    flex: 1 1 420px;
+    min-width: 300px;
+    max-width: 760px;
+    width: auto !important;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e4eaf2;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(26, 54, 93, 0.055);
+}
+
+.chartPanel .sapMPanelHdr {
+    height: auto;
+    padding: 18px 20px 12px;
+    color: #193858;
+    font-size: 1rem;
+    font-weight: 700;
+    background: #ffffff;
+    border-bottom: 1px solid #f0f3f8;
+}
+
+.chartPanel .sapMPanelContent {
+    padding: 12px 16px 18px;
+    background: #ffffff;
+}
+
+.chartDescription {
+    color: #8793a5;
+    font-size: 0.8rem;
+    padding: 2px 4px 10px;
+}
+
+/* =====================================================
+   QUICK ACCESS
+   ===================================================== */
+
+.quickAccessPanel.sapMPanel {
+    margin-top: 24px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e4eaf2;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(26, 54, 93, 0.045);
+}
+
+.quickAccessPanel .sapMPanelHdr {
+    height: auto;
+    padding: 18px 20px 14px;
+    background: #ffffff;
+    color: #193858;
+    font-weight: 700;
+    border-bottom: 1px solid #edf1f6;
+}
+
+.quickAccessPanel .sapMPanelContent {
+    padding: 12px 18px;
+    background: #ffffff;
+}
+
+.quickActions {
+    gap: 10px;
+}
+
+.quickActionButton {
+    margin: 3px;
+    border: 1px solid #dce7f4;
+    border-radius: 8px;
+    background: #f8fbff;
+}
+
+.quickActionButton .sapMBtnInner {
+    height: 2.75rem;
+    padding: 0 16px;
+    border: none;
+    border-radius: 8px;
+    color: #155da8;
+    font-weight: 600;
+}
+
+.quickActionButton:hover .sapMBtnInner {
+    background: #eaf3ff;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.dashboardFooter {
+    display: block;
+    padding: 24px 0 4px;
+    color: #8b98aa;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+/* =====================================================
+   RESPONSIVE LAYOUT
+   ===================================================== */
+
+@media (max-width: 768px) {
+    .dashboardContent {
+        padding: 16px 12px;
+    }
+
+    .dashboardWelcome {
+        padding: 12px 4px;
+    }
+
+    .kpiTile.sapMGT {
+        flex: 1 1 100%;
+        max-width: none;
+        min-width: 100%;
+    }
+
+    .chartPanel.sapMPanel {
+        flex: 1 1 100%;
+        min-width: 100%;
+        max-width: none;
+    }
+
+    .sectionHeading {
+        margin-top: 22px;
+    }
+
+    .chartPanel .sapMPanelContent {
+        padding: 8px;
+    }
+
+    .quickActionButton {
+        width: 100%;
+    }
+}
+
+/* KPI grid: occupy the available dashboard width */
+.vrxDashboardBody .vrxKpiGrid {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Consistent GenericTile alignment */
+.vrxDashboardBody .vrxKpiTile {
+    width: 100%;
+    min-width: 0;
+    min-height: 10rem;
+    box-sizing: border-box;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    transition: box-shadow 0.2s ease;
+}
+
+/* Subtle hover effect */
+.vrxDashboardBody .vrxKpiTile:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+
+/* Consistent dashboard spacing */
+.vrxDashboardBody {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 1.25rem;
+}
+
+/* Responsive spacing */
+@media (max-width: 600px) {
+    .vrxDashboardBody {
+        padding: 0.5rem;
+    }
+}
+
+
+/* =========================================================
+   PO list page - compact icon tab bar (class "vrxPoTabs")
+   ========================================================= */
+
+/* Smaller icons */
+.vrxPoTabs .sapMITBFilterIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.vrxPoTabs .sapMITBFilterIcon .sapUiIcon,
+.vrxPoTabs .sapMITBFilter .sapUiIcon {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+/* Slightly smaller tab text */
+.vrxPoTabs .sapMITBText {
+    font-size: 0.8125rem;
+}
+
+/* Hover effect */
+.vrxPoTabs .sapMITBFilter {
+    border-radius: 0.5rem 0.5rem 0 0;
+    transition: background-color 0.2s ease;
+}
+
+.vrxPoTabs .sapMITBFilter:hover {
+    background-color: var(--sapList_Hover_Background, #f5f6f7);
+}
+
+/* Selected tab: bold text, soft background, slightly larger icon */
+.vrxPoTabs .sapMITBFilter.sapMITBSelected {
+    background-color: var(--sapList_SelectionBackgroundColor, #ebf5fe);
+}
+
+.vrxPoTabs .sapMITBFilter.sapMITBSelected .sapMITBText {
+    font-weight: 600;
+}
+
+.vrxPoTabs .sapMITBFilter .sapMITBFilterIcon {
+    transition: transform 0.2s ease;
+}
+
+.vrxPoTabs .sapMITBFilter.sapMITBSelected .sapMITBFilterIcon {
+    transform: scale(1.15);
+}

@@ -1,0 +1,233 @@
+
+<mvc:View
+    controllerName="vrfrontend.controller.QualityControl"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Page
+        id="qualityControlPage"
+        title="Quality Control"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        enableScrolling="true">
+
+        <content>
+            <VBox class="sapUiMediumMargin" width="auto">
+
+                <Panel
+                    backgroundDesign="Solid"
+                    class="sapUiMediumMarginBottom">
+
+                    <content>
+                        <HBox
+                            alignItems="Center"
+                            class="sapUiMediumMargin"
+                            wrap="Wrap">
+
+                            <core:Icon
+                                src="sap-icon://quality-issue"
+                                size="2.5rem"
+                                color="#0A6ED1"
+                                class="sapUiMediumMarginEnd"/>
+
+                            <VBox>
+                                <Title
+                                    text="Quality Complaint Management"
+                                    level="H2"
+                                    wrapping="true"/>
+
+                                <Text
+                                    text="Register defects, track inspections and manage corrective actions."
+                                    wrapping="true"/>
+                            </VBox>
+                        </HBox>
+                    </content>
+                </Panel>
+
+                <!-- Summary Cards -->
+                <HBox
+                    wrap="Wrap"
+                    justifyContent="SpaceBetween"
+                    class="sapUiSmallMarginBottom">
+
+                    <GenericTile
+                        header="Total Complaints"
+                        subheader="All recorded complaints"
+                        frameType="OneByOne"
+                        class="sapUiSmallMargin"
+                        press=".onShowAllComplaints">
+
+                        <TileContent>
+                            <NumericContent
+                                value="{quality>/summary/total}"
+                                icon="sap-icon://list"/>
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        header="Open"
+                        subheader="Awaiting investigation"
+                        frameType="OneByOne"
+                        class="sapUiSmallMargin"
+                        press=".onShowOpenComplaints">
+
+                        <TileContent>
+                            <NumericContent
+                                value="{quality>/summary/open}"
+                                valueColor="Error"
+                                icon="sap-icon://alert"/>
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        header="Investigating"
+                        subheader="Under review"
+                        frameType="OneByOne"
+                        class="sapUiSmallMargin"
+                        press=".onShowInvestigatingComplaints">
+
+                        <TileContent>
+                            <NumericContent
+                                value="{quality>/summary/investigating}"
+                                valueColor="Critical"
+                                icon="sap-icon://search"/>
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        header="Resolved"
+                        subheader="Resolved complaints"
+                        frameType="OneByOne"
+                        class="sapUiSmallMargin"
+                        press=".onShowResolvedComplaints">
+
+                        <TileContent>
+                            <NumericContent
+                                value="{quality>/summary/resolved}"
+                                valueColor="Good"
+                                icon="sap-icon://accept"/>
+                        </TileContent>
+                    </GenericTile>
+
+                </HBox>
+
+                <!-- Actions -->
+                <OverflowToolbar class="sapUiSmallMarginTop">
+                    <Title
+                        text="Quality Complaint Records"
+                        level="H3"/>
+
+                    <ToolbarSpacer/>
+
+                    <Button
+                        text="Refresh"
+                        icon="sap-icon://refresh"
+                        press=".onRefresh"/>
+
+                    <Button
+                        text="Create Complaint"
+                        icon="sap-icon://add"
+                        type="Emphasized"
+                        press=".onCreateComplaint"/>
+                </OverflowToolbar>
+
+                <!-- Search -->
+                <SearchField
+                    width="100%"
+                    placeholder="Search complaint, material or defect type"
+                    liveChange=".onSearch"
+                    class="sapUiSmallMarginBottom"/>
+<Label text="Filter by Status" />
+<Select
+    id="qualityStatusFilter"
+    width="220px"
+    selectedKey="ALL"
+    change=".onStatusFilterChange">
+    <items>
+        <core:Item key="ALL" text="All Statuses" />
+        <core:Item key="OPEN" text="Open" />
+        <core:Item key="INVESTIGATING" text="Investigating" />
+        <core:Item key="RESOLVED" text="Resolved" />
+        <core:Item key="CLOSED" text="Closed" />
+    </items>
+</Select>
+                <!-- Complaint Table -->
+                <Table
+                    id="qualityComplaintsTable"
+                    items="{quality>/complaints}"
+                    growing="true"
+                    growingScrollToLoad="true"
+                    noDataText="No quality complaints found">
+
+                    <columns>
+                        <Column>
+                            <Text text="Complaint Number"/>
+                        </Column>
+
+                        <Column>
+                            <Text text="Material Code"/>
+                        </Column>
+
+                        <Column>
+                            <Text text="Complaint Date"/>
+                        </Column>
+
+                        <Column>
+                            <Text text="Defect Type"/>
+                        </Column>
+
+                        <Column>
+                            <Text text="Severity"/>
+                        </Column>
+
+                        <Column hAlign="End">
+                            <Text text="Defect %"/>
+                        </Column>
+
+                        <Column>
+                            <Text text="Status"/>
+                        </Column>
+                    </columns>
+
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{quality>complaintNumber}"/>
+                                <Text text="{quality>materialCode}"/>
+                                <Text text="{quality>complaintDate}"/>
+                                <Text text="{quality>defectType}"/>
+
+                                <ObjectStatus
+                                    text="{quality>severity}"
+                                    state="{
+                                        = ${quality>severity} === 'HIGH' || ${quality>severity} === 'CRITICAL'
+                                            ? 'Error'
+                                            : ${quality>severity} === 'MEDIUM'
+                                                ? 'Warning'
+                                                : 'None'
+                                    }"/>
+
+                                <ObjectNumber
+                                    number="{quality>defectPercentage}"
+                                    unit="%"/>
+
+                                <ObjectStatus
+                                    text="{quality>complaintStatus}"
+                                    state="{
+                                        = ${quality>complaintStatus} === 'RESOLVED' || ${quality>complaintStatus} === 'CLOSED'
+                                            ? 'Success'
+                                            : ${quality>complaintStatus} === 'INVESTIGATING'
+                                                ? 'Warning'
+                                                : 'Error'
+                                    }"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+
+                </Table>
+
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

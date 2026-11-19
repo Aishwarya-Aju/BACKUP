@@ -1,0 +1,72 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "score.dashboard",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "Vendor Risk Management",
+    "description": "Vendor Risk Management Dashboard",
+    "dataSources": {
+      "mainService": {
+        "uri": "/vendor-risk/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "dashboard-display": {
+          "semanticObject": "dashboard",
+          "action": "display",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "score.dashboard.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "models": {
+      "": {
+        "dataSource": "mainService"
+      }
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "score.service"
+  }
+}

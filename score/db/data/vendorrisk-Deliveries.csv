@@ -1,0 +1,30 @@
+ID,vendor_ID,purchaseOrder_ID,poItemNumber,materialCode,expectedDeliveryDate,actualDeliveryDate,orderedQuantity,deliveredQuantity,shipmentStatus,remarks
+22222222-2222-2222-2222-222222222222,aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,10000001-0000-0000-0000-000000000001,20,MAT-1002,2026-08-15,2026-08-18,200,200,Delivered,Delivered 3 days late
+33333333-3333-3333-3333-333333333333,aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,10000002-0000-0000-0000-000000000002,10,MAT-1003,2026-08-20,2026-08-25,150,100,Partially Delivered,Partial delivery and delayed
+44444444-4444-4444-4444-444444444444,aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,10000002-0000-0000-0000-000000000002,20,MAT-1004,2026-08-25,2026-09-02,300,180,Partially Delivered,Significant delay and partial delivery
+55555555-5555-5555-5555-555555555555,aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,10000003-0000-0000-0000-000000000003,10,MAT-1005,2026-09-01,2026-09-03,100,90,Partially Delivered,Minor delay with partial delivery
+66666666-6666-6666-6666-666666666666,bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,10000004-0000-0000-0000-000000000004,10,MAT-2001,2026-08-12,2026-08-12,250,250,Delivered,Delivered on expected date
+77777777-7777-7777-7777-777777777777,bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,10000004-0000-0000-0000-000000000004,20,MAT-2002,2026-08-18,2026-08-20,300,300,Delivered,Delivered 2 days late
+88888888-8888-8888-8888-888888888888,bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,10000005-0000-0000-0000-000000000005,10,MAT-2003,2026-08-25,2026-08-30,400,300,Partially Delivered,Partial delivery and delayed
+99999999-9999-9999-9999-999999999999,bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,10000005-0000-0000-0000-000000000005,20,MAT-2004,2026-09-02,2026-09-04,150,150,Delivered,Delivered 2 days late
+aaaaaaa1-aaaa-aaaa-aaaa-aaaaaaaaaaa1,bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,10000006-0000-0000-0000-000000000006,10,MAT-2005,2026-09-10,2026-09-18,500,350,Partially Delivered,Major delay and partial delivery
+bbbbbbb1-bbbb-bbbb-bbbb-bbbbbbbbbbb1,cccccccc-cccc-cccc-cccc-cccccccccccc,10000007-0000-0000-0000-000000000007,10,MAT-3001,2026-08-10,2026-08-10,100,100,Delivered,Delivered on time
+ccccccc1-cccc-cccc-cccc-ccccccccccc1,cccccccc-cccc-cccc-cccc-cccccccccccc,10000007-0000-0000-0000-000000000007,20,MAT-3002,2026-08-16,2026-08-19,200,180,Partially Delivered,3 days late with partial delivery
+ddddddd1-dddd-dddd-dddd-ddddddddddd1,cccccccc-cccc-cccc-cccc-cccccccccccc,10000008-0000-0000-0000-000000000008,10,MAT-3003,2026-08-22,2026-08-22,300,300,Delivered,Delivered on expected date
+eeeeeee1-eeee-eeee-eeee-eeeeeeeeeee1,cccccccc-cccc-cccc-cccc-cccccccccccc,10000008-0000-0000-0000-000000000008,20,MAT-3004,2026-09-01,2026-09-06,250,200,Partially Delivered,Delayed and partial delivery
+fffffff1-ffff-ffff-ffff-fffffffffff1,cccccccc-cccc-cccc-cccc-cccccccccccc,10000009-0000-0000-0000-000000000009,10,MAT-3005,2026-09-10,2026-09-11,150,150,Delivered,Minor delay
+11111112-1111-1111-1111-111111111112,dddddddd-dddd-dddd-dddd-dddddddddddd,10000010-0000-0000-0000-000000000010,10,MAT-4001,2026-08-05,2026-08-05,500,500,Delivered,Delivered on time
+22222223-2222-2222-2222-222222222223,dddddddd-dddd-dddd-dddd-dddddddddddd,10000010-0000-0000-0000-000000000010,20,MAT-4002,2026-08-15,2026-08-18,250,250,Delivered,3 days late
+33333334-3333-3333-3333-333333333334,dddddddd-dddd-dddd-dddd-dddddddddddd,10000011-0000-0000-0000-000000000011,10,MAT-4003,2026-08-25,2026-09-05,400,200,Partially Delivered,Significant delay and 50 percent delivered
+44444445-4444-4444-4444-444444444445,dddddddd-dddd-dddd-dddd-dddddddddddd,10000011-0000-0000-0000-000000000011,20,MAT-4004,2026-09-05,2026-09-07,300,250,Partially Delivered,2 days late with partial delivery
+55555556-5555-5555-5555-555555555556,dddddddd-dddd-dddd-dddd-dddddddddddd,10000012-0000-0000-0000-000000000012,10,MAT-4005,2026-09-12,2026-09-12,100,100,Delivered,Delivered on time
+66666667-6666-6666-6666-666666666667,eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee,10000013-0000-0000-0000-000000000013,10,MAT-5001,2026-08-08,2026-08-15,200,200,Delivered,7 days late
+77777778-7777-7777-7777-777777777778,eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee,10000013-0000-0000-0000-000000000013,20,MAT-5002,2026-08-18,2026-08-25,300,220,Partially Delivered,7 days late and partial delivery
+88888889-8888-8888-8888-888888888889,eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee,10000014-0000-0000-0000-000000000014,10,MAT-5003,2026-08-28,2026-09-02,400,300,Partially Delivered,5 days late and partial delivery
+99999990-9999-9999-9999-999999999990,eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee,10000014-0000-0000-0000-000000000014,20,MAT-5004,2026-09-05,2026-09-15,150,100,Partially Delivered,10 days late and partial delivery
+aaaaaaa2-aaaa-aaaa-aaaa-aaaaaaaaaaa2,eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee,10000015-0000-0000-0000-000000000015,10,MAT-5005,2026-09-15,2026-09-20,500,450,Partially Delivered,5 days late with minor shortage
+bbbbbbb2-bbbb-bbbb-bbbb-bbbbbbbbbbb2,ffffffff-ffff-ffff-ffff-ffffffffffff,10000016-0000-0000-0000-000000000016,10,MAT-6001,2026-08-10,2026-08-10,100,100,Delivered,Delivered on time
+ccccccc2-cccc-cccc-cccc-ccccccccccc2,ffffffff-ffff-ffff-ffff-ffffffffffff,10000016-0000-0000-0000-000000000016,20,MAT-6002,2026-08-20,2026-08-21,250,250,Delivered,1 day late
+ddddddd2-dddd-dddd-dddd-ddddddddddd2,ffffffff-ffff-ffff-ffff-ffffffffffff,10000017-0000-0000-0000-000000000017,10,MAT-6003,2026-08-28,2026-09-01,300,270,Partially Delivered,4 days late with partial delivery
+eeeeeee2-eeee-eeee-eeee-eeeeeeeeeee2,ffffffff-ffff-ffff-ffff-ffffffffffff,10000017-0000-0000-0000-000000000017,20,MAT-6004,2026-09-05,2026-09-05,200,200,Delivered,Delivered on expected date
+fffffff2-ffff-ffff-ffff-fffffffffff2,ffffffff-ffff-ffff-ffff-ffffffffffff,10000018-0000-0000-0000-000000000018,10,MAT-6005,2026-09-12,2026-09-20,350,175,Partially Delivered,8 days late and 50 percent delivered

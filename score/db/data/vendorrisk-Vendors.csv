@@ -1,0 +1,7 @@
+ID,vendorCode,vendorName,country,region,vendorCategory,materialCategory,contactPerson,email,phone,vendorStatus,currentRiskScore,riskLevel,lastRiskCalculation
+aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,V001,ABC Components Pvt Ltd,India,Tamil Nadu,Manufacturing,Electrical Components,Rajesh Kumar,rajesh.kumar@example.com,+91-9840010001,ACTIVE,18.50,Low,2026-10-10T10:00:00Z
+bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,V002,Global Industrial Supplies,India,Karnataka,Distributor,Industrial Supplies,Priya Sharma,priya.sharma@example.com,+91-9840010002,ACTIVE,48.00,Medium,2026-10-10T10:00:00Z
+cccccccc-cccc-cccc-cccc-cccccccccccc,V003,South India Engineering,India,Kerala,Engineering,Mechanical Parts,Suresh Nair,suresh.nair@example.com,+91-9840010003,ACTIVE,32.00,Medium,2026-10-10T10:00:00Z
+dddddddd-dddd-dddd-dddd-dddddddddddd,V004,Chennai Industrial Solutions,India,Tamil Nadu,Manufacturer,Industrial Equipment,Arun Kumar,arun.kumar@example.com,+91-9840010004,ACTIVE,72.50,Critical,2026-10-10T10:00:00Z
+eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee,V005,Bharat Heavy Equipment Suppliers,India,Maharashtra,Equipment Supplier,Heavy Equipment,Meena Patel,meena.patel@example.com,+91-9840010005,ACTIVE,55.00,High,2026-10-10T10:00:00Z
+ffffffff-ffff-ffff-ffff-ffffffffffff,V006,Coastal Engineering Components,India,Andhra Pradesh,Manufacturing,Engineering Components,Venkatesh Rao,venkatesh.rao@example.com,+91-9840010006,ACTIVE,12.00,Low,2026-10-10T10:00:00Z

@@ -1,0 +1,185 @@
+
+_schema-version: 3.3.0
+ID: score
+version: 1.0.0
+description: "Vendor Risk Management Control Tower"
+
+parameters:
+  enable-parallel-deployments: true
+  deploy_mode: html5-repo
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+
+modules:
+  - name: score-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: score-db
+      - name: score-auth
+
+  - name: score-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: score-db
+
+  - name: score
+    type: approuter.nodejs
+    path: .deploy/app-router
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: score-auth
+      - name: score-destination
+      - name: score-html5-runtime
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
+
+  - name: score-app-deployer
+    type: com.sap.application.content
+    path: gen
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: scoredashboard
+          artifacts:
+            - scoredashboard.zip
+          target-path: app/
+    requires:
+      - name: score-auth
+      - name: srv-api
+      - name: score-html5-repo-host
+        parameters:
+          content-target: true
+          config:
+            HTML5Runtime_enabled: true
+
+  - name: scoredashboard
+    type: html5
+    path: app/dashboard
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      build-result: dist
+      supported-platforms: []
+
+  - name: score-destinations
+    type: com.sap.application.content
+    requires:
+      - name: score-auth
+        parameters:
+          service-key:
+            name: score-auth-key
+      - name: score-html5-repo-host
+        parameters:
+          service-key:
+            name: score-html5-repo-host-key
+      - name: score-destination
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: score-html5-repository
+              ServiceInstanceName: score-html5-repo-host
+              ServiceKeyName: score-html5-repo-host-key
+              sap.cloud.service: score.service
+
+            - Name: score-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: score-auth
+              ServiceKeyName: score-auth-key
+              sap.cloud.service: score.service
+
+resources:
+  - name: score-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: score-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: score-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - binding-secret
+            - x509
+          redirect-uris:
+            - https://*~{app-api/app-uri}/**
+    requires:
+      - name: app-api
+
+  - name: score-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: update
+            destinations:
+              - Name: srv-api
+                Type: HTTP
+                ProxyType: Internet
+                URL: ~{srv-api/srv-url}
+                Authentication: NoAuthentication
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true
+                sap.cloud.service: score.service
+    requires:
+      - name: srv-api
+
+  - name: score-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: score-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime

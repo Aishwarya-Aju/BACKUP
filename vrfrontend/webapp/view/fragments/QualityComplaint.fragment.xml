@@ -1,0 +1,157 @@
+
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form">
+
+    <Dialog
+        id="qualityComplaintDialog"
+        title="Create Quality Complaint"
+        contentWidth="650px"
+        contentHeight="auto"
+        stretchOnPhone="true"
+        draggable="true"
+        resizable="true">
+
+        <content>
+            <form:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="4"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="2"
+                emptySpanL="2"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1">
+
+                <Label text="Complaint Number" />
+                <Input
+                    value="{complaintForm>/complaintNumber}"
+                    placeholder="Enter complaint number"
+                    required="true" />
+
+                <Label text="Vendor" />
+                <Select
+                    selectedKey="{complaintForm>/vendor_ID}"
+                    items="{quality>/vendors}"
+                    change=".onVendorChange"
+                    forceSelection="false"
+                    required="true">
+                    <core:Item
+                        key="{quality>ID}"
+                        text="{quality>vendorName}" />
+                </Select>
+
+                <Label text="Purchase Order" />
+                <Select
+                    selectedKey="{complaintForm>/purchaseOrder_ID}"
+                    items="{quality>/filteredPurchaseOrders}"
+                    change=".onPurchaseOrderChange"
+                    forceSelection="false"
+                    required="true"
+                    enabled="{= !!${complaintForm>/vendor_ID} }">
+                    <core:Item
+                        key="{quality>ID}"
+                        text="{quality>poNumber}" />
+                </Select>
+<Label text="Material Code" required="true" />
+
+<Select
+    id="complaintMaterialSelect"
+    selectedKey="{complaintForm>/materialCode}"
+    items="{quality>/purchaseOrderMaterials}"
+    enabled="{= !!${complaintForm>/purchaseOrder_ID} }"
+    required="true"
+    forceSelection="false">
+
+    <core:Item
+        key="{quality>materialCode}"
+        text="{quality>materialCode} - {quality>materialDescription}" />
+</Select>
+                <Label text="Complaint Date" />
+                <DatePicker
+                    value="{complaintForm>/complaintDate}"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="dd-MM-yyyy"
+                    required="true" />
+
+                <Label text="Defect Type" />
+                <Input
+                    value="{complaintForm>/defectType}"
+                    placeholder="e.g. Damaged material"
+                    required="true" />
+
+                <Label text="Severity" />
+                <Select
+                    selectedKey="{complaintForm>/severity}"
+                    required="true">
+                    <core:Item key="LOW" text="Low" />
+                    <core:Item key="MEDIUM" text="Medium" />
+                    <core:Item key="HIGH" text="High" />
+                    <core:Item key="CRITICAL" text="Critical" />
+                </Select>
+
+                <Label text="Inspected Quantity" />
+                <Input
+                    value="{complaintForm>/inspectedQuantity}"
+                    type="Number"
+                    liveChange=".onComplaintQuantityChange"
+                    required="true" />
+
+                <Label text="Rejected Quantity" />
+                <Input
+                    value="{complaintForm>/rejectedQuantity}"
+                    type="Number"
+                    liveChange=".onComplaintQuantityChange"
+                    required="true" />
+
+                <Label text="Defect Percentage" />
+                <Input
+                    value="{complaintForm>/defectPercentage}"
+                    editable="false" />
+
+                <Label text="Root Cause" />
+                <TextArea
+                    value="{complaintForm>/rootCause}"
+                    rows="2"
+                    placeholder="Describe the root cause" />
+
+                <Label text="Corrective Action" />
+                <TextArea
+                    value="{complaintForm>/correctiveAction}"
+                    rows="2"
+                    placeholder="Describe the corrective action" />
+
+                <Label text="Complaint Status" />
+                <Select
+                    selectedKey="{complaintForm>/complaintStatus}">
+                    <core:Item key="OPEN" text="Open" />
+                    <core:Item key="INVESTIGATING" text="Investigating" />
+                    <core:Item key="RESOLVED" text="Resolved" />
+                    <core:Item key="CLOSED" text="Closed" />
+                </Select>
+
+            </form:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button
+                text="Save Complaint"
+                type="Emphasized"
+                press=".onSaveQualityComplaint" />
+        </beginButton>
+
+        <endButton>
+            <Button
+                text="Cancel"
+                press=".onCloseQualityComplaint" />
+        </endButton>
+
+    </Dialog>
+</core:FragmentDefinition>

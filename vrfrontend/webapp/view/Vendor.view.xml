@@ -1,0 +1,220 @@
+<mvc:View
+    controllerName="vrfrontend.controller.Vendor"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:cards="sap.f.cards"
+    xmlns:table="sap.m.table"
+>
+    <f:DynamicPage
+        id="vendorDynamicPage"
+        fitContent="true"
+        headerExpanded="true"
+        class="sapUiResponsiveContentPadding"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Vendor Details" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar
+                        id="vendorFilterBar"
+                        showFilterConfiguration="false"
+                        useToolbar="false"
+                        showGoOnFB="false"
+                        persistencyKey=""
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                label="Vendor Code"
+                                name="VendorCode"
+                                groupName="Vendor"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="vendorFilter"
+                                        width="220px"
+                                        selectionChange=".onVendorFilterChange"
+                                        items="{
+                                            path: '/Vendors',
+                                            templateShareable: true
+                                        }"
+                                    >
+                                        <core:Item
+                                            key="{vendorCode}"
+                                            text="{vendorCode}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                label="Vendor Name"
+                                name="vendorName"
+                                groupName="VendorName"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="vendorNameFilter"
+                                        width="220px"
+                                        selectionChange=".onVendorNameFilterChange"
+                                        items="{
+                                            path: '/Vendors',
+                                            templateShareable: true
+                                        }"
+                                    >
+                                        <core:Item
+                                            key="{vendorName}"
+                                            text="{vendorName}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                label="Category"
+                                name="vendorCategory"
+                                groupName="VendorCategory"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="vendorCategoryFilter"
+                                        width="220px"
+                                        selectionChange=".onVendorCategoryFilterChange"
+                                        items="{vendorCategory>/categories}"
+                                    >
+                                        <core:Item
+                                            key="{vendorCategory>category}"
+                                            text="{vendorCategory>category}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                label="Risk Level"
+                                name="vendorRisk"
+                                groupName="VendorRisk"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="vendorRiskFilter"
+                                        width="220px"
+                                        selectionChange=".onVendorRiskFilterChange"
+                                        items="{vendorRisk>/riskLevels}"
+                                    >
+                                        <core:Item
+                                            key="{vendorRisk>riskLevel}"
+                                            text="{vendorRisk>riskLevel}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <VBox
+                width="100%"
+                class="sapUiMediumMarginTop"
+            >
+                <Toolbar>
+                    <Title text="Vendors" />
+                    <ToolbarSpacer />
+
+                    <Button
+                        icon="sap-icon://add"
+                        tooltip="Add Vendor"
+                        type="Transparent"
+                        press=".addVendor"
+                    />
+
+                    <Button
+                        icon="sap-icon://delete"
+                        tooltip="Delete Vendor"
+                        type="Transparent"
+                        press=".onDeleteVendor"
+                    />
+                </Toolbar>
+
+                <Table
+                    id="vendorTable"
+                    width="100%"
+                    growing="true"
+                    growingScrollToLoad="true"
+                    growingThreshold="10"
+                    mode="MultiSelect"
+                    items="{
+                        path: '/Vendors',
+                        sorter: {
+                            path: 'vendorCode'
+                        }
+                    }"
+                >
+                    <columns>
+                        <Column width="10rem">
+                            <Text text="Vendor Code" />
+                        </Column>
+
+                        <Column width="15rem">
+                            <Text text="Vendor Name" />
+                        </Column>
+
+                        <Column width="12rem">
+                            <Text text="Vendor Category" />
+                        </Column>
+
+                        <Column width="15rem">
+                            <Text text="Material Category" />
+                        </Column>
+
+                        <Column width="10rem">
+                            <Text text="Risk Level" />
+                        </Column>
+                    </columns>
+
+                    <items>
+                        <ColumnListItem
+                            type="Navigation"
+                            press=".onVendorPress"
+                        >
+                            <cells>
+                                <Text text="{vendorCode}" />
+
+                                <Text text="{vendorName}" />
+
+                                <Text text="{vendorCategory}" />
+
+                                <Text text="{materialCategory}" />
+
+                                <ObjectStatus
+                                    text="{riskLevel}"
+                                    state="{
+        path: 'riskLevel',
+        formatter: '.formatter.riskLevelState'
+    }"
+                                   
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

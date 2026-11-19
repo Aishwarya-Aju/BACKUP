@@ -1,0 +1,4 @@
+ID,policyCode,policyName,coverageMonths,maxKilometers,claimSubmissionDays,labourRate,maxClaimAmount,currency,isActive
+c116ec65-6381-4e03-bdcd-e9d56342ff39,WP-ST-36,Standard Warranty – 36 Months,36,100000,30,900.00,150000.00,INR,true
+caacf6a3-a8aa-40ae-8695-5e42a25a9a84,WP-EX-60,Extended Warranty – 60 Months,60,150000,45,1100.00,250000.00,INR,true
+c56e316d-9fc0-4775-8130-633e05cb932d,WP-PR-60,Premium Warranty – 60 Months,60,200000,60,1300.00,500000.00,INR,true

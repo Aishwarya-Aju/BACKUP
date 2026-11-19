@@ -1,0 +1,395 @@
+
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Dialog
+        id="newDeliveryDialog"
+        title="New Delivery"
+        contentWidth="80rem"
+        stretch="{device>/system/phone}"
+        draggable="true"
+        resizable="true"
+        busy="{dlv>/create/saving}"
+        busyIndicatorDelay="0">
+
+        <content>
+            <VBox class="dlvDialogBody">
+
+                <!-- Error Message -->
+                <MessageStrip
+                    text="{dlv>/create/error}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${dlv>/create/error}}"
+                    class="sapUiSmallMarginBottom"/>
+
+                <!-- Step 1: Vendor and Purchase Order -->
+                <VBox class="dlvSection">
+
+                    <Text
+                        text="1. Select Vendor and Purchase Order"
+                        class="dlvSectionTitle"/>
+
+                    <HBox class="dlvFieldGroup">
+
+                        <VBox>
+                            <Label
+                                text="Vendor"
+                                required="true"
+                                labelFor="createVendor"/>
+
+                            <ComboBox
+                                id="createVendor"
+                                width="100%"
+                                placeholder="Select a vendor"
+                                items="{dlv>/vendors}"
+                                selectedKey="{dlv>/create/vendorID}"
+                                selectionChange=".onVendorSelected">
+
+                                <core:ListItem
+                                    key="{dlv>ID}"
+                                    text="{dlv>vendorName}"
+                                    additionalText="{dlv>vendorCode}"/>
+                            </ComboBox>
+                        </VBox>
+
+                        <VBox>
+                            <Label
+                                text="Purchase Order"
+                                required="true"
+                                labelFor="createPO"/>
+
+                            <ComboBox
+                                id="createPO"
+                                width="100%"
+                                placeholder="Select a purchase order"
+                                enabled="{= !!${dlv>/create/vendorID}}"
+                                busy="{dlv>/create/loadingPOs}"
+                                items="{dlv>/create/purchaseOrders}"
+                                selectedKey="{dlv>/create/purchaseOrderID}"
+                                selectionChange=".onPOSelected">
+
+                                <core:ListItem
+                                    key="{dlv>ID}"
+                                    text="{dlv>poNumber}"
+                                    additionalText="{dlv>poStatus}"/>
+                            </ComboBox>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+                <!-- Step 2: Purchase Order and Invoice Details -->
+                <VBox
+                    class="dlvSection"
+                    busy="{dlv>/create/loading}"
+                    busyIndicatorDelay="0"
+                    visible="{dlv>/create/hasDetails}">
+
+                    <Text
+                        text="2. Purchase Order and Invoice Details"
+                        class="dlvSectionTitle"/>
+
+                    <HBox class="dlvFieldGroup">
+
+                        <VBox>
+                            <Text
+                                text="Vendor"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/create/vendorName}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Purchase Order"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/create/details/poNumber}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Invoice Number"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/create/details/invoiceNumber}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Expected Delivery Date"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{path:'dlv>/create/details/expectedDeliveryDate', formatter:'.formatter.date'}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Current Delivery Progress"
+                                class="dlvKvLabel"/>
+
+                            <ProgressIndicator
+                                width="12rem"
+                                percentValue="{dlv>/create/currentProgress}"
+                                displayValue="{path:'dlv>/create/currentProgress', formatter:'.formatter.percentText'}"
+                                state="Information"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+                <!-- Step 3: Items and Quantities -->
+                <VBox
+                    class="dlvSection"
+                    visible="{dlv>/create/hasItems}">
+
+                    <Text
+                        text="3. Enter Delivered Quantities"
+                        class="dlvSectionTitle"/>
+
+                    <Table
+                        items="{dlv>/create/items}"
+                        popinLayout="GridSmall"
+                        noDataText="No invoice items">
+
+                        <!-- Table Columns -->
+                        <columns>
+
+                            <Column>
+                                <Text text="Material Code"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Material Description"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+
+                                <Text text="Unit"/>
+                            </Column>
+
+                            <Column 
+                                hAlign="End">
+
+                                <Text text="Ordered Quantity"/>
+                            </Column>
+
+                            <Column hAlign="End">
+                                <Text text="Accepted Quantity"/>
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Previously Delivered"/>
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Remaining Quantity"/>
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                width="10rem">
+
+                                <Text text="Delivering Now"/>
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+
+                                <Text text="Projected Total"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Delivery Progress"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Item Status"/>
+                            </Column>
+
+                        </columns>
+
+                        <!-- Table Rows -->
+                        <items>
+
+                            <ColumnListItem
+                                vAlign="Middle"
+                                highlight="{dlv>state}">
+
+                                <cells>
+
+                                    <ObjectIdentifier
+                                        title="{dlv>materialCode}"/>
+
+                                    <Text
+                                        text="{dlv>materialDescription}"/>
+
+                                    <Text
+                                        text="{dlv>unit}"/>
+
+                                    <Text 
+                                        text="{path:'dlv>orderedQuantity', formatter:'.formatter.qty'}"/>
+
+                                    <Text
+                                        text="{path:'dlv>acceptedQuantity', formatter:'.formatter.qty'}"/>
+
+                                    <Text
+                                        text="{path:'dlv>deliveredSoFar', formatter:'.formatter.qty'}"/>
+
+                                    <Text
+                                        text="{path:'dlv>remainingQuantity', formatter:'.formatter.qty'}"/>
+
+                                    <Input
+                                        class="dlvQtyInput"
+                                        value="{dlv>deliverNow}"
+                                        placeholder="0"
+                                        textAlign="End"
+                                        maxLength="16"
+                                        enabled="{= ${dlv>remainingQuantity} > 0}"
+                                        valueState="{dlv>valueState}"
+                                        valueStateText="{dlv>valueStateText}"
+                                        liveChange=".onCreateQuantityChange"/>
+
+                                    <Text
+                                        text="{path:'dlv>projectedTotal', formatter:'.formatter.qty'}"/>
+
+                                    <ProgressIndicator
+                                        width="8rem"
+                                        percentValue="{dlv>progress}"
+                                        displayValue="{dlv>progressText}"
+                                        state="{dlv>state}"/>
+
+                                    <ObjectStatus
+                                        text="{dlv>status}"
+                                        state="{dlv>state}"/>
+
+                                </cells>
+                            </ColumnListItem>
+
+                        </items>
+                    </Table>
+
+                    <!-- Overall Purchase Order Delivery Progress -->
+                    <HBox
+                        class="dlvOverall"
+                        alignItems="Center"
+                        wrap="Wrap">
+
+                        <VBox class="sapUiSmallMarginEnd">
+
+                            <Text
+                                text="Overall Projected PO Delivery"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/create/overall/text}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <ProgressIndicator
+                            width="16rem"
+                            percentValue="{dlv>/create/overall/percent}"
+                            displayValue="{path:'dlv>/create/overall/percent', formatter:'.formatter.percentText'}"
+                            state="{dlv>/create/overall/state}"/>
+
+                    </HBox>
+                </VBox>
+
+                <!-- Step 4: Shipment Status and Remarks -->
+                <VBox
+                    class="dlvSection"
+                    visible="{dlv>/create/hasItems}">
+
+                    <Text
+                        text="4. Shipment Status and Remarks"
+                        class="dlvSectionTitle"/>
+
+                    <HBox class="dlvFieldGroup">
+
+                        <VBox>
+                            <Label
+                                text="Shipment Status"
+                                labelFor="createShipmentStatus"/>
+
+                            <Select
+                                id="createShipmentStatus"
+                                width="100%"
+                                selectedKey="{dlv>/create/shipmentStatus}"
+                                items="{dlv>/shipmentStatuses}">
+
+                                <core:Item
+                                    key="{dlv>key}"
+                                    text="{dlv>key}"/>
+                            </Select>
+                        </VBox>
+
+                        <VBox>
+                            <Label
+                                text="Remarks"
+                                labelFor="createRemarks"/>
+
+                            <TextArea
+                                id="createRemarks"
+                                width="100%"
+                                rows="3"
+                                maxLength="500"
+                                showExceededText="true"
+                                value="{dlv>/create/remarks}"
+                                placeholder="Optional remarks"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </content>
+
+        <!-- Dialog Actions -->
+        <beginButton>
+            <Button
+                text="Save Delivery"
+                type="Emphasized"
+                icon="sap-icon://save"
+                enabled="{dlv>/create/canSave}"
+                press=".onSaveDelivery"/>
+        </beginButton>
+
+        <endButton>
+            <Button
+                text="Cancel"
+                press=".onCancelNewDelivery"/>
+        </endButton>
+
+    </Dialog>
+</core:FragmentDefinition>

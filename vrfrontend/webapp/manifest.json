@@ -1,0 +1,264 @@
+{
+  "_version": "1.89.0",
+  "sap.app": {
+    "id": "vrfrontend",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.33.0",
+      "toolsId": "51494289-1f1a-4f61-994d-a2306bd4643a"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/vendor-risk/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "risk_object-risk_action": {
+          "semanticObject": "risk_object",
+          "action": "risk_action",
+          "title": "{{risk_object-risk_action.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.153.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.ui.table": {},
+        "sap.ui.export": {
+          "lazy": true
+        }
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "vrfrontend.i18n.i18n"
+        }
+      },
+      "": {
+        "type": "sap.ui.model.odata.v4.ODataModel",
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        },
+        {
+          "uri": "css/dashboard.css"
+        },
+        {
+          "uri": "css/deliveryTeam.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "vrfrontend.view",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "Routehome",
+          "pattern": ":?query:",
+          "target": "Targethome"
+        },
+        {
+          "name": "vendorSelfService",
+          "pattern": "vendorSelfService",
+          "target": "vendorSelfService"
+        },
+        {
+          "name": "VendorDashboard",
+          "pattern": "vendors",
+          "target": "TargetVendorDashboard"
+        },
+        {
+          "name": "QualityControl",
+          "pattern": "quality-control",
+          "target": "QualityControl"
+        },
+        {
+          "name": "VendorDetails",
+          "pattern": "VendorDetails/{vendorId}",
+          "target": "VendorDetails"
+        },
+        {
+          "name": "View1",
+          "pattern": "View1",
+          "target": "View1"
+        },
+        {
+          "name": "Vendor",
+          "pattern": "Vendor",
+          "target": "Vendor"
+        },
+        {
+          "name": "PurchaseOrder",
+          "pattern": "po",
+          "target": "po"
+        },
+        {
+          "name": "Invoice",
+          "pattern": "invoice",
+          "target": "invoice"
+        },
+        {
+          "name": "POItem",
+          "pattern": "po-item/{po}",
+          "target": "poItem"
+        },
+        {
+          "name": "VendorObject",
+          "pattern": "vendors/{ven}",
+          "target": "VendorObject"
+        },
+        {
+          "name": "POCreation",
+          "pattern": "poCreate",
+          "target": "poCreate"
+        },
+        {
+          "name": "POTeamItem",
+          "pattern": "poTeam/{po}",
+          "target": "poTeam"
+        },
+        {
+          "name": "DeliveryTeam",
+          "pattern": "delivery",
+          "target": "DeliveryTeam"
+        },
+        {
+          "name": "RiskDetails",
+          "pattern": "risk/{riskType}/{vendorId}",
+          "target": "RiskDetails"
+        }
+      ],
+      "targets": {
+        "Targethome": {
+          "id": "home",
+          "name": "home"
+        },
+        "TargetVendorDashboard": {
+          "id": "VendorDashboard",
+          "name": "VendorDashboard"
+        },
+        "View1": {
+          "id": "View1",
+          "name": "View1"
+        },
+        "vendorSelfService": {
+          "id": "vendorSelfService",
+          "name": "vendorSelfService",
+          "viewLevel": 2
+        },
+        "VendorDetails": {
+          "id": "VendorDetails",
+          "name": "VendorDetails"
+        },
+        "Vendor": {
+          "name": "Vendor"
+        },
+        "po": {
+          "name": "PurchaseOrder"
+        },
+        "invoice": {
+          "name": "Invoice"
+        },
+        "poItem": {
+          "name": "POItem",
+          "viewLevel": 2
+        },
+        "QualityControl": {
+          "id": "QualityControl",
+          "name": "QualityControl"
+        },
+        "VendorObject": {
+          "name": "VendorObject",
+          "viewLevel": 2
+        },
+        "poCreate": {
+          "name": "POCreation"
+        },
+        "poTeam": {
+          "name": "POTeamItem"
+        },
+        "DeliveryTeam": {
+          "id": "DeliveryTeam",
+          "name": "DeliveryTeam"
+        },
+        "RiskDetails": {
+          "id": "RiskDetails",
+          "name": "RiskDetails"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "vrfrontend.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "vrfrontend"
+  }
+}

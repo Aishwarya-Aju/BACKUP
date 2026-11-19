@@ -1,0 +1,10 @@
+ID,operationCode,operationDescription,category_code,standardHours,standardHourlyRate,isActive
+d0b8e47c-882b-4607-80ef-0a24469038d5,LB-ENG-001,Engine diagnostic inspection,ENGINE,1.50,1000,true
+161927bd-6582-4457-95f9-9cc0ddf8916e,LB-ENG-002,Oil pump replacement,ENGINE,3.00,1200,true
+dae28932-065d-48e4-bfea-e0f9da9a02a5,LB-TRN-001,Clutch assembly replacement,TRANSMISSION,5.00,1000,true
+265619bc-ed58-4832-91a1-75411ceb1f76,LB-TRN-002,Gearbox sensor replacement,TRANSMISSION,1.50,1300,true
+6f40b46d-7252-4df9-ae53-6563743950f3,LB-ELC-001,Electrical system diagnosis,ELECTRICAL,1.00,1000,true
+08b33ea9-26ff-4136-aca0-3ccfad778410,LB-ELC-002,Alternator replacement,ELECTRICAL,2.00,1500,true
+62e9a585-41a2-4010-9025-874157c57472,LB-BRK-001,Brake pad replacement,BRAKES,1.50,1250,true
+dd95e63a-dc16-4180-8ae8-a51b98ce7f90,LB-COOL-001,Radiator replacement,COOLING,3.00,1300,true
+0deb9cd9-1953-48c8-a6cd-6d2aa6c89177,LB-COOL-002,Water pump replacement,COOLING,2.50,1300,true

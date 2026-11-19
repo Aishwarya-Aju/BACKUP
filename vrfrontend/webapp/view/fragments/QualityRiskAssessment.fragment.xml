@@ -1,0 +1,205 @@
+
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout">
+
+    <Dialog
+        id="qualityRiskDialog"
+        title="Quality Risk Assessment"
+        contentWidth="720px"
+        contentHeight="600px"
+        resizable="true"
+        draggable="true"
+        verticalScrolling="true"
+        horizontalScrolling="false">
+
+        <content>
+            <Page
+                showHeader="false"
+                enableScrolling="true"
+                class="sapUiContentPadding">
+
+                <content>
+                    <VBox width="100%" class="sapUiSmallMarginBottom">
+
+                        <!-- Vendor summary -->
+                        <Panel
+                            headerText="Vendor Assessment"
+                            expandable="false"
+                            class="sapUiSmallMarginBottom">
+
+                            <content>
+                                <VBox class="sapUiSmallMargin">
+
+                                    <Text
+                                        text="{qualityAssessment>/vendorName}"
+                                        wrapping="true"
+                                        class="sapMTitle sapMTitleStyleH3"/>
+
+                                    <HBox
+                                        alignItems="Center"
+                                        justifyContent="SpaceBetween"
+                                        wrap="Wrap"
+                                        class="sapUiSmallMarginTop">
+
+                                        <VBox>
+                                            <Label text="Quality Risk Score"/>
+                                            <ObjectNumber
+                                                number="{qualityAssessment>/qualityRiskScore}"
+                                                unit="/ 100"
+                                                emphasized="true"/>
+                                        </VBox>
+
+                                        <ObjectStatus
+                                            text="{qualityAssessment>/riskLevel}"
+                                            state="{qualityAssessment>/riskState}"/>
+                                    </HBox>
+
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <!-- Inspection summary -->
+                        <Panel
+                            headerText="Inspection Summary"
+                            expandable="false"
+                            class="sapUiSmallMarginBottom">
+
+                            <content>
+                                <layout:Grid
+                                    width="100%"
+                                    defaultSpan="L4 M4 S12"
+                                    hSpacing="1"
+                                    vSpacing="1">
+
+                                    <VBox class="sapUiSmallMargin">
+                                        <Label text="Total Complaints"/>
+                                        <ObjectNumber
+                                            number="{qualityAssessment>/totalComplaints}"/>
+                                    </VBox>
+
+                                    <VBox class="sapUiSmallMargin">
+                                        <Label text="Inspected Quantity"/>
+                                        <ObjectNumber
+                                            number="{qualityAssessment>/totalInspectedQuantity}"/>
+                                    </VBox>
+
+                                    <VBox class="sapUiSmallMargin">
+                                        <Label text="Rejected Quantity"/>
+                                        <ObjectNumber
+                                            number="{qualityAssessment>/totalRejectedQuantity}"
+                                            state="Error"/>
+                                    </VBox>
+
+                                </layout:Grid>
+                            </content>
+                        </Panel>
+
+                        <!-- Defect analysis -->
+                        <Panel
+                            headerText="Defect Analysis"
+                            expandable="false"
+                            class="sapUiSmallMarginBottom">
+
+                            <content>
+                                <VBox class="sapUiSmallMargin">
+
+                                    <HBox
+                                        alignItems="Center"
+                                        justifyContent="SpaceBetween">
+
+                                        <Label text="Average Defect Percentage"/>
+
+                                        <ObjectNumber
+                                            number="{= (Number(${qualityAssessment>/averageDefectPercentage}) || 0).toFixed(2) }"
+                                            unit="%"/>
+                                    </HBox>
+
+                                    <ProgressIndicator
+                                        class="sapUiSmallMarginTop"
+                                        percentValue="{= Math.max(0, Math.min(100, Number(${qualityAssessment>/averageDefectPercentage}) || 0)) }"
+                                        displayValue=""
+                                        state="Warning"
+                                        showValue="false"
+                                        width="100%"/>
+
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <!-- Risk breakdown -->
+                        <Panel
+                            headerText="Risk Score Breakdown"
+                            expandable="false"
+                            class="sapUiSmallMarginBottom">
+
+                            <content>
+                                <VBox class="sapUiSmallMargin">
+
+                                    <HBox
+                                        alignItems="Center"
+                                        justifyContent="SpaceBetween"
+                                        class="sapUiTinyMarginBottom">
+
+                                        <Text text="Defect Score (70% weight)"/>
+
+                                        <ObjectNumber
+                                            number="{qualityAssessment>/defectScore}"
+                                            unit="/ 100"/>
+                                    </HBox>
+
+                                    <HBox
+                                        alignItems="Center"
+                                        justifyContent="SpaceBetween">
+
+                                        <Text text="Severity Score (30% weight)"/>
+
+                                        <ObjectNumber
+                                            number="{qualityAssessment>/severityScore}"
+                                            unit="/ 100"/>
+                                    </HBox>
+
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                        <!-- Final assessment -->
+                        <Panel
+                            headerText="Final Assessment"
+                            expandable="false">
+
+                            <content>
+                                <VBox class="sapUiSmallMargin">
+
+                                    <MessageStrip
+                                        text="Quality Risk Score = (Defect Score × 70%) + (Severity Score × 30%)"
+                                        type="Information"
+                                        showIcon="true"
+                                        showCloseButton="false"/>
+
+                                    <MessageStrip
+                                        class="sapUiSmallMarginTop"
+                                        text="{= ${qualityAssessment>/riskLevel} === 'No Data' ? 'No quality complaints are available for this vendor.' : 'Quality risk assessment completed successfully.' }"
+                                        type="{= ${qualityAssessment>/riskLevel} === 'No Data' ? 'Information' : ${qualityAssessment>/riskLevel} === 'Critical' ? 'Error' : 'Success' }"
+                                        showIcon="true"
+                                        showCloseButton="false"/>
+
+                                </VBox>
+                            </content>
+                        </Panel>
+
+                    </VBox>
+                </content>
+            </Page>
+        </content>
+
+        <beginButton>
+            <Button
+                text="Close"
+                type="Emphasized"
+                press=".onCloseQualityRisk"/>
+        </beginButton>
+
+    </Dialog>
+</core:FragmentDefinition>

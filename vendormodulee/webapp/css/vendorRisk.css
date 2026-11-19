@@ -1,0 +1,93 @@
+/* =========================================================
+   My Risk Profile
+   Builds on the shared portal styles in vendorHome.css
+   ========================================================= */
+
+.riskSummary {
+    gap: 2rem;
+}
+
+/* Left block: overall score */
+.riskScoreBox {
+    box-sizing: border-box;
+    flex: 0 0 15rem;
+    min-width: 13rem;
+    padding: 0.5rem 1.5rem 0.5rem 0;
+    border-right: 1px solid #e5ebf2;
+}
+
+.riskScoreBox .sapMTitle {
+    color: #183b5b;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.riskScoreBox .sapMNCValue {
+    font-weight: 700;
+}
+
+.riskScoreBox .sapMObjStatus,
+.riskScoreBox .sapMText {
+    margin-top: 0.6rem;
+}
+
+.riskScoreBox .sapMText {
+    color: #687b8e;
+    font-size: 0.85rem;
+}
+
+/* Right block: breakdown bars */
+.riskDimensions {
+    flex: 1 1 22rem;
+    min-width: 0;
+}
+
+.riskDimensions .sapMTitle {
+    color: #183b5b;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.riskNote {
+    color: #687b8e;
+    font-size: 0.85rem;
+    margin-bottom: 0.9rem;
+}
+
+.riskDimensionRow {
+    margin-bottom: 0.85rem;
+}
+
+.riskDimensionLabel {
+    width: 8rem;
+    color: #294b68;
+    font-weight: 600;
+}
+
+/* Tabs sit inside a card */
+.riskTabs.sapMITB {
+    background: #ffffff;
+    border: 1px solid #e5ebf2;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(31, 58, 82, 0.06);
+    overflow: hidden;
+}
+
+.riskTabs .sapMITBContent {
+    padding: 0.5rem 1rem 1rem;
+}
+
+/* Phone */
+@media (max-width: 600px) {
+    .riskScoreBox {
+        flex: 1 1 100%;
+        padding-right: 0;
+        border-right: 0;
+        border-bottom: 1px solid #e5ebf2;
+        padding-bottom: 1rem;
+    }
+
+    .riskDimensionLabel {
+        width: 6rem;
+    }
+}

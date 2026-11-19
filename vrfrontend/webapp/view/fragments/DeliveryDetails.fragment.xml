@@ -1,0 +1,379 @@
+
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Dialog
+        id="deliveryDetailsDialog"
+        title="Delivery Details"
+        contentWidth="85rem"
+        stretch="{device>/system/phone}"
+        draggable="true"
+        resizable="true"
+        busy="{dlv>/detail/busy}"
+        busyIndicatorDelay="0">
+
+        <content>
+            <VBox class="dlvDialogBody">
+
+                <!-- Error Message -->
+                <MessageStrip
+                    text="{dlv>/detail/error}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${dlv>/detail/error}}"
+                    class="sapUiSmallMarginBottom"/>
+
+                <!-- Delivery Information -->
+                <VBox class="dlvSection">
+
+                    <Text
+                        text="Delivery Information (calculated fields are read-only)"
+                        class="dlvSectionTitle"/>
+
+                    <HBox class="dlvFieldGroup">
+
+                        <VBox>
+                            <Text
+                                text="Delivery ID"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/detail/ID}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Vendor"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/detail/vendorName}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Purchase Order"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/detail/poNumber}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Invoice Number"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{dlv>/detail/invoiceNumber}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Shipment Date"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{path:'dlv>/detail/shipmentDate', formatter:'.formatter.date'}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Expected Delivery Date"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{path:'dlv>/detail/expectedDeliveryDate', formatter:'.formatter.date'}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Actual Delivery Date"
+                                class="dlvKvLabel"/>
+
+                            <Text
+                                text="{path:'dlv>/detail/actualDeliveryDate', formatter:'.formatter.date'}"
+                                class="dlvKvValue"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Delay Days"
+                                class="dlvKvLabel"/>
+
+                            <ObjectStatus
+                                text="{path:'dlv>/detail/delayDays', formatter:'.formatter.delayText'}"
+                                state="{path:'dlv>/detail/delayDays', formatter:'.formatter.delayState'}"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Delivery Status"
+                                class="dlvKvLabel"/>
+
+                            <ObjectStatus
+                                text="{dlv>/detail/deliveryStatus}"
+                                icon="{path:'dlv>/detail/deliveryStatus', formatter:'.formatter.statusIcon'}"
+                                state="{path:'dlv>/detail/deliveryStatus', formatter:'.formatter.statusState'}"/>
+                        </VBox>
+
+                        <VBox>
+                            <Text
+                                text="Overall PO Delivery"
+                                class="dlvKvLabel"/>
+
+                            <ProgressIndicator
+                                width="12rem"
+                                percentValue="{dlv>/detail/deliveryPercentage}"
+                                displayValue="{path:'dlv>/detail/deliveryPercentage', formatter:'.formatter.percentText'}"
+                                state="{path:'dlv>/detail/deliveryStatus', formatter:'.formatter.statusState'}"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+                <!-- Shipment Status and Remarks -->
+                <VBox class="dlvSection">
+
+                    <Text
+                        text="Shipment Status and Remarks"
+                        class="dlvSectionTitle"/>
+
+                    <HBox class="dlvFieldGroup">
+
+                        <VBox>
+                            <Label
+                                text="Shipment Status"
+                                labelFor="detailShipmentStatus"/>
+
+                            <Select
+                                id="detailShipmentStatus"
+                                width="100%"
+                                enabled="{dlv>/detail/editing}"
+                                selectedKey="{dlv>/detail/editShipmentStatus}"
+                                items="{dlv>/shipmentStatuses}">
+
+                                <core:Item
+                                    key="{dlv>key}"
+                                    text="{dlv>key}"/>
+                            </Select>
+                        </VBox>
+
+                        <VBox>
+                            <Label
+                                text="Remarks"
+                                labelFor="detailRemarks"/>
+
+                            <TextArea
+                                id="detailRemarks"
+                                width="100%"
+                                rows="2"
+                                maxLength="500"
+                                showExceededText="true"
+                                editable="{dlv>/detail/editing}"
+                                value="{dlv>/detail/editRemarks}"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+                <!-- Delivery Items -->
+                <VBox class="dlvSection">
+
+                    <Text
+                        text="Delivery Items"
+                        class="dlvSectionTitle"/>
+
+                    <Table
+                        items="{dlv>/detail/items}"
+                        popinLayout="GridSmall"
+                        noDataText="This delivery has no items">
+
+                        <!-- Table Columns -->
+                        <columns>
+
+                            <Column>
+                                <Text text="Material Code"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Description"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+
+                                <Text text="Unit"/>
+                            </Column>
+                            <Column
+                                 hAlign="End" 
+                                 minScreenWidth="Tablet" 
+                                 demandPopin="true">
+
+                                 <Text text="Ordered Quantity"/>
+                            </Column>
+
+                            <Column hAlign="End">
+                                <Text text="Accepted Quantity"/>
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                width="10rem">
+
+                                <Text text="Delivered This Shipment"/>
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Cumulative Delivered"/>
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Remaining"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Item Progress"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+
+                                <Text text="Item Status"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+
+                                <Text text="Item Delay"/>
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+
+                                <Text text="Completion Date"/>
+                            </Column>
+
+                        </columns>
+
+                        <!-- Table Rows -->
+                        <items>
+
+                            <ColumnListItem
+                                vAlign="Middle"
+                                highlight="{dlv>state}">
+
+                                <cells>
+
+                                    <ObjectIdentifier
+                                        title="{dlv>materialCode}"/>
+
+                                    <Text
+                                        text="{dlv>materialDescription}"/>
+
+                                    <Text
+                                        text="{dlv>unit}"/>
+
+                                    <Text
+                                        text="{path:'dlv>orderedQuantity', formatter:'.formatter.qty'}"/>
+
+                                    <Text
+                                        text="{path:'dlv>acceptedQuantity', formatter:'.formatter.qty'}"/>
+
+                                    <Input
+                                        class="dlvQtyInput"
+                                        textAlign="End"
+                                        maxLength="16"
+                                        value="{dlv>newQty}"
+                                        editable="{dlv>/detail/editing}"
+                                        valueState="{dlv>valueState}"
+                                        valueStateText="{dlv>valueStateText}"
+                                        liveChange=".onDetailQuantityChange"/>
+
+                                    <Text
+                                        text="{path:'dlv>projectedCumulative', formatter:'.formatter.qty'}"/>
+
+                                    <Text
+                                        text="{path:'dlv>projectedRemaining', formatter:'.formatter.qty'}"/>
+
+                                    <ProgressIndicator
+                                        width="8rem"
+                                        percentValue="{dlv>progress}"
+                                        displayValue="{dlv>progressText}"
+                                        state="{dlv>state}"/>
+
+                                    <ObjectStatus
+                                        text="{dlv>itemStatus}"
+                                        state="{dlv>state}"/>
+
+                                    <Text
+                                        text="{path:'dlv>itemDelayDays', formatter:'.formatter.delayText'}"/>
+
+                                    <Text
+                                        text="{path:'dlv>completionDate', formatter:'.formatter.date'}"/>
+
+                                </cells>
+                            </ColumnListItem>
+
+                        </items>
+                    </Table>
+                </VBox>
+
+            </VBox>
+        </content>
+
+        <!-- Dialog Actions -->
+        <buttons>
+
+            <Button
+                text="Edit"
+                icon="sap-icon://edit"
+                visible="{= !${dlv>/detail/editing}}"
+                press=".onEditDelivery"/>
+
+            <Button
+                text="Save Changes"
+                type="Emphasized"
+                icon="sap-icon://save"
+                visible="{dlv>/detail/editing}"
+                enabled="{dlv>/detail/canSave}"
+                press=".onSaveChanges"/>
+
+            <Button
+                text="Cancel Edit"
+                visible="{dlv>/detail/editing}"
+                press=".onCancelEdit"/>
+
+            <Button
+                text="Close"
+                press=".onCloseDetails"/>
+
+        </buttons>
+
+    </Dialog>
+</core:FragmentDefinition>

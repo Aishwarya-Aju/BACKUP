@@ -1,0 +1,66 @@
+/* Main dashboard layout */
+.vrxDashboardBody {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+}
+
+/* Header alignment */
+.vrxPageHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vrxHeaderText {
+    flex: 1;
+    min-width: 0;
+}
+
+.vrxBackButton {
+    flex-shrink: 0;
+}
+
+/* KPI grid */
+.vrxKpiGrid {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* KPI tiles */
+.vrxKpiGrid .vrxKpiTile {
+    width: 100%;
+    min-width: 0;
+    min-height: 10rem;
+    box-sizing: border-box;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    transition: box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+.vrxKpiGrid .vrxKpiTile:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+
+/* Keep chart panels aligned */
+.vrxDashboardBody .vrxCard {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    border-radius: 0.75rem;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) {
+    .vrxDashboardBody {
+        padding: 0.5rem;
+    }
+
+    .vrxPageHeaderTitle {
+        font-size: 1.4rem;
+    }
+}

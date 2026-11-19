@@ -1,0 +1,442 @@
+<mvc:View
+    controllerName="vendormodulee.controller.VendorRisk"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    core:require="{ formatter: 'vendormodulee/model/formatter' }">
+
+    <Page
+        id="vendorRiskPage"
+        class="portalPage"
+        enableScrolling="true">
+
+        <customHeader>
+            <Bar class="portalHeaderBar">
+                <contentLeft>
+                    <core:Icon
+                        src="sap-icon://supplier"
+                        class="portalLogo" />
+                    <Title
+                        text="Vendor Self-Service Portal"
+                        level="H1" />
+                </contentLeft>
+
+                <contentRight>
+                    <Button
+                        text="Home"
+                        icon="sap-icon://home"
+                        type="Transparent"
+                        press=".onNavHome" />
+
+                    <Button
+                        text="My Purchase Orders"
+                        icon="sap-icon://sales-order"
+                        type="Transparent"
+                        press=".onOpenPurchaseOrders" />
+
+                    <Button
+                        text="My Risk"
+                        icon="sap-icon://alert"
+                        type="Emphasized" />
+
+
+                                            <Button
+                        text="Invoices"
+                        icon="sap-icon://sales-document"
+                        type="Transparent"
+                        press=".onOpenInvoices" />
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <VBox
+                class="dashboardContainer"
+                width="100%"
+                renderType="Bare">
+
+                <MessageStrip
+                    class="portalMessageStrip"
+                    text="{risk>/errorText}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${risk>/errorText} }" />
+
+                <HBox
+                    alignItems="Center"
+                    justifyContent="SpaceBetween"
+                    wrap="Wrap"
+                    class="dashboardSectionHeader">
+
+                    <VBox renderType="Bare">
+                        <Title
+                            text="{risk>/pageTitle}"
+                            level="H2" />
+
+                        <Text
+                            text="How your company is rated, and the events behind the rating."
+                            wrapping="true" />
+                    </VBox>
+
+                    <Button
+                        text="Refresh"
+                        icon="sap-icon://refresh"
+                        press=".onRefresh" />
+                </HBox>
+
+                <!-- Overall score and breakdown -->
+                <HBox
+                    class="portalCard riskSummary"
+                    width="100%"
+                    wrap="Wrap"
+                    renderType="Bare">
+
+                    <VBox
+                        class="riskScoreBox"
+                        renderType="Bare">
+
+                        <Title
+                            text="Overall Risk Score"
+                            level="H4" />
+
+                        <NumericContent
+                            value="{risk>/scoreText}"
+                            truncateValueTo="6"
+                            icon="sap-icon://alert"
+                            valueColor="{path: 'risk>/riskLevel', formatter: 'formatter.riskValueColor'}"
+                            withMargin="false" />
+
+                        <ObjectStatus
+                            text="{= ${risk>/riskLevel} ? ${risk>/riskLevelText} : 'No risk level yet' }"
+                            state="{path: 'risk>/riskLevel', formatter: 'formatter.riskLevelState'}"
+                            inverted="true" />
+
+                        <ObjectStatus
+                            text="Critical vendor"
+                            icon="sap-icon://status-critical"
+                            state="Warning"
+                            visible="{risk>/criticalVendor}" />
+
+                        <Text
+                            text="{= ${risk>/lastCalculated} ? 'Last calculated: ' + ${risk>/lastCalculated} : 'Not calculated yet' }"
+                            wrapping="true" />
+                    </VBox>
+
+                    <VBox
+                        class="riskDimensions"
+                        renderType="Bare">
+
+                        <Title
+                            text="Risk Breakdown"
+                            level="H4" />
+
+                        <Text
+                            class="riskNote"
+                            text="{= ${risk>/hasAssessment} ? 'From your latest assessment on ' + ${risk>/assessmentDate} + '. A lower score is better.' : 'No risk assessment has been recorded for your company yet.' }"
+                            wrapping="true" />
+
+                        <VBox
+                            items="{risk>/dimensions}"
+                            renderType="Bare">
+                            <HBox
+                                class="riskDimensionRow"
+                                alignItems="Center"
+                                renderType="Bare">
+                                <Label
+                                    class="riskDimensionLabel"
+                                    text="{risk>name}" />
+                                <ProgressIndicator
+                                    width="100%"
+                                    percentValue="{risk>percent}"
+                                    displayValue="{risk>displayValue}"
+                                    state="{risk>state}" />
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <!-- Attention tiles -->
+                <Title
+                    text="Needs Your Attention"
+                    level="H3"
+                    class="dashboardSectionTitle sapUiMediumMarginTop" />
+
+                <HBox
+                    class="dashboardTiles"
+                    width="100%"
+                    wrap="Wrap"
+                    alignItems="Stretch"
+                    renderType="Bare">
+
+                    <GenericTile
+                        class="dashboardTile kpiPending"
+                        header="Open Alerts"
+                        subheader="Not acknowledged yet"
+                        frameType="OneByOne"
+                        state="{= ${risk>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="tab" value="alerts" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{risk>/openAlerts}"
+                                icon="sap-icon://bell"
+                                valueColor="Critical"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        class="dashboardTile kpiRejected"
+                        header="Late Deliveries"
+                        subheader="Delivered after the agreed date"
+                        frameType="OneByOne"
+                        state="{= ${risk>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="tab" value="deliveries" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{risk>/delayedCount}"
+                                icon="sap-icon://shipping-status"
+                                valueColor="Error"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        class="dashboardTile kpiPending"
+                        header="Open Quality Complaints"
+                        subheader="Not resolved yet"
+                        frameType="OneByOne"
+                        state="{= ${risk>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="tab" value="quality" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{risk>/unresolvedComplaints}"
+                                icon="sap-icon://quality-issue"
+                                valueColor="Critical"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+
+                    <GenericTile
+                        class="dashboardTile kpiTotal"
+                        header="Certificates to Renew"
+                        subheader="Expired or expiring in 30 days"
+                        frameType="OneByOne"
+                        state="{= ${risk>/busy} ? 'Loading' : 'Loaded' }"
+                        press=".onKpiPress">
+                        <customData>
+                            <core:CustomData key="tab" value="certificates" />
+                        </customData>
+                        <TileContent>
+                            <NumericContent
+                                value="{risk>/expiringCertificates}"
+                                icon="sap-icon://newspaper"
+                                valueColor="Neutral"
+                                withMargin="false" />
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
+
+                <!-- Details -->
+                <IconTabBar
+                    id="riskTabs"
+                    class="riskTabs"
+                    expandable="false"
+                    selectedKey="history"
+                    applyContentPadding="false">
+
+                    <items>
+
+                        <IconTabFilter
+                            key="history"
+                            text="Risk History"
+                            count="{risk>/historyCount}">
+                            <Table
+                                items="{risk>/history}"
+                                noDataText="No risk assessments recorded yet.">
+                                <columns>
+                                    <Column><Text text="Assessed on" /></Column>
+                                    <Column hAlign="End"><Text text="Total" /></Column>
+                                    <Column><Text text="Level" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Text text="Delivery" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Text text="Price" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Text text="Quality" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true" hAlign="End"><Text text="Compliance" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true" hAlign="End"><Text text="Financial" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{path: 'risk>assessmentDate', formatter: 'formatter.dateTime'}" />
+                                            <Text text="{path: 'risk>totalRiskScore', formatter: 'formatter.score'}" />
+                                            <ObjectStatus
+                                                text="{path: 'risk>riskLevel', formatter: 'formatter.label'}"
+                                                state="{path: 'risk>riskLevel', formatter: 'formatter.riskLevelState'}"
+                                                inverted="true" />
+                                            <Text text="{path: 'risk>deliveryRisk', formatter: 'formatter.score'}" />
+                                            <Text text="{path: 'risk>priceRisk', formatter: 'formatter.score'}" />
+                                            <Text text="{path: 'risk>qualityRisk', formatter: 'formatter.score'}" />
+                                            <Text text="{path: 'risk>complianceRisk', formatter: 'formatter.score'}" />
+                                            <Text text="{path: 'risk>financialRisk', formatter: 'formatter.score'}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </IconTabFilter>
+
+                        <IconTabFilter
+                            key="alerts"
+                            text="Risk Alerts"
+                            count="{risk>/alertCount}">
+                            <Table
+                                items="{risk>/alerts}"
+                                noDataText="No risk alerts for your company.">
+                                <columns>
+                                    <Column><Text text="Alert" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Type" /></Column>
+                                    <Column><Text text="Severity" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Message" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Status" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Raised on" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <ObjectIdentifier title="{risk>alertNumber}" />
+                                            <Text text="{path: 'risk>alertType', formatter: 'formatter.label'}" />
+                                            <ObjectStatus
+                                                text="{path: 'risk>severity', formatter: 'formatter.label'}"
+                                                state="{path: 'risk>severity', formatter: 'formatter.riskLevelState'}"
+                                                inverted="true" />
+                                            <Text text="{risk>message}" />
+                                            <Text text="{path: 'risk>status', formatter: 'formatter.label'}" />
+                                            <Text text="{path: 'risk>createdAt', formatter: 'formatter.dateTime'}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </IconTabFilter>
+
+                        <IconTabFilter
+                            key="deliveries"
+                            text="Late Deliveries"
+                            count="{risk>/delayedCount}">
+                            <Table
+                                items="{risk>/delayedDeliveries}"
+                                noDataText="No late deliveries. Well done.">
+                                <columns>
+                                    <Column><Text text="Material" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Expected" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Delivered" /></Column>
+                                    <Column><Text text="Delay" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true" hAlign="End"><Text text="Delivered %" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Status" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Risk" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <ObjectIdentifier title="{risk>materialCode}" />
+                                            <Text text="{path: 'risk>expectedDeliveryDate', formatter: 'formatter.date'}" />
+                                            <Text text="{path: 'risk>actualDeliveryDate', formatter: 'formatter.date'}" />
+                                            <ObjectStatus
+                                                text="{path: 'risk>delayDays', formatter: 'formatter.delayText'}"
+                                                state="{path: 'risk>delayDays', formatter: 'formatter.delayState'}" />
+                                            <Text text="{path: 'risk>deliveryPercentage', formatter: 'formatter.percent'}" />
+                                            <Text text="{path: 'risk>deliveryStatus', formatter: 'formatter.label'}" />
+                                            <ObjectStatus
+                                                text="{path: 'risk>deliveryRiskLevel', formatter: 'formatter.label'}"
+                                                state="{path: 'risk>deliveryRiskLevel', formatter: 'formatter.riskLevelState'}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </IconTabFilter>
+
+                        <IconTabFilter
+                            key="quality"
+                            text="Quality Complaints"
+                            count="{risk>/complaintCount}">
+                            <Table
+                                items="{risk>/complaints}"
+                                noDataText="No quality complaints for your company.">
+                                <columns>
+                                    <Column><Text text="Complaint" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Date" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Material" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Defect" /></Column>
+                                    <Column><Text text="Severity" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true" hAlign="End"><Text text="Defect %" /></Column>
+                                    <Column><Text text="Status" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Resolved on" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <ObjectIdentifier title="{risk>complaintNumber}" />
+                                            <Text text="{path: 'risk>complaintDate', formatter: 'formatter.date'}" />
+                                            <Text text="{risk>materialCode}" />
+                                            <Text text="{path: 'risk>defectType', formatter: 'formatter.label'}" />
+                                            <ObjectStatus
+                                                text="{path: 'risk>severity', formatter: 'formatter.label'}"
+                                                state="{path: 'risk>severity', formatter: 'formatter.riskLevelState'}"
+                                                inverted="true" />
+                                            <Text text="{path: 'risk>defectPercentage', formatter: 'formatter.percent'}" />
+                                            <Text text="{path: 'risk>complaintStatus', formatter: 'formatter.label'}" />
+                                            <Text text="{path: 'risk>resolvedDate', formatter: 'formatter.date'}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </IconTabFilter>
+
+                        <IconTabFilter
+                            key="certificates"
+                            text="Certificates"
+                            count="{risk>/certificateCount}">
+                            <Table
+                                items="{risk>/certificates}"
+                                noDataText="No compliance certificates on file.">
+                                <columns>
+                                    <Column><Text text="Certificate" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Number" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Issued by" /></Column>
+                                    <Column><Text text="Expires" /></Column>
+                                    <Column><Text text="Time left" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Mandatory" /></Column>
+                                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Verification" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <ObjectIdentifier title="{path: 'risk>certificateType', formatter: 'formatter.label'}" />
+                                            <Text text="{risk>certificateNumber}" />
+                                            <Text text="{risk>issuingAuthority}" />
+                                            <Text text="{path: 'risk>expiryDate', formatter: 'formatter.date'}" />
+                                            <ObjectStatus
+                                                text="{path: 'risk>daysLeft', formatter: 'formatter.daysLeftText'}"
+                                                state="{path: 'risk>daysLeft', formatter: 'formatter.daysLeftState'}" />
+                                            <Text text="{path: 'risk>mandatory', formatter: 'formatter.yesNo'}" />
+                                            <Text text="{path: 'risk>verificationStatus', formatter: 'formatter.label'}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </IconTabFilter>
+
+                    </items>
+                </IconTabBar>
+
+            </VBox>
+        </content>
+
+    </Page>
+</mvc:View>

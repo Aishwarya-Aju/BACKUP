@@ -1,0 +1,4 @@
+ID,fileName,mimeType,fileSize,documentType,uploadedBy,uploadedAt,verificationStatus,verifiedBy,verifiedAt,verificationComments,claim_ID
+1c5cbe5d-f98e-4120-b638-ceb0c6ca4d6c,RR-CHN-1001-repair-invoice.pdf,application/pdf,250000,RepairInvoice,dealer.chennai@example.com,2026-10-25T10:30:00Z,Pending,,,,8967c6d9-b893-44c7-80ec-b48140feb3da
+2da6e2b0-8703-4225-9ede-ef93ed44c9fc,RR-CBE-3005-diagnostic.pdf,application/pdf,180000,DiagnosticReport,dealer.coimbatore@example.com,2026-10-25T10:45:00Z,Verified,analyst@example.com,2026-10-26T11:00:00Z,Diagnostic report reviewed.,ba452f77-cc71-4403-89f2-ba6393c69854
+f0618caf-7edf-4fee-acaa-218cbb91e9d1,RR-CBE-3005-part-photo.jpg,image/jpeg,120000,Photo,dealer.coimbatore@example.com,2026-10-25T10:46:00Z,Verified,analyst@example.com,2026-10-26T11:00:00Z,Photo reviewed.,ba452f77-cc71-4403-89f2-ba6393c69854

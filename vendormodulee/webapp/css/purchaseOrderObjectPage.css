@@ -1,0 +1,327 @@
+/* =========================================================
+   Purchase Order Object Page
+   ========================================================= */
+
+.purchaseOrderObjectPage {
+    background: #f5f7f9;
+}
+
+.purchaseOrderObjectPage .sapMPageBgStandard {
+    background: #f5f7f9;
+}
+
+.purchaseOrderObjectPage .sapMPageEnableScrolling {
+    background: #f5f7f9;
+}
+
+
+/* =========================================================
+   Main Content
+   ========================================================= */
+
+.purchaseOrderObjectPage .sapUiMediumMargin {
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 35px;
+}
+
+
+/* =========================================================
+   Page Heading
+   ========================================================= */
+
+.purchaseOrderObjectPage .sapUiMediumMargin > .sapMTitle {
+    color: #1d2d3e;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+
+/* =========================================================
+   Purchase Order Object Header
+   ========================================================= */
+
+.purchaseOrderObjectPage .sapMOH {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-left: 4px solid #0a6ed1;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.purchaseOrderObjectPage .sapMOHTitle {
+    color: #1d2d3e;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.purchaseOrderObjectPage .sapMObjectNumberText {
+    color: #0a6ed1;
+    font-weight: 700;
+}
+
+.purchaseOrderObjectPage .sapMObjectNumberUnit {
+    color: #607d94;
+    font-size: 0.75rem;
+}
+
+.purchaseOrderObjectPage .sapMObjectAttributeTitle {
+    color: #607d94;
+    font-weight: 600;
+}
+
+.purchaseOrderObjectPage .sapMObjectAttributeText {
+    color: #34495e;
+}
+
+
+/* =========================================================
+   PO Status
+   ========================================================= */
+
+.purchaseOrderObjectPage .sapMObjStatus {
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   Action Buttons
+   ========================================================= */
+
+#poActionButtons {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 10px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+#acceptPOButton {
+    min-width: 110px;
+}
+
+#rejectPOButton {
+    min-width: 110px;
+}
+
+
+/* =========================================================
+   Delivery Date Section
+   ========================================================= */
+
+#deliveryDateAction {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+#updateDeliveryDateButton {
+    min-width: 250px;
+}
+
+
+
+
+/* =========================================================
+   Panels
+   ========================================================= */
+
+.purchaseOrderObjectPage .sapMPanel {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.purchaseOrderObjectPage .sapMPanelHdr {
+    background: #ffffff;
+    color: #1d2d3e;
+    font-size: 1rem;
+    font-weight: 700;
+
+    min-height: 52px;
+    line-height: 52px;
+
+    padding-left: 20px;
+
+    border-bottom: 1px solid #d9e2ec;
+}
+
+
+/* =========================================================
+   Vendor Panel
+   ========================================================= */
+
+.purchaseOrderObjectPage .sapMPanel .sapMObjectIdentifierTitle {
+    color: #1d2d3e;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.purchaseOrderObjectPage .sapMPanel .sapMObjectIdentifierText {
+    color: #0a6ed1;
+    font-weight: 600;
+}
+
+.purchaseOrderObjectPage .sapMLabel {
+    color: #607d94;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.purchaseOrderObjectPage .sapMText {
+    color: #34495e;
+}
+
+
+/* =========================================================
+   Purchase Order Items Table
+   ========================================================= */
+
+#purchaseOrderItemsTable {
+    background: #ffffff;
+}
+
+#purchaseOrderItemsTable .sapMListTblHeaderCell {
+    background: #f1f5f8;
+
+    border-bottom: 1px solid #cbd7e2;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+#purchaseOrderItemsTable .sapMListTblHeaderCell .sapMText {
+    color: #334e68;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+#purchaseOrderItemsTable .sapMListTblRow {
+    background: #ffffff;
+    transition: background-color 0.15s ease;
+}
+
+#purchaseOrderItemsTable .sapMListTblRow:hover {
+    background: #f5faff;
+}
+
+#purchaseOrderItemsTable .sapMListTblCell {
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #e6edf3;
+
+    vertical-align: middle;
+}
+
+#purchaseOrderItemsTable .sapMListTblCell .sapMText {
+    color: #34495e;
+    font-size: 0.85rem;
+}
+
+
+/* Material Code */
+
+#purchaseOrderItemsTable
+.sapMListTblCell:first-child
+.sapMText {
+    color: #0a6ed1;
+    font-weight: 700;
+}
+
+
+/* Quantity */
+
+#purchaseOrderItemsTable
+.sapMListTblCell:nth-child(3)
+.sapMText {
+    color: #1d2d3e;
+    font-weight: 600;
+}
+
+
+/* Unit Price */
+
+#purchaseOrderItemsTable .sapMObjectNumberText {
+    color: #1d2d3e;
+    font-weight: 700;
+}
+
+#purchaseOrderItemsTable .sapMObjectNumberUnit {
+    color: #607d94;
+}
+
+
+/* Item Status */
+
+#purchaseOrderItemsTable .sapMObjStatus {
+    font-weight: 600;
+}
+
+
+/* Empty Table */
+
+#purchaseOrderItemsTable .sapMListNoData {
+    color: #607d94;
+    padding: 45px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   Responsive Design
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .purchaseOrderObjectPage .sapUiMediumMargin {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .purchaseOrderObjectPage .sapMOH {
+        padding: 18px;
+    }
+
+    #updateDeliveryDateButton {
+        min-width: 220px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .purchaseOrderObjectPage .sapUiMediumMargin {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .purchaseOrderObjectPage .sapMOHTitle {
+        font-size: 1.2rem;
+    }
+
+    #poActionButtons,
+    #deliveryDateAction {
+        padding: 10px;
+    }
+
+    #updateDeliveryDateButton {
+        min-width: 100%;
+    }
+
+    #purchaseOrderItemsTable .sapMListTblCell {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+}

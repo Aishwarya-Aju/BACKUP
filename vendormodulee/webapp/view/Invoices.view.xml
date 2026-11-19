@@ -1,0 +1,313 @@
+
+<mvc:View
+    controllerName="vendormodulee.controller.Invoices"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    core:require="{ formatter: 'vendormodulee/model/formatter' }">
+
+    <Page
+        id="invoicesPage"
+        class="portalPage invoicesPage"
+        enableScrolling="true">
+
+        <customHeader>
+            <Bar class="portalHeaderBar">  
+                <contentLeft>
+                    <core:Icon
+                        src="sap-icon://supplier"
+                        class="portalLogo" />
+                    <Title
+                        text="Vendor Self-Service Portal"
+                        level="H1" />
+                </contentLeft>
+
+                <contentRight>
+                    <Button
+                        id="invoicesNavHome"
+                        text="Home"
+                        icon="sap-icon://home"
+                        type="Transparent"
+                        press=".onNavHome" />
+
+                    <Button
+                        id="invoicesNavPurchaseOrders"
+                        text="My Purchase Orders"
+                        icon="sap-icon://sales-order"
+                        type="Transparent"
+                        press=".onOpenPurchaseOrders" />
+
+                    <Button
+                        id="invoicesNavRisk"
+                        text="My Risk"
+                        icon="sap-icon://alert"
+                        type="Transparent"
+                        press=".onOpenRisk" />
+
+                    <Button
+                        id="invoicesNavInvoices"
+                        text="Invoices"
+                        icon="sap-icon://sales-document"
+                        type="Emphasized" />
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <VBox
+                class="dashboardContainer"
+                width="100%"
+                renderType="Bare">
+
+                <MessageStrip
+                    id="invoicesErrorStrip"
+                    class="portalMessageStrip"
+                    text="{invoicesView>/errorText}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${invoicesView>/errorText} }" />
+
+                <VBox
+                    class="portalCard"
+                    width="100%"
+                    renderType="Bare">
+
+                    <HBox
+                        alignItems="Center"
+                        justifyContent="SpaceBetween"
+                        wrap="Wrap"
+                        class="dashboardSectionHeader">
+
+                        <VBox renderType="Bare">
+                            <Title
+                                id="invoicesTitle"
+                                text="Invoices"
+                                level="H2" />
+
+                            <Text
+                                text="A draft invoice is created automatically when you accept a purchase order. Select an invoice to see its items and status, or complete a draft."
+                                wrapping="true" />
+                        </VBox>
+
+                        <HBox
+                            renderType="Bare"
+                            wrap="Wrap"
+                            class="invoicesHeaderActions">
+
+                            <Button
+                                id="refreshInvoicesButton"
+                                text="Refresh"
+                                icon="sap-icon://refresh"
+                                press=".onRefresh" />
+                            <Button 
+                                type="Emphasized"
+                                icon="sap-icon://pdf-attachment"
+                                press=".onpdf"
+                            />
+                        </HBox>
+                    </HBox>
+
+                    <HBox
+                        class="portalFilterBar"
+                        wrap="Wrap"
+                        alignItems="Center"
+                        renderType="Bare">
+
+                        <SearchField
+                            id="invoiceSearch"
+                            class="portalSearch"
+                            width="22rem"
+                            placeholder="Search by invoice or PO number"
+                            search=".onSearch" />
+
+                        <Select
+                            id="invoiceStatusFilter"
+                            class="portalStatusFilter"
+                            selectedKey="ALL"
+                            forceSelection="true"
+                            change=".onStatusFilterChange">
+
+                            <core:Item key="ALL" text="All statuses" />
+                            <core:Item key="DRAFT" text="Draft" />
+                            <core:Item key="SUBMITTED" text="Submitted" />
+                            <core:Item key="APPROVED" text="Approved" />
+                            <core:Item key="UNDER_REVIEW" text="Under Review" />
+                            <core:Item key="BLOCKED" text="Blocked" />
+                        </Select>
+
+                        <Select
+                            id="invoiceSort"
+                            class="portalStatusFilter"
+                            selectedKey="DATE_DESC"
+                            forceSelection="true"
+                            tooltip="Sort by"
+                            change=".onSortChange">
+
+                            <core:Item key="DATE_DESC" text="Sort: Invoice date (newest first)" />
+                            <core:Item key="DATE_ASC" text="Sort: Invoice date (oldest first)" />
+                            <core:Item key="AMOUNT_DESC" text="Sort: Amount (high to low)" />
+                            <core:Item key="AMOUNT_ASC" text="Sort: Amount (low to high)" />
+                            <core:Item key="NUMBER_ASC" text="Sort: Invoice number" />
+                            <core:Item key="STATUS_ASC" text="Sort: Status" />
+                        </Select>
+                    </HBox>
+
+                    <Table
+                        id="invoicesTable"
+                        mode="SingleSelectLeft"
+                        class="invoicesTable"
+                        width="100%"
+                        growing="true"
+                        growingThreshold="20"
+                        updateFinished=".onUpdateFinished"
+                        items="{
+                            path: '/Invoices',
+                            parameters: {
+                                $select: 'ID,invoiceNumber,invoiceDate,deliveryDate,materialCode,invoiceAmount,currency,invoiceStatus,blocked,mismatch',
+                                $orderby: 'invoiceDate desc,invoiceNumber',
+                                $count: true
+                            },
+                            suspended: true
+                        }">
+
+                        <noData>
+                            <VBox
+                                class="portalEmptyState"
+                                alignItems="Center"
+                                renderType="Bare">
+
+                                <core:Icon
+                                    src="sap-icon://sales-document"
+                                    size="2.5rem" />
+
+                                <Title
+                                    text="{= ${invoicesView>/errorText} ? 'Invoices could not be loaded' : 'No invoices found' }"
+                                    level="H4" />
+
+                                <Text
+                                    text="{= ${invoicesView>/errorText} ? 'Select Refresh to try again.' : 'Change the search or status filter. A draft invoice appears here after you accept a purchase order.' }"
+                                    textAlign="Center" />
+                            </VBox>
+                        </noData>
+
+                        <columns>
+                            <Column>
+                                <Text text="Invoice Number" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Invoice Date" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Delivery Date" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="PO Number" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Material Code" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Invoice Amount" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Currency" />
+                            </Column>
+
+                            <Column>
+                                <Text text="Status" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Blocked" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Mismatch" />
+                            </Column>
+
+                            <Column
+                                hAlign="End">
+                                <Text text="" />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem
+                                type="Navigation"
+                                press=".onInvoicePress">
+
+                                <cells>
+                                    <ObjectIdentifier
+                                        title="{path: 'invoiceNumber', formatter: 'formatter.invoiceNumber'}" />
+
+                                    <Text
+                                        text="{path: 'invoiceDate', formatter: 'formatter.date'}" />
+
+                                    <Text
+                                        text="{path: 'deliveryDate', formatter: 'formatter.date'}" />
+
+                                    <Text
+                                        text="{purchaseOrder/poNumber}" />
+
+                                    <Text
+                                        text="{materialCode}" />
+
+                                    <ObjectNumber
+                                        number="{path: 'invoiceAmount', formatter: 'formatter.amount'}"
+                                        unit="{currency}" />        
+
+                                    <Text
+                                        text="{currency}" />
+
+                                    <ObjectStatus
+                                        text="{path: 'invoiceStatus', formatter: 'formatter.invoiceStatusText'}"
+                                        state="{path: 'invoiceStatus', formatter: 'formatter.invoiceStatusState'}"
+                                        inverted="true" />
+
+                                    <ObjectStatus
+                                        text="{path: 'blocked', formatter: 'formatter.blockedText'}"
+                                        state="{path: 'blocked', formatter: 'formatter.blockedState'}" />
+
+                                    <ObjectStatus
+                                        text="{path: 'mismatch', formatter: 'formatter.mismatchText'}"
+                                        state="{path: 'mismatch', formatter: 'formatter.mismatchState'}" />
+
+                                    <!-- Only a draft can be completed from the list -->
+                                    <Button
+                                        text="Complete Draft"
+                                        icon="sap-icon://edit"
+                                        type="Emphasized"
+                                        visible="{= ${path: 'invoiceStatus', targetType: 'any'} === 'DRAFT' }"
+                                        press=".onCompleteDraftPress" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

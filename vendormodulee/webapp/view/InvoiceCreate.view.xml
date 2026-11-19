@@ -1,0 +1,508 @@
+<mvc:View
+    controllerName="vendormodulee.controller.InvoiceCreate"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    core:require="{ formatter: 'vendormodulee/model/formatter' }">
+
+    <Page
+        id="invoiceCreatePage"
+        title="{inv>/pageTitle}"
+        class="portalPage invoiceCreatePage"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        enableScrolling="true"
+        busy="{inv>/busy}"
+        busyIndicatorDelay="0">
+
+        <content>
+            <VBox
+                class="dashboardContainer"
+                width="100%"
+                renderType="Bare">
+
+                <MessageStrip
+                    id="invoiceCreateErrorStrip"
+                    class="portalMessageStrip"
+                    text="{inv>/errorText}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${inv>/errorText} }" />
+
+                <MessageStrip
+                    id="invoiceDraftInfoStrip"
+                    class="portalMessageStrip"
+                    text="This draft invoice was created automatically when you accepted the purchase order. Enter the invoice number, invoice date, delivery date, quantities and your unit prices."
+                    type="Information"
+                    showIcon="true"
+                    visible="{inv>/isDraft}" />
+
+                <MessageStrip
+                    id="invoiceCreateInfoStrip"
+                    class="portalMessageStrip"
+                    text="Enter the price your company is charging for each item. The purchase order price is shown for comparison. Line totals and the invoice total are calculated automatically."
+                    type="Information"
+                    showIcon="true" />
+
+                <!-- A. Invoice information -->
+                <VBox
+                    class="portalCard invoiceSection"
+                    width="100%"
+                    renderType="Bare">
+
+                    <Title
+                        text="Invoice Information"
+                        level="H3"
+                        class="invoiceSectionTitle" />
+
+                    <form:SimpleForm
+                        id="invoiceInfoForm"
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsM="2"
+                        columnsL="2"
+                        columnsXL="3"
+                        labelSpanM="12"
+                        labelSpanL="12">
+
+                        <!-- <Label
+                            text="Invoice Number"
+                            labelFor="invoiceNumberInput"
+                            required="true" /> -->
+<!-- 
+                        <Input
+                            id="invoiceNumberInput"
+                            value="{inv>/invoiceNumber}"
+                            maxLength="40"
+                            editable="{= !${inv>/submitting} }"
+                            placeholder="Enter your invoice number"
+                            valueState="{inv>/invoiceNumberState}"
+                            valueStateText="{inv>/invoiceNumberStateText}"
+                            liveChange=".onInvoiceNumberChange" /> -->
+
+                        <Label
+                            text="Invoice Date"
+                            labelFor="invoiceDatePicker"
+                            required="true" />
+
+                        <DatePicker
+                            id="invoiceDatePicker"
+                            value="{inv>/invoiceDate}"
+                            valueFormat="yyyy-MM-dd"
+                            displayFormat="dd-MM-yyyy"
+                            editable="{= !${inv>/submitting} }"
+                            valueState="{inv>/invoiceDateState}"
+                            valueStateText="{inv>/invoiceDateStateText}"
+                            change=".onInvoiceDateChange" />
+
+                        <Label
+                            text="Delivery Date"
+                            labelFor="deliveryDatePicker"
+                            required="true" />
+
+                        <DatePicker
+                            id="deliveryDatePicker"
+                            value="{inv>/deliveryDate}"
+                            valueFormat="yyyy-MM-dd"
+                            displayFormat="dd-MM-yyyy"
+                            editable="{= !${inv>/submitting} }"
+                            valueState="{inv>/deliveryDateState}"
+                            valueStateText="{inv>/deliveryDateStateText}"
+                            change=".onDeliveryDateChange" />
+
+                        <Label
+                            text="Purchase Order Number"
+                            labelFor="purchaseOrderNumberText" />
+
+                        <Text
+                            id="purchaseOrderNumberText"
+                            text="{inv>/poNumber}" />
+
+                        <Label text="Invoice Status" />
+
+                        <ObjectStatus
+                            id="invoiceStatusText"
+                            text="{path: 'inv>/invoiceStatus', formatter: 'formatter.invoiceStatusText'}"
+                            state="{path: 'inv>/invoiceStatus', formatter: 'formatter.invoiceStatusState'}"
+                            inverted="true" />
+
+                        <Label text="Vendor" />
+
+                        <Text
+                            id="vendorText"
+                            text="{inv>/vendorDisplay}" />
+
+                        <Label text="Currency" />
+
+                        <Text
+                            id="currencyText"
+                            text="{inv>/currency}" />
+
+                    </form:SimpleForm>
+                </VBox>
+
+                <!-- B. Purchase order item reference -->
+                <VBox
+                    class="portalCard invoiceSection"
+                    width="100%"
+                    renderType="Bare">
+
+                    <Title
+                        text="Purchase Order Items"
+                        level="H3"
+                        class="invoiceSectionTitle" />
+
+                    <Text
+                        text="These are the items from the purchase order. The PO price is the reference price. Enter your actual invoice price in the Invoice Items section below."
+                        wrapping="true"
+                        class="invoiceSectionHint" />
+
+                    <Table
+                        id="poItemsTable"
+                        width="100%"
+                        items="{inv>/poItems}"
+                        growing="true"
+                        growingThreshold="20">
+
+                        <noData>
+                            <VBox
+                                class="portalEmptyState"
+                                alignItems="Center"
+                                renderType="Bare">
+                                <core:Icon
+                                    src="sap-icon://product"
+                                    size="2.5rem" />
+                                <Title
+                                    text="No purchase order items"
+                                    level="H4" />
+                                <Text
+                                    text="{= ${inv>/purchaseOrderId} ? 'The purchase order has no items.' : 'The purchase order items appear here once the invoice is loaded.' }"
+                                    textAlign="Center" />
+                            </VBox>
+                        </noData>
+
+                        <columns>
+                            <Column>
+                                <Text text="Material Code" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Description" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Ordered Qty" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Previously Invoiced" />
+                            </Column>
+
+                            <Column hAlign="End">
+                                <Text text="Remaining Qty" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Unit" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="PO Price" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Material Rate" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Currency" />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <ObjectIdentifier
+                                        title="{inv>materialCode}" />
+
+                                    <Text
+                                        text="{inv>materialDescription}" />
+
+                                    <Text
+                                        text="{path: 'inv>orderedQuantity', formatter: 'formatter.quantity'}" />
+
+                                    <Text
+                                        text="{path: 'inv>invoicedQuantity', formatter: 'formatter.quantity'}" />
+
+                                    <ObjectNumber
+                                        number="{path: 'inv>remainingQuantity', formatter: 'formatter.quantity'}"
+                                        state="{= ${inv>remainingQuantity} > 0 ? 'None' : 'Warning' }" />
+
+                                    <Text text="{inv>unit}" />
+
+                                    <Text
+                                        text="{path: 'inv>unitPrice', formatter: 'formatter.amount'}" />
+
+                                    <Text
+                                        text="{path: 'inv>materialRate', formatter: 'formatter.amount'}" />
+
+                                    <Text text="{inv>currency}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+                <!-- C. Invoice items -->
+                <VBox
+                    class="portalCard invoiceSection"
+                    width="100%"
+                    renderType="Bare">
+
+                    <HBox
+                        alignItems="Center"
+                        justifyContent="SpaceBetween"
+                        wrap="Wrap"
+                        class="dashboardSectionHeader">
+
+                        <Title
+                            text="Invoice Items"
+                            level="H3" />
+
+                        <Button
+                            id="addInvoiceItemButton"
+                            text="Add Item"
+                            icon="sap-icon://add"
+                            enabled="{= ${inv>/ready} &amp;&amp; !${inv>/submitting} }"
+                            press=".onAddLine" />
+                    </HBox>
+
+                    <MessageStrip
+                        id="invoiceLinesStrip"
+                        text="{inv>/linesErrorText}"
+                        type="Error"
+                        showIcon="true"
+                        visible="{= !!${inv>/linesErrorText} }"
+                        class="sapUiTinyMarginBottom" />
+
+                    <Table
+                        id="invoiceLinesTable"
+                        width="100%"
+                        items="{inv>/lines}">
+
+                        <noData>
+                            <VBox
+                                class="portalEmptyState"
+                                alignItems="Center"
+                                renderType="Bare">
+                                <core:Icon
+                                    src="sap-icon://create-form"
+                                    size="2.5rem" />
+                                <Title
+                                    text="No invoice items"
+                                    level="H4" />
+                                <Text
+                                    text="Choose Add Item to add an invoice line."
+                                    textAlign="Center" />
+                            </VBox>
+                        </noData>
+
+                        <columns>
+                            <Column width="16rem">
+                                <Text text="Material" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Material Code" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Description" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Ordered Qty" />
+                            </Column>
+
+                            <Column
+                                width="9rem"
+                                hAlign="End">
+                                <Text text="Invoice Qty" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Unit" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="PO Price" />
+                            </Column>
+
+                            <Column width="11rem" hAlign="End">
+                                <Text text="Vendor Unit Price" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Currency" />
+                            </Column>
+
+                            <Column
+                                hAlign="End"
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="Line Total" />
+                            </Column>
+
+                            <Column width="3.5rem" hAlign="Center">
+                                <Text text="" />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Select
+                                        width="100%"
+                                        selectedKey="{inv>purchaseOrderItem_ID}"
+                                        forceSelection="false"
+                                        enabled="{= !${inv>/submitting} }"
+                                        valueState="{inv>itemState}"
+                                        valueStateText="{inv>itemStateText}"
+                                        tooltip="Purchase order item"
+                                        change=".onItemChange"
+                                        items="{inv>/poItems}">
+
+                                        <core:Item
+                                            key="{inv>ID}"
+                                            text="{inv>label}"
+                                            enabled="{inv>available}" />
+                                    </Select>
+
+                                    <Text text="{inv>materialCode}" />
+
+                                    <Text text="{inv>materialDescription}" />
+
+                                    <Text
+                                        text="{path: 'inv>orderedQuantity', formatter: 'formatter.quantity'}" />
+
+                                    <Input
+                                        type="Number"
+                                        value="{inv>quantity}"
+                                        placeholder="Quantity"
+                                        editable="{= !${inv>/submitting} }"
+                                        tooltip="Invoice quantity"
+                                        valueState="{inv>qtyState}"
+                                        valueStateText="{inv>qtyStateText}"
+                                        liveChange=".onQuantityChange"
+                                        change=".onQuantityChange" />
+
+                                    <Text text="{inv>unit}" />
+
+                                    <!-- PO reference price -->
+                                    <Text
+                                        text="{path: 'inv>unitPrice', formatter: 'formatter.amount'}" />
+
+                                    <!-- Vendor-entered invoice price -->
+                                    <Input
+                                        type="Number"
+                                        value="{inv>vendorUnitPrice}"
+                                        placeholder="Enter price"
+                                        width="100%"
+                                        editable="{= !${inv>/submitting} }"
+                                        valueState="{inv>priceState}"
+                                        valueStateText="{inv>priceStateText}"
+                                        tooltip="Enter your invoice unit price"
+                                        liveChange=".onVendorUnitPriceChange"
+                                        change=".onVendorUnitPriceChange" />
+
+                                    <Text text="{inv>currency}" />
+
+                                    <Text
+                                        text="{path: 'inv>lineTotal', formatter: 'formatter.amount'}" />
+
+                                    <Button
+                                        icon="sap-icon://delete"
+                                        type="Transparent"
+                                        tooltip="Remove item"
+                                        enabled="{= !${inv>/submitting} }"
+                                        press=".onRemoveLine" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+
+                    <HBox
+                        justifyContent="End"
+                        alignItems="Center"
+                        class="invoiceTotalBar">
+
+                        <Label
+                            text="Estimated invoice total:"
+                            class="sapUiTinyMarginEnd" />
+
+                        <ObjectNumber
+                            id="estimatedTotal"
+                            number="{path: 'inv>/estimatedTotal', formatter: 'formatter.amount'}"
+                            unit="{inv>/currency}"
+                            emphasized="true" />
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </content>
+
+        <footer>
+            <OverflowToolbar id="invoiceCreateFooter">
+                <ToolbarSpacer />
+
+                <Button
+                    id="submitInvoiceButton"
+                    text="{inv>/submitText}"
+                    icon="sap-icon://paper-plane"
+                    type="Emphasized"
+                    enabled="{= ${inv>/ready} &amp;&amp; !${inv>/busy} &amp;&amp; !${inv>/submitting} }"
+                    press=".onSubmit" />
+
+                <Button
+                    id="cancelInvoiceButton"
+                    text="Cancel"
+                    enabled="{= !${inv>/submitting} }"
+                    press=".onNavBack" />
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+</mvc:View>

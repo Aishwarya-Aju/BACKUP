@@ -1,0 +1,4 @@
+ID,dealerCode,dealerName,email,phone,address,city,isActive
+e4762d4b-e371-4380-9a48-4f62927827e4,DLR-CHN-001,Chennai Motors,warranty@chennaimotors.example,+91-44-40001001,"Guindy Industrial Estate, Chennai",Chennai,true
+a57c01f0-b6fb-4cb8-8744-6c51bec7ba9f,DLR-MDU-002,Madurai Auto Works,claims@maduriauto.example,+91-452-40002002,"Bypass Road, Madurai",Madurai,true
+743993ed-8333-4f66-ab6f-ef7598314b01,DLR-CBE-003,Coimbatore Commercial Vehicles,service@ccv.example,+91-422-40003003,"Peelamedu, Coimbatore",Coimbatore,true

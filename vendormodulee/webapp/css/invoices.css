@@ -1,0 +1,49 @@
+/* =========================================================
+   Invoices list and invoice details
+   Builds on the shared portal classes in vendorHome.css
+   ========================================================= */
+
+.invoicesHeaderActions {
+    gap: 0.5rem;
+}
+
+.invoicesTable .sapMListTblCell {
+    vertical-align: middle;
+}
+
+/* Invoice details */
+.invoiceObjectPage .invoiceDetailCard {
+    margin-top: 1rem;
+}
+
+.invoiceObjectPage .invoiceInfoGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2.5rem;
+    padding: 0.5rem 0;
+}
+
+.invoiceObjectPage .invoiceInfoItem {
+    min-width: 11rem;
+}
+
+.invoiceObjectPage .invoiceInfoItem .sapMLabel {
+    color: #556b82;
+    font-size: 0.8125rem;
+}
+
+/* Invoice card on the purchase order details page */
+.poInvoicePanel .poInvoiceFacts {
+    gap: 1rem 2rem;
+}
+
+.poInvoicePanel .poInvoiceFacts .sapMLabel {
+    color: #556b82;
+    font-size: 0.8125rem;
+}
+
+@media (max-width: 600px) {
+    .invoiceObjectPage .invoiceInfoItem {
+        min-width: 100%;
+    }
+}

@@ -1,0 +1,101 @@
+<mvc:View
+    controllerName="vrfrontend.controller.RiskDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+    <Page
+        id="riskPage"
+        title="{risk>/title}"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        enableScrolling="true"
+        busy="{risk>/busy}"
+        busyIndicatorDelay="0">
+
+        <headerContent>
+            <Button
+                icon="sap-icon://refresh"
+                tooltip="Recalculate"
+                type="Transparent"
+                press=".onRefresh"/>
+        </headerContent>
+
+        <content>
+            <VBox class="dlvBody">
+
+                <!-- Vendor banner -->
+                <HBox class="dlvBanner" alignItems="Center" wrap="Wrap">
+                    <core:Icon src="{risk>/icon}" size="2.5rem" class="dlvBannerIcon"/>
+                    <VBox>
+                        <Title text="{risk>/vendorName}" level="H2" wrapping="true"/>
+                        <Text class="dlvBannerSubtitle" wrapping="true" text="{risk>/subtitle}"/>
+                    </VBox>
+                </HBox>
+
+                <MessageStrip
+                    text="{risk>/error}"
+                    type="Error"
+                    showIcon="true"
+                    visible="{= !!${risk>/error}}"/>
+
+                <!-- Summary cards -->
+                <HBox class="dlvCards" items="{risk>/cards}">
+                    <VBox class="dlvCard">
+                        <Text text="{risk>value}" class="dlvCardValue"/>
+                        <ObjectStatus text="{risk>label}" state="{risk>state}"/>
+                    </VBox>
+                </HBox>
+
+                <VBox class="dlvPanel">
+
+                    <!-- Order level: filters -->
+                    <HBox
+                        class="dlvFilterGrid"
+                        visible="{= ${risk>/level} === 'orders'}">
+                        <SearchField
+                            width="100%"
+                            placeholder="Search PO number or invoice"
+                            liveChange=".onSearch"
+                            search=".onSearch"/>
+                        <Select
+                            width="100%"
+                            selectedKey="{risk>/filters/status}"
+                            change=".onStatusFilter">
+                            <core:Item key="ALL" text="All Risk Levels"/>
+                            <core:Item key="Low" text="Low"/>
+                            <core:Item key="Medium" text="Medium"/>
+                            <core:Item key="High" text="High"/>
+                            <core:Item key="Pending" text="Pending"/>
+                        </Select>
+                    </HBox>
+
+                    <!-- Item level: back to orders -->
+                    <HBox
+                        class="dlvFilterTop"
+                        alignItems="Center"
+                        visible="{= ${risk>/level} === 'items'}">
+                        <Button
+                            icon="sap-icon://nav-back"
+                            text="Back to orders"
+                            press=".onBackToOrders"/>
+                        <Title
+                            class="sapUiSmallMarginBegin"
+                            level="H3"
+                            text="Items of PO {risk>/selectedPO}"/>
+                    </HBox>
+
+                    <Toolbar class="dlvToolbar" visible="{= ${risk>/level} === 'orders'}">
+                        <Title text="Purchase Orders ({risk>/orderCount})" level="H3"/>
+                        <ToolbarSpacer/>
+                        <Text text="Select an order to see its items"/>
+                    </Toolbar>
+
+                    <VBox id="ordersHolder" visible="{= ${risk>/level} === 'orders'}"/>
+                    <VBox id="itemsHolder" visible="{= ${risk>/level} === 'items'}"/>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

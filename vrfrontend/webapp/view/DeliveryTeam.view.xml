@@ -1,0 +1,335 @@
+
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    controllerName="vrfrontend.controller.DeliveryTeam"
+    displayBlock="true">
+
+    <Page
+        id="deliveryTeamPage"
+        title="Delivery Management"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        enableScrolling="true"
+        busy="{dlv>/busy}"
+        busyIndicatorDelay="0">
+
+        <!-- Header Actions -->
+        <headerContent>
+            <Button
+                icon="sap-icon://refresh"
+                tooltip="Refresh deliveries"
+                type="Transparent"
+                press=".onRefresh"/>
+
+            <Button
+                icon="sap-icon://add"
+                text="New Delivery"
+                tooltip="Record a new delivery"
+                type="Emphasized"
+                press=".onNewDelivery"/>
+
+            <MenuButton text="Export" icon="sap-icon://download" tooltip="Export the filtered report">
+                <menu>
+                    <Menu>
+                        <MenuItem text="Export as CSV" icon="sap-icon://document-text" press=".onExportCsv"/>
+                        <MenuItem text="Export as Excel (.xlsx)" icon="sap-icon://excel-attachment" press=".onExportExcel"/>
+                    </Menu>
+                </menu>
+            </MenuButton>
+            <Button
+                 type="Emphasized"
+                 icon="sap-icon://pdf-attachment"
+                 press=".onpdf"
+            />
+        </headerContent>
+
+        <content>
+            <VBox class="dlvBody">
+
+                <!-- Banner -->
+                <HBox
+                    class="dlvBanner"
+                    alignItems="Center"
+                    wrap="Wrap">
+
+                    <core:Icon
+                        src="sap-icon://shipping-status"
+                        size="2.5rem"
+                        class="dlvBannerIcon"/>
+
+                    <VBox>
+                        <Title
+                            text="Delivery Management"
+                            level="H2"
+                            wrapping="true"/>
+
+                        <Text
+                            class="dlvBannerSubtitle"
+                            wrapping="true"
+                            text="Track shipments, record delivered quantities, and monitor purchase order delivery progress."/>
+                    </VBox>
+                </HBox>
+
+                <!-- Summary Cards -->
+                <HBox class="dlvCards">
+
+                    <VBox class="dlvCard dlvCardTotal">
+                        <core:Icon
+                            src="sap-icon://list"
+                            class="dlvCardIcon"/>
+
+                        <Text
+                            text="{dlv>/summary/total}"
+                            class="dlvCardValue"/>
+
+                        <Text
+                            text="Total Deliveries"
+                            class="dlvCardLabel"/>
+                    </VBox>
+
+                    <VBox class="dlvCard dlvCardPending">
+                        <core:Icon
+                            src="sap-icon://pending"
+                            class="dlvCardIcon"/>
+
+                        <Text
+                            text="{dlv>/summary/pending}"
+                            class="dlvCardValue"/>
+
+                        <Text
+                            text="Pending Deliveries"
+                            class="dlvCardLabel"/>
+                    </VBox>
+
+                    <VBox class="dlvCard dlvCardTransit">
+                        <core:Icon
+                            src="sap-icon://shipping-status"
+                            class="dlvCardIcon"/>
+
+                        <Text
+                            text="{dlv>/summary/inTransit}"
+                            class="dlvCardValue"/>
+
+                        <Text
+                            text="In Transit"
+                            class="dlvCardLabel"/>
+                    </VBox>
+
+                    <VBox class="dlvCard dlvCardPartial">
+                        <core:Icon
+                            src="sap-icon://circle-task-2"
+                            class="dlvCardIcon"/>
+
+                        <Text
+                            text="{dlv>/summary/partial}"
+                            class="dlvCardValue"/>
+
+                        <Text
+                            text="Partially Delivered"
+                            class="dlvCardLabel"/>
+                    </VBox>
+
+                    <VBox class="dlvCard dlvCardDone">
+                        <core:Icon
+                            src="sap-icon://accept"
+                            class="dlvCardIcon"/>
+
+                        <Text
+                            text="{dlv>/summary/completed}"
+                            class="dlvCardValue"/>
+
+                        <Text
+                            text="Completed Deliveries"
+                            class="dlvCardLabel"/>
+                    </VBox>
+
+                    <VBox class="dlvCard dlvCardDelayed">
+                        <core:Icon
+                            src="sap-icon://alert"
+                            class="dlvCardIcon"/>
+
+                        <Text
+                            text="{dlv>/summary/delayed}"
+                            class="dlvCardValue"/>
+
+                        <Text
+                            text="Delayed Deliveries"
+                            class="dlvCardLabel"/>
+                    </VBox>
+
+                </HBox>
+
+                <!-- Deliveries List -->
+                                <VBox class="dlvPanel">
+
+                    <!-- Row 1: view switch + sort order / clear -->
+                    <HBox class="dlvFilterTop" justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap">
+                        <SegmentedButton
+                            selectedKey="{dlv>/filters/creation}"
+                            selectionChange=".onCreationFilter">
+                            <items>
+                                <SegmentedButtonItem key="ALL" text="All Orders ({dlv>/counts/all})"/>
+                                <SegmentedButtonItem key="PENDING" text="Pending Creation ({dlv>/counts/pending})"/>
+                                <SegmentedButtonItem key="CREATED" text="Delivery Created ({dlv>/counts/created})"/>
+                            </items>
+                        </SegmentedButton>
+                        <HBox alignItems="Center">
+                            <Button
+                                icon="{= ${dlv>/filters/sortDesc} ? 'sap-icon://sort-descending' : 'sap-icon://sort-ascending'}"
+                                tooltip="Toggle sort order"
+                                type="Transparent"
+                                press=".onToggleSortDirection"/>
+                            <Button
+                                icon="sap-icon://clear-filter"
+                                text="Clear Filters"
+                                tooltip="Clear all filters"
+                                type="Transparent"
+                                press=".onClearFilters"/>
+                        </HBox>
+                    </HBox>
+
+                    <!-- Row 2: search and filters in an even grid -->
+                    <HBox class="dlvFilterGrid">
+                        <SearchField
+                            width="100%"
+                            placeholder="Search PO, vendor, invoice or delivery ID"
+                            value="{dlv>/filters/search}"
+                            liveChange=".onSearch"
+                            search=".onSearch"/>
+                        <Select
+                            width="100%"
+                            tooltip="Filter by delivery status"
+                            selectedKey="{dlv>/filters/deliveryStatus}"
+                            change=".onDeliveryStatusFilter">
+                            <core:Item key="ALL" text="All Delivery Statuses"/>
+                            <core:Item key="Pending" text="Pending"/>
+                            <core:Item key="Partially Delivered" text="Partially Delivered"/>
+                            <core:Item key="Delayed" text="Delayed"/>
+                            <core:Item key="On Time" text="On Time"/>
+                            <core:Item key="Completed Late" text="Completed Late"/>
+                        </Select>
+                        <Select
+                            width="100%"
+                            tooltip="Filter by shipment status"
+                            selectedKey="{dlv>/filters/shipmentStatus}"
+                            change=".onShipmentStatusFilter">
+                            <core:Item key="ALL" text="All Shipment Statuses"/>
+                            <core:Item key="Not Shipped" text="Not Shipped"/>
+                            <core:Item key="In Transit" text="In Transit"/>
+                            <core:Item key="Partially Delivered" text="Partially Delivered"/>
+                            <core:Item key="Delivered" text="Delivered"/>
+                            <core:Item key="Cancelled" text="Cancelled"/>
+                        </Select>
+                        <Select
+                            width="100%"
+                            tooltip="Sort by"
+                            selectedKey="{dlv>/filters/sortKey}"
+                            change=".onSortKeyChange">
+                            <core:Item key="shipmentDate" text="Sort: Shipment Date"/>
+                            <core:Item key="expectedDeliveryDate" text="Sort: Expected Date"/>
+                            <core:Item key="deliveryPercentage" text="Sort: Delivery %"/>
+                            <core:Item key="delayDays" text="Sort: Delay Days"/>
+                            <core:Item key="vendorName" text="Sort: Vendor"/>
+                            <core:Item key="poNumber" text="Sort: PO Number"/>
+                        </Select>
+                    </HBox>
+
+                    <Table
+                        id="deliveriesTable"
+                        mode="SingleSelectLeft"
+                        items="{dlv>/filtered}"
+                        growing="true"
+                        growingThreshold="20"
+                        noDataText="No orders found"
+                        popinLayout="GridSmall">
+                        <headerToolbar>
+                            <Toolbar class="dlvToolbar">
+                                <Title text="Orders ({dlv>/filteredCount})" level="H3"/>
+                            </Toolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column width="16rem"><Text text="Purchase Order / Vendor"/></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Invoice"/></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Expected Delivery"/></Column>
+                            <Column><Text text="Delivery Creation"/></Column>
+                            <Column><Text text="Delivery / Shipment Status"/></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Progress"/></Column>
+                            <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Actual Delivery"/></Column>
+                            <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Delay"/></Column>
+                            <Column hAlign="End" width="11rem"><Text text="Actions"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem
+                                vAlign="Middle"
+                                highlight="{path:'dlv>deliveryStatus', formatter:'.formatter.statusState'}">
+                                <cells>
+                                    <ObjectIdentifier
+                                        title="{dlv>poNumber}"
+                                        text="{dlv>vendorName}"
+                                        titleActive="{dlv>hasDelivery}"
+                                        titlePress=".onViewDetails"/>
+                                    <Text text="{dlv>invoiceNumber}"/>
+                                    <Text text="{path:'dlv>expectedDeliveryDate', formatter:'.formatter.date'}"/>
+                                    <ObjectStatus
+                                        text="{dlv>creationStatus}"
+                                        icon="{= ${dlv>hasDelivery} ? 'sap-icon://accept' : 'sap-icon://add-document'}"
+                                        state="{= ${dlv>hasDelivery} ? 'Success' : 'Warning'}"/>
+                                    <VBox visible="{dlv>hasDelivery}">
+                                        <ObjectStatus
+                                            text="{dlv>deliveryStatus}"
+                                            icon="{path:'dlv>deliveryStatus', formatter:'.formatter.statusIcon'}"
+                                            state="{path:'dlv>deliveryStatus', formatter:'.formatter.statusState'}"/>
+                                        <ObjectStatus
+                                            text="{dlv>shipmentStatus}"
+                                            state="{path:'dlv>shipmentStatus', formatter:'.formatter.shipmentState'}"/>
+                                    </VBox>
+                                    <ProgressIndicator
+                                        visible="{dlv>hasDelivery}"
+                                        width="8rem"
+                                        percentValue="{dlv>deliveryPercentage}"
+                                        displayValue="{path:'dlv>deliveryPercentage', formatter:'.formatter.percentText'}"
+                                        state="{path:'dlv>deliveryStatus', formatter:'.formatter.statusState'}"/>
+                                    <Text text="{path:'dlv>actualDeliveryDate', formatter:'.formatter.date'}"/>
+                                    <ObjectStatus
+                                        visible="{dlv>hasDelivery}"
+                                        text="{path:'dlv>delayDays', formatter:'.formatter.delayText'}"
+                                        state="{path:'dlv>delayDays', formatter:'.formatter.delayState'}"/>
+                                    <HBox justifyContent="End">
+                                        <Button
+                                            text="Create Delivery"
+                                            icon="sap-icon://add"
+                                            type="Emphasized"
+                                            visible="{= !${dlv>hasDelivery}}"
+                                            press=".onCreateFromRow"/>
+                                        <Button
+                                            icon="sap-icon://display"
+                                            tooltip="View Details"
+                                            type="Transparent"
+                                            visible="{dlv>hasDelivery}"
+                                            press=".onViewDetails"/>
+                                        <Button
+                                            icon="sap-icon://edit"
+                                            tooltip="Edit Delivery"
+                                            type="Transparent"
+                                            visible="{dlv>hasDelivery}"
+                                            press=".onEditFromRow"/>
+                                        <Button
+                                            icon="sap-icon://delete"
+                                            tooltip="Delete Delivery"
+                                            type="Transparent"
+                                            visible="{dlv>hasDelivery}"
+                                            press=".onDeleteDelivery"/>
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+            </VBox>
+        </content>
+
+    </Page>
+</mvc:View>

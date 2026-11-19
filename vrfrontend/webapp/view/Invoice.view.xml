@@ -1,0 +1,270 @@
+<mvc:View
+    controllerName="vrfrontend.controller.Invoice"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:cards="sap.f.cards"
+>
+    <f:DynamicPage
+        id="invoiceDynamicPage"
+        fitContent="true"
+        headerExpanded="true"
+        class="sapUiResponsiveContentPadding"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Invoice Details" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar
+                        id="invoiceFilterBar"
+                        showFilterConfiguration="false"
+                        useToolbar="false"
+                        showGoOnFB="false"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                label="Invoice Number"
+                                name="invoice"
+                                groupName="invoice"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="invoiceFilter"
+                                        width="220px"
+                                        selectionChange=".onInvoiceFilterChange"
+                                        items="{
+                                            path: '/Invoices',
+                                            templateShareable: true
+                                        }"
+                                    >
+                                        <core:Item
+                                            key="{invoiceNumber}"
+                                            text="{invoiceNumber}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                label="Invoice Status"
+                                name="invoiceStatus"
+                                groupName="inStatus"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="inStatusFilter"
+                                        width="220px"
+                                        selectionChange=".onInStatusFilterChange"
+                                        items="{invoiceStatus>/statuses}"
+                                    >
+                                        <core:Item
+                                            key="{invoiceStatus>status}"
+                                            text="{invoiceStatus>status}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                label="Invoice Date"
+                                name="invoiceDates"
+                                groupName="inDate"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="inDateFilter"
+                                        width="220px"
+                                        selectionChange=".onDateFilterChange"
+                                        items="{invoiceDate>/dates}"
+                                    >
+                                        <core:Item
+                                            key="{invoiceDate>date}"
+                                            text="{invoiceDate>date}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                label="Material Code"
+                                name="invoiceMaterial"
+                                groupName="inMaterial"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        id="inMaterialFilter"
+                                        width="220px"
+                                        selectionChange=".onInMaterialFilterChange"
+                                        items="{materialCode>/materials}"
+                                    >
+                                        <core:Item
+                                            key="{materialCode>material}"
+                                            text="{materialCode>material}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <VBox
+                width="100%"
+                class="sapUiMediumMarginTop"
+            >
+                <Toolbar>
+                    <Title text="Invoice List" />
+                    <ToolbarSpacer />
+                    <!-- <Button
+                        id="editInvoiceButton"
+                        icon="sap-icon://edit"
+                        tooltip="Edit Invoice"
+                        type="Transparent"
+                        press=".onEditInvoice"
+                    />
+
+                    <Button
+                        id="saveInvoiceButton"
+                        icon="sap-icon://save"
+                        tooltip="Save Invoice"
+                        type="Emphasized"
+                        press=".onSaveInvoice"
+                        visible="false"
+                    /> -->
+
+                    <!-- <Button
+                        id="cancelInvoiceButton"
+                        icon="sap-icon://decline"
+                        tooltip="Cancel Edit"
+                        type="Transparent"
+                        press=".onCancelInvoice"
+                        visible="false"
+                    />
+                    <Button
+                        icon="sap-icon://delete"
+                        tooltip="Delete Invoice"
+                        type="Transparent"
+                        press=".onDeleteInvoice"
+                    /> -->
+                </Toolbar>
+                <Table
+                    id="invoiceTable"
+                    width="100%"
+                    growing="true"
+                    growingThreshold="10"
+                    growingScrollToLoad="true"
+                    items="{
+                        path: '/Invoices',
+                         filters: [
+        {
+            path: 'invoiceStatus',
+            operator: 'EQ',
+            value1: 'SUBMITTED'
+        }
+    ],
+                        sorter: {
+                            path: 'invoiceNumber'
+                        },
+                         parameters: {
+                            $$updateGroupId: 'invoiceUpdate'
+                        }
+                    }"
+                >
+                    <columns>
+                        <Column>
+                            <Text text="Invoice Number" />
+                        </Column>
+                        <Column>
+                            <Text text="Invoice Date" />
+                        </Column>
+                        <Column>
+                            <Text text="Material Code" />
+                        </Column>
+                        <Column>
+                            <Text text="Quantity" />
+                        </Column>
+                        <Column>
+                            <Text text="Estimated Price" />
+                        </Column>
+                        <Column>
+                            <Text text="Actual Price" />
+                        </Column>
+                        <Column>
+                            <Text text="Price Difference" />
+                        </Column>
+                        <Column>
+                            <Text text="Invoice Amount" />
+                        </Column>
+                        <Column>
+                            <Text text="Status" />
+                        </Column>
+                       
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{invoiceNumber}" />
+
+                                <Text text="{invoiceDate}" />
+
+                                <Text text="{materialCode}" />
+
+                                <Text text="{quantity}" />
+                                <Text text="{oldPrice}" />
+                                <Text text="{currentPrice}" />
+                                <Text text="{priceDifference}" />
+                                <Text text="{invoiceAmount}" />
+                                <HBox alignItems="Center">
+                                    <!-- <ComboBox
+                                    selectedKey="{invoiceStatus}"
+                                    editable="{ui>/editMode}"
+                                >
+                                    <core:Item
+                                        key="Draft"
+                                        text="Draft"
+                                    />
+                                    <core:Item
+                                        key="Submitted"
+                                        text="Submitted"
+                                    />
+                                    <core:Item
+                                        key="Approved"
+                                        text="Approved"
+                                    />
+                                    <core:Item
+                                        key="Rejected"
+                                        text="Rejected"
+                                    />
+                                </ComboBox> -->
+                                    <ObjectStatus
+                                        text="{invoiceStatus}"
+                                        visible="{= !${ui>/editMode} }"
+                                        state="{=${invoiceStatus} === 'Draft' ? 'None' :
+                                         ${invoiceStatus} === 'Submitted' ? 'Information':
+                                         ${invoiceStatus} === 'Approved' ? 'Success':
+                                         ${invoiceStatus} === 'Rejected' ? 'Error':
+                 'None'}"
+                                    />
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

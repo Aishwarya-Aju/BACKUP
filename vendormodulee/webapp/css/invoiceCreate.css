@@ -1,0 +1,31 @@
+/* =========================================================
+   Invoice form (complete a draft invoice / edit a submitted one)
+   Builds on the shared portal classes in vendorHome.css.
+   This file is listed in manifest.json (sap.ui5/resources/css).
+   ========================================================= */
+
+.invoiceCreatePage .invoiceSection {
+    margin-top: 1rem;
+}
+
+.invoiceCreatePage .invoiceSectionTitle {
+    color: #183b5b;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.invoiceCreatePage .invoiceSectionHint {
+    color: #687b8e;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.invoiceCreatePage .invoiceTotalBar {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5ebf2;
+}
+
+.invoiceCreatePage .sapMListTblCell {
+    vertical-align: middle;
+}

@@ -1,0 +1,434 @@
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:23.772940] Added process: "web" (STDOUT, API)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:23.785320] Created app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:23.876099] Updating process: "web" (STDOUT, API)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:23.933088] Scaling process: "web" (STDOUT, API)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:42.036486] Uploading app package for app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:42.262645] Updated app with guid dcd48564-d60a-4058-a4e1-3d719459aacc ({"environment_variables" => "[PRIVATE DATA HIDDEN]"}) (STDOUT, API)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:52.064334] Creating build for app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:52.476271] Downloading nodejs_buildpack... (STDOUT, STG)#
+#2026 11 17 18:48:01.917#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:52.532865] Downloaded nodejs_buildpack (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:52.532980] Cell c839c7b1-088e-41af-b9b7-66256aacd457 creating container for instance 5dcb0f66-e21b-449d-899b-0a7ae8337f23 (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:53.629550] Security group rules were updated (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:53.687220] Cell c839c7b1-088e-41af-b9b7-66256aacd457 successfully created container for instance 5dcb0f66-e21b-449d-899b-0a7ae8337f23 (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:54.879083] Downloading app package... (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:55.511535] Downloaded app package (3.4M) (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:55.659602] -----> Nodejs Buildpack version 1.9.7 (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:55.834827] -----> Bootstrapping python (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:55.834989] -----> Installing python 3.13.18 (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:47:55.835049] Copy [/tmp/buildpacks/e692b33510ec4c3a/dependencies/19ba5035b2de64a4656a3359a44a66ca/python_3.13.18_linux_x64_cflinuxfs4_86d7d323.tgz] (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:01.269904] -----> Installing binaries (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:01.269942] engines.node (package.json): ^24 (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:01.269948] engines.npm (package.json): unspecified (use default) (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:01.269985] -----> Installing node 24.22.1 (STDOUT, STG)#
+#2026 11 17 18:48:01.918#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27308#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:01.269989] Copy [/tmp/buildpacks/e692b33510ec4c3a/dependencies/81943ffafa7adf07ff6ffc6aaa402b41/node_24.22.1_linux_x64_cflinuxfs4_e062d949.tgz] (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:04.642092] Using default npm version: 11.19.1 (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:04.642182] -----> Installing yarn 1.22.22 (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:04.642376] Copy [/tmp/buildpacks/e692b33510ec4c3a/dependencies/e4fe26756e9984a665478d350474fa2e/yarn_1.22.22_linux_noarch_any-stack_b6132b86.tgz] (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.169623] Installed yarn 1.22.22 (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.169834] -----> Creating runtime environment (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171320] NODE_ENV=production (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171339] NODE_HOME=/tmp/contents1992024205/deps/0/node (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171347] NODE_MODULES_CACHE=true (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171349] NODE_VERBOSE=false (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171352] NPM_CONFIG_LOGLEVEL=error (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171367] NPM_CONFIG_PRODUCTION=true (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171460] -----> Building dependencies (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171496] Prebuild detected (node_modules already exists) (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:05.171576] Rebuilding any native modules (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.070422] rebuilt dependencies successfully (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.070894] npm notice (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.070927] npm notice New major version of npm available! 11.19.1 -> 12.2.2 (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.070933] npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2 (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.070936] npm notice To update run: npm install -g npm@12.2.2 (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.070938] npm notice (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.162525] Installing any new modules (package.json + package-lock.json) (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.968366] up to date in 698ms (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.968398] 33 packages are looking for funding (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:06.968413] run `npm fund` for details (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:07.858392] [31;1m**WARNING**[0m This app may not specify any way to start a node process (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:07.858429] See: https://docs.cloudfoundry.org/buildpacks/node/node-tips.html#start (STDOUT, STG)#
+#2026 11 17 18:48:12.124#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27320#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:07.863565] Contrast Security no credentials found. Will not write environment files. (STDOUT, STG)#
+#2026 11 17 18:48:22.072#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27328#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:19.694193] Exit status 0 (STDOUT, STG)#
+#2026 11 17 18:48:22.072#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27328#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:19.694266] Uploading droplet, build artifacts cache... (STDOUT, STG)#
+#2026 11 17 18:48:22.072#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27328#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:19.694309] Uploading build artifacts cache... (STDOUT, STG)#
+#2026 11 17 18:48:22.072#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27328#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:19.694424] Uploading droplet... (STDOUT, STG)#
+#2026 11 17 18:48:22.072#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27328#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:19.731446] Uploaded build artifacts cache (218B) (STDOUT, STG)#
+#2026 11 17 18:48:22.072#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27328#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:20.604121] Creating droplet for app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:48:32.271#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23758#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:23.677201] Uploaded droplet (61M) (STDOUT, STG)#
+#2026 11 17 18:48:32.271#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23758#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:23.724807] Uploading complete (STDOUT, STG)#
+#2026 11 17 18:48:32.271#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23758#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:25.067922] Cell c839c7b1-088e-41af-b9b7-66256aacd457 stopping instance 5dcb0f66-e21b-449d-899b-0a7ae8337f23 (STDOUT, STG)#
+#2026 11 17 18:48:32.271#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23758#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:25.067965] Cell c839c7b1-088e-41af-b9b7-66256aacd457 destroying container for instance 5dcb0f66-e21b-449d-899b-0a7ae8337f23 (STDOUT, STG)#
+#2026 11 17 18:48:32.271#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23758#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:25.116627] Staging complete for build 5dcb0f66-e21b-449d-899b-0a7ae8337f23 (STDOUT, API)#
+#2026 11 17 18:48:32.271#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23758#
+[PollStageAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:29.344742] Cell c839c7b1-088e-41af-b9b7-66256aacd457 successfully destroyed container for instance 5dcb0f66-e21b-449d-899b-0a7ae8337f23 (STDOUT, STG)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:32.348878] Updated app with guid dcd48564-d60a-4058-a4e1-3d719459aacc ({droplet_guid: "3a6c81be-8d5a-460f-8238-12049f01bb76"}) (STDOUT, API)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:32.554575] Creating revision for app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:32.596198] Starting app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:32.781849] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 creating container for instance 6ef3d511-6eec-4a0f-5096-de1c (STDOUT, CELL)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:34.028264] Security group rules were updated (STDOUT, CELL)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:34.085383] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 successfully created container for instance 6ef3d511-6eec-4a0f-5096-de1c (STDOUT, CELL)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:34.910257] Downloading droplet... (STDOUT, CELL)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:40.657111] Downloaded droplet (61M) (STDOUT, CELL)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:40.657599] Starting health monitoring of container (STDOUT, CELL)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:40.865669] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.172089] Invoking start command. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765605] npm error Missing script: "start" (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765641] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765645] npm error Did you mean one of these? (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765661] npm error   npm star # Mark your favorite packages (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765673] npm error   npm stars # View packages marked as favorites (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765677] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765681] npm error To see a list of scripts, run: (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.765685] npm error   npm run (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.767461] npm error A complete log of this run can be found in: /home/vcap/app/.npm/_logs/2026-11-17T18_48_41_329Z-debug-0.log (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:48:42.446#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27340#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:41.855514] Exit status 1 (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:48.891281] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 stopping instance 6ef3d511-6eec-4a0f-5096-de1c (STDOUT, CELL)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:48.891341] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 destroying container for instance 6ef3d511-6eec-4a0f-5096-de1c (STDOUT, CELL)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:48.897932] Process has crashed with type: "web" (STDOUT, API)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:48.911993] App instance exited with guid dcd48564-d60a-4058-a4e1-3d719459aacc payload: {"instance" => "6ef3d511-6eec-4a0f-5096-de1c", "index" => 0, "cell_id" => "d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0", "reason" => "CRASHED", "exit_description" => "APP/PROC/WEB: Exited with status 1", "crash_count" => 1, "crash_timestamp" => 1794941328885805808, "version" => "958cfe68-6c4a-4244-b996-10978bd531da"} (STDOUT, API)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:48.991360] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 creating container for instance 0e97e53b-52a1-47cf-55ca-fe65 (STDOUT, CELL)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:49.274264] Exit status 137 (STDOUT, PROXY)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:50.446626] Security group rules were updated (STDOUT, CELL)#
+#2026 11 17 18:48:52.434#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23776#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:50.543245] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 successfully created container for instance 0e97e53b-52a1-47cf-55ca-fe65 (STDOUT, CELL)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:52.372427] Downloading droplet... (STDOUT, CELL)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:52.444973] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 successfully destroyed container for instance 6ef3d511-6eec-4a0f-5096-de1c (STDOUT, CELL)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:57.604132] Downloaded droplet (61M) (STDOUT, CELL)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:57.604618] Starting health monitoring of container (STDOUT, CELL)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:57.782113] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.102524] Invoking start command. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741045] npm error Missing script: "start" (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741084] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741088] npm error Did you mean one of these? (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741093] npm error   npm star # Mark your favorite packages (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741103] npm error   npm stars # View packages marked as favorites (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741106] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741110] npm error To see a list of scripts, run: (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.741114] npm error   npm run (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.743290] npm error A complete log of this run can be found in: /home/vcap/app/.npm/_logs/2026-11-17T18_48_58_282Z-debug-0.log (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:02.721#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23784#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:48:58.829158] Exit status 1 (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:07.256999] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 stopping instance 0e97e53b-52a1-47cf-55ca-fe65 (STDOUT, CELL)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:07.257055] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 destroying container for instance 0e97e53b-52a1-47cf-55ca-fe65 (STDOUT, CELL)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:07.263093] Process has crashed with type: "web" (STDOUT, API)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:07.278980] App instance exited with guid dcd48564-d60a-4058-a4e1-3d719459aacc payload: {"instance" => "0e97e53b-52a1-47cf-55ca-fe65", "index" => 0, "cell_id" => "77283d80-dfa7-40ba-ba4e-265aef112085", "reason" => "CRASHED", "exit_description" => "APP/PROC/WEB: Exited with status 1", "crash_count" => 2, "crash_timestamp" => 1794941347250840260, "version" => "958cfe68-6c4a-4244-b996-10978bd531da"} (STDOUT, API)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:07.354710] Cell c839c7b1-088e-41af-b9b7-66256aacd457 creating container for instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:08.921924] Exit status 137 (STDOUT, PROXY)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:09.018974] Security group rules were updated (STDOUT, CELL)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:09.105154] Cell c839c7b1-088e-41af-b9b7-66256aacd457 successfully created container for instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:09.773903] Downloading droplet... (STDOUT, CELL)#
+#2026 11 17 18:49:12.667#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-23792#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:10.424054] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 successfully destroyed container for instance 0e97e53b-52a1-47cf-55ca-fe65 (STDOUT, CELL)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:15.608287] Downloaded droplet (61M) (STDOUT, CELL)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:15.608737] Starting health monitoring of container (STDOUT, CELL)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:15.946372] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.239154] Invoking start command. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830292] npm error Missing script: "start" (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830325] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830329] npm error Did you mean one of these? (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830334] npm error   npm star # Mark your favorite packages (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830341] npm error   npm stars # View packages marked as favorites (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830347] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830351] npm error To see a list of scripts, run: (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.830355] npm error   npm run (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.833039] npm error A complete log of this run can be found in: /home/vcap/app/.npm/_logs/2026-11-17T18_49_16_365Z-debug-0.log (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:22.648#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27367#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:16.932431] Exit status 1 (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:32.803#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27377#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.776956] Cell c839c7b1-088e-41af-b9b7-66256aacd457 stopping instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:32.803#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27377#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.777012] Cell c839c7b1-088e-41af-b9b7-66256aacd457 destroying container for instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:32.804#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27377#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.786653] Process has crashed with type: "web" (STDOUT, API)#
+#2026 11 17 18:49:32.804#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27377#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.800484] App instance exited with guid dcd48564-d60a-4058-a4e1-3d719459aacc payload: {"instance" => "d2720d83-f5b9-47fa-7164-36f8", "index" => 0, "cell_id" => "c839c7b1-088e-41af-b9b7-66256aacd457", "reason" => "CRASHED", "exit_description" => "APP/PROC/WEB: Exited with status 1", "crash_count" => 3, "crash_timestamp" => 1794941364773897622, "version" => "958cfe68-6c4a-4244-b996-10978bd531da"} (STDOUT, API)#
+#2026 11 17 18:49:32.804#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27377#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:26.122018] Exit status 137 (STDOUT, PROXY)#
+#2026 11 17 18:49:32.804#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27377#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:28.311477] Cell c839c7b1-088e-41af-b9b7-66256aacd457 successfully destroyed container for instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.776956] Cell c839c7b1-088e-41af-b9b7-66256aacd457 stopping instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.777012] Cell c839c7b1-088e-41af-b9b7-66256aacd457 destroying container for instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.786653] Process has crashed with type: "web" (STDOUT, API)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:24.800484] App instance exited with guid dcd48564-d60a-4058-a4e1-3d719459aacc payload: {"instance" => "d2720d83-f5b9-47fa-7164-36f8", "index" => 0, "cell_id" => "c839c7b1-088e-41af-b9b7-66256aacd457", "reason" => "CRASHED", "exit_description" => "APP/PROC/WEB: Exited with status 1", "crash_count" => 3, "crash_timestamp" => 1794941364773897622, "version" => "958cfe68-6c4a-4244-b996-10978bd531da"} (STDOUT, API)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:26.122018] Exit status 137 (STDOUT, PROXY)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:28.311477] Cell c839c7b1-088e-41af-b9b7-66256aacd457 successfully destroyed container for instance d2720d83-f5b9-47fa-7164-36f8 (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:33.447092] Stopping app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:33.580224] Starting app with guid dcd48564-d60a-4058-a4e1-3d719459aacc (STDOUT, API)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:33.757367] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 creating container for instance a018a603-7bbf-4d23-475d-29c0 (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:34.877298] Security group rules were updated (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:34.955142] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 successfully created container for instance a018a603-7bbf-4d23-475d-29c0 (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:35.732187] Downloading droplet... (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:41.354447] Downloaded droplet (61M) (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:41.354906] Starting health monitoring of container (STDOUT, CELL)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:41.573320] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:42.766#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27386#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:41.916339] Invoking start command. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559508] npm error Missing script: "start" (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559548] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559553] npm error Did you mean one of these? (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559561] npm error   npm star # Mark your favorite packages (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559568] npm error   npm stars # View packages marked as favorites (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559571] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559575] npm error To see a list of scripts, run: (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.559578] npm error   npm run (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.562712] npm error A complete log of this run can be found in: /home/vcap/app/.npm/_logs/2026-11-17T18_49_42_075Z-debug-0.log (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:42.650409] Exit status 1 (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:49.737555] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 stopping instance a018a603-7bbf-4d23-475d-29c0 (STDOUT, CELL)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:49.737592] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 destroying container for instance a018a603-7bbf-4d23-475d-29c0 (STDOUT, CELL)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:49.743400] Process has crashed with type: "web" (STDOUT, API)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:49.758489] App instance exited with guid dcd48564-d60a-4058-a4e1-3d719459aacc payload: {"instance" => "a018a603-7bbf-4d23-475d-29c0", "index" => 0, "cell_id" => "d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0", "reason" => "CRASHED", "exit_description" => "APP/PROC/WEB: Exited with status 1", "crash_count" => 1, "crash_timestamp" => 1794941389731225731, "version" => "28b41f40-12c2-441f-bd5e-46aab81d7b72"} (STDOUT, API)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:49.906440] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 creating container for instance 017dbdfc-7221-4b3e-57e5-2849 (STDOUT, CELL)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:50.333545] Exit status 137 (STDOUT, PROXY)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:51.227932] Security group rules were updated (STDOUT, CELL)#
+#2026 11 17 18:49:52.848#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27390#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:51.280131] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 successfully created container for instance 017dbdfc-7221-4b3e-57e5-2849 (STDOUT, CELL)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:52.835812] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 successfully destroyed container for instance a018a603-7bbf-4d23-475d-29c0 (STDOUT, CELL)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:53.719927] Downloading droplet... (STDOUT, CELL)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:59.718086] Downloaded droplet (61M) (STDOUT, CELL)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:49:59.718203] Starting health monitoring of container (STDOUT, CELL)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:00.012798] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:00.440326] Invoking start command. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046047] npm error Missing script: "start" (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046083] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046087] npm error Did you mean one of these? (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046093] npm error   npm star # Mark your favorite packages (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046096] npm error   npm stars # View packages marked as favorites (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046099] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046102] npm error To see a list of scripts, run: (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.046106] npm error   npm run (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.049180] npm error A complete log of this run can be found in: /home/vcap/app/.npm/_logs/2026-11-17T18_50_00_586Z-debug-0.log (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:02.915#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27397#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:01.144926] Exit status 1 (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:09.343715] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 stopping instance 017dbdfc-7221-4b3e-57e5-2849 (STDOUT, CELL)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:09.343758] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 destroying container for instance 017dbdfc-7221-4b3e-57e5-2849 (STDOUT, CELL)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:09.349487] Process has crashed with type: "web" (STDOUT, API)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:09.363965] App instance exited with guid dcd48564-d60a-4058-a4e1-3d719459aacc payload: {"instance" => "017dbdfc-7221-4b3e-57e5-2849", "index" => 0, "cell_id" => "77283d80-dfa7-40ba-ba4e-265aef112085", "reason" => "CRASHED", "exit_description" => "APP/PROC/WEB: Exited with status 1", "crash_count" => 2, "crash_timestamp" => 1794941409337726844, "version" => "28b41f40-12c2-441f-bd5e-46aab81d7b72"} (STDOUT, API)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:09.491173] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 creating container for instance 813e4bcc-8cbd-4425-7870-f1f0 (STDOUT, CELL)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:09.948278] Exit status 137 (STDOUT, PROXY)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:10.827912] Security group rules were updated (STDOUT, CELL)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:10.881176] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 successfully created container for instance 813e4bcc-8cbd-4425-7870-f1f0 (STDOUT, CELL)#
+#2026 11 17 18:50:12.845#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27408#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:12.147598] Downloading droplet... (STDOUT, CELL)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:13.046401] Cell 77283d80-dfa7-40ba-ba4e-265aef112085 successfully destroyed container for instance 017dbdfc-7221-4b3e-57e5-2849 (STDOUT, CELL)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:14.712988] Downloaded droplet (STDOUT, CELL)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:14.713387] Starting health monitoring of container (STDOUT, CELL)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:14.917341] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.242201] Invoking start command. (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802303] npm error Missing script: "start" (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802344] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802349] npm error Did you mean one of these? (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802354] npm error   npm star # Mark your favorite packages (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802357] npm error   npm stars # View packages marked as favorites (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802360] npm error (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802363] npm error To see a list of scripts, run: (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.802367] npm error   npm run (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.804553] npm error A complete log of this run can be found in: /home/vcap/app/.npm/_logs/2026-11-17T18_50_15_385Z-debug-0.log (STDERR, APP/PROC/WEB)#
+#2026 11 17 18:50:22.863#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27415#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:15.899530] Exit status 1 (STDOUT, APP/PROC/WEB)#
+#2026 11 17 18:50:32.942#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27422#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:23.293393] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 stopping instance 813e4bcc-8cbd-4425-7870-f1f0 (STDOUT, CELL)#
+#2026 11 17 18:50:32.942#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27422#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:23.293459] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 destroying container for instance 813e4bcc-8cbd-4425-7870-f1f0 (STDOUT, CELL)#
+#2026 11 17 18:50:32.942#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27422#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:23.303668] Process has crashed with type: "web" (STDOUT, API)#
+#2026 11 17 18:50:32.942#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27422#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:23.319914] App instance exited with guid dcd48564-d60a-4058-a4e1-3d719459aacc payload: {"instance" => "813e4bcc-8cbd-4425-7870-f1f0", "index" => 0, "cell_id" => "d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0", "reason" => "CRASHED", "exit_description" => "APP/PROC/WEB: Exited with status 1", "crash_count" => 3, "crash_timestamp" => 1794941423289794589, "version" => "28b41f40-12c2-441f-bd5e-46aab81d7b72"} (STDOUT, API)#
+#2026 11 17 18:50:32.942#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27422#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:23.738158] Exit status 137 (STDOUT, PROXY)#
+#2026 11 17 18:50:32.942#Z#DEBUG#4d46bcdd-e2b7-11f1-8eb5-eeee0a954bd0.dealerclaimwarranty-srv#flowable-async-job-executor-thread-27422#
+[PollStartAppStatusExecution] dcd48564-d60a-4058-a4e1-3d719459aacc [2026-11-17T18:50:26.559621] Cell d1cc041a-d5a1-41d6-b9f6-6cda736ce3f0 successfully destroyed container for instance 813e4bcc-8cbd-4425-7870-f1f0 (STDOUT, CELL)#
